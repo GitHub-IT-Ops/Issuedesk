@@ -7,13 +7,13 @@ jobs:
     name: Run the program
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/cache@v1
       with:
-        node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - name: Run action
-      uses: teakopp/it-bot@master
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - uses: teakopp/it-bot
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
