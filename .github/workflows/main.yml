@@ -7,9 +7,13 @@ jobs:
     name: Run the program
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+    - name: Install dependencies
+      run: npm install
+    - name: Run action
     - uses: teakopp/it-bot@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - run: npm install
-
         
