@@ -7,9 +7,9 @@ jobs:
     name: Run the program
     steps:
     - uses: actions/checkout@v2
-    - run: npm install
     - uses: teakopp/it-bot@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - run: npm install
 
         
