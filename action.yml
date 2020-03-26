@@ -5,6 +5,8 @@ inputs:
     description: |
       Token to authenticate the request
     required: true
+steps:
+- uses: actions/checkout@v2
 runs:
   using: node12
   main: index.js
