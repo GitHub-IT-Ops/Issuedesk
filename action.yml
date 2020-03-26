@@ -5,11 +5,6 @@ inputs:
     description: |
       Token to authenticate the request
     required: true
-steps:
-- uses: actions/checkout@v2
-- name: Use Node.js
-  uses: actions/setup-node@v1
-  with:
-    node-version: '12.x'
-- name: Install dependencies
-  runs: npm install
+runs:
+  using: node12
+  main: index.js
