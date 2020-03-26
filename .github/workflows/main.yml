@@ -13,7 +13,7 @@ jobs:
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
-    - uses: teakopp/it-bot
+    - uses: teakopp/it-bot@master
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
