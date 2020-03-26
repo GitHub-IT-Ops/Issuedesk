@@ -12,4 +12,4 @@ steps:
   with:
     node-version: '12.x'
 - name: Install dependencies
-  runs: npm install
+  run: npm install
