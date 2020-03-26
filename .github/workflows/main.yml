@@ -1,5 +1,4 @@
 on: issue_comment
-
 jobs:
   bot:
     runs-on: ubuntu-latest
