@@ -1,0 +1,12 @@
+name: 'IT-Bot'
+description: 'Read the issues, open the tickets, rinse, repeat'
+inputs:
+  GITHUB_TOKEN:
+    description: |
+      Token to authenticate the request
+    required: true
+steps:
+- uses: actions/checkout@v2
+runs:
+  using: node12
+  main: index.js
