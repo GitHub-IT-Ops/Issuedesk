@@ -12,7 +12,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run start
     - name: Run action
       uses: teakopp/it-bot@master
       with:
