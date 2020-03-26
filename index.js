@@ -4,5 +4,6 @@ const myToken = core.getInput('GITHUB_TOKEN');
 const octokit = new github.GitHub(myToken);
 const context = github.context;
 
-console.log(context);
+console.log(context.payload.user);
+console.log(context.payload.comment.body);
 
