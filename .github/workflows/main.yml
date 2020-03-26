@@ -10,6 +10,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '12.x'
+    - run: npm install
     - name: Run action
       uses: teakopp/it-bot@master
       with:
