@@ -57,4 +57,4 @@ class Gitzen extends zendesk{
 
 }
 
-export { Gitzen, zendesk};
+export { Gitzen };
