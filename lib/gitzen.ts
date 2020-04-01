@@ -3,15 +3,14 @@ const github = require('@actions/github');
 const core = require('@actions/core');
 
 class Gitzen extends zendesk{
-    contructor(username:string, token:string, remoteUri:string, octokit : InstanceType<typeof github>, context: object){
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string){
         this.client = zendesk.createClient({
-            username:  process.env.USERNAME,
-            token:     process.env.ZENDESK_TOKEN,
-            remoteUri: process.env.URI
+            username:  zendeskUsername,
+            token:     zendeskToken,
+            remoteUri: zendeskURI
           });
 
-        this.context = context
-        this.octokit = octokit
+        this.ticketInfo = {}
     }
 
     private isCorrectLabel(){
@@ -37,15 +36,6 @@ class Gitzen extends zendesk{
 
     }
     
-    public async getIssueThread(owner: string, repo: string, issue_number: any){
-      const commentThread = await this.octokit.issues.listComments({
-            owner,
-            repo,
-            issue_number,
-        });
-
-    }
-
     public generateTicket(){
 
     }
