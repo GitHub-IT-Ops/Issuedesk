@@ -3,7 +3,7 @@ const core = require('@actions/core');
 const myToken = core.getInput('GITHUB_TOKEN');
 const octokit = new github.GitHub(myToken);
 const context = github.context;
-const GitZen = require('./lib/gitzen.js').GitZen
+const Gitzen = require('./lib/gitzen.js').Gitzen
 const gitzen = new GitZen()
 
 let ticketTitle = context.payload
