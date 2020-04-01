@@ -5,6 +5,18 @@ inputs:
     description: |
       Token to authenticate the request
     required: true
+  ZENDESK_USERNAME:
+    description: |
+      Token to authenticate the request
+    required: true
+  ZENDESK_TOKEN:
+    description: |
+      Token to authenticate the request
+    required: true
+  ZENDESK_URI:
+    description: |
+      Token to authenticate the request
+    required: true
 steps:
 - uses: actions/checkout@v2
 runs:
