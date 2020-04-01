@@ -6,8 +6,8 @@ const zendeskToken = core.getInput('ZENDESK_TOKEN');
 const zendeskURI = core.getInput('ZENDESK_URI');
 const octokit = new github.GitHub(myToken);
 const context = github.context;
-const Gitzen = require('./lib/gitzen.js')
-const gitzen = new Gitzen(zendeskUsername, zendeskToken, zendeskURI, context, octokit)
+const Gitzen = require('./lib/gitzen.js').Gitzen
+const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI, context, octokit)
 
 
 let ticketTitle = context.payload
