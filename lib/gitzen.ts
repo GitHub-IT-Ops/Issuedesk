@@ -48,6 +48,8 @@ class Gitzen {
             repo,
             issue_number,
         });
+        console.log(commentThread);
+        
     }
 
     public generateTicket(){
