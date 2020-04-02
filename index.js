@@ -18,5 +18,4 @@ let ticketTitle = context.payload
 // console.log(`To see issue, click [here](${context.payload.issue.url})`);
 
 gitzen.getIssueThread("teakopp", "it-bot", 1)
-console.log(commentThread);
 
