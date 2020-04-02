@@ -38,13 +38,8 @@ class Gitzen extends zendesk{
     }
     
     public async getIssueThread(owner: string, repo: string, issue_number: any){
-      const commentThread = await this.octokit.issues.listComments({
-            owner,
-            repo,
-            issue_number,
-        });
-
-        return commentThread
+        console.log("ok");
+        
     }
 
     public generateTicket(){
