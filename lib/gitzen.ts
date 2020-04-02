@@ -19,6 +19,10 @@ class Gitzen {
           this.context = github.context;
     }
 
+    public logcontext(){
+        console.log(this.context);
+    }
+
     private isCorrectLabel(){
 
     }
@@ -48,8 +52,8 @@ class Gitzen {
             repo,
             issue_number,
         });
-        console.log(commentThread);
-        
+
+        return commentThread
     }
 
     public generateTicket(){
