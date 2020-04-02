@@ -3,8 +3,6 @@ const github = require('@actions/github');
 const core = require('@actions/core');
 const myToken = core.getInput('GITHUB_TOKEN');
 
-const context = github.context;
-
 class Gitzen {
     client: any;
     octokit: any;
@@ -15,7 +13,7 @@ class Gitzen {
         this.context = github.context;
     }
     public logContext(){
-        console.log(this.octokit);
+        console.log();
         console.log(this.context);
     }    
 
