@@ -9,11 +9,13 @@ class Gitzen {
     context: any;
     
     contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken:string){
+        console.log("hello");  
+        console.log(myToken);
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
     }
     public logContext(){
-        console.log();
+        console.log(this.octokit);
         console.log(this.context);
     }    
 
