@@ -15,7 +15,8 @@ class Gitzen {
         this.context = github.context;
     }
     public logContext(){
-        console.log(this.context.payload);
+        console.log(this.octokit);
+        console.log(this.context);
     }    
 
     private isCorrectLabel(){
