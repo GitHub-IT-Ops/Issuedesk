@@ -1,16 +1,22 @@
 const zendesk = require("node-zendesk");
 const github = require('@actions/github');
-const core = require('@actions/core');
 
-class Gitzen extends zendesk{
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string){
+
+class Gitzen {
+    client: any;
+    octokit: any;
+    context: any;
+
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken: string){
+
         this.client = zendesk.createClient({
             username:  zendeskUsername,
             token:     zendeskToken,
             remoteUri: zendeskURI
           });
 
-        this.ticketInfo = {}
+          this.octokit = new github.GitHub(myToken);
+          this.context = github.context;
     }
 
     private isCorrectLabel(){
@@ -37,8 +43,11 @@ class Gitzen extends zendesk{
     }
     
     public async getIssueThread(owner: string, repo: string, issue_number: any){
-        console.log("ok");
-        
+        const commentThread = await this.octokit.issues.listComments({
+            owner,
+            repo,
+            issue_number,
+        });
     }
 
     public generateTicket(){
