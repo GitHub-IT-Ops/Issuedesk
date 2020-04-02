@@ -8,7 +8,7 @@ const Gitzen = require('./lib/gitzen.js').Gitzen
 const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI, myToken)
 
 
-let ticketTitle = context.payload
+// let ticketTitle = context.payload
 // console.log(context.payload);
 // console.log("\n");
 // console.log(context.payload.comment.user.login);
