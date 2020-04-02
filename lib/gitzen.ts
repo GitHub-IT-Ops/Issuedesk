@@ -7,7 +7,7 @@ class Gitzen {
     }
 
     logUsername = () => {
-        console.log(this.username);
+        return this.username;
     }    
 
     private isCorrectLabel(){
