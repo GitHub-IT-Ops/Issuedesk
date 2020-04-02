@@ -2,18 +2,14 @@ const zendesk = require("node-zendesk");
 const github = require('@actions/github');
 
 class Gitzen {
-    client: any;
-    octokit: any;
-    context: any;
+    username: string | undefined;
     
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken:string ,testToken:string){
-        console.log(testToken);  
-        this.octokit = new github.GitHub(myToken);
-        this.context = github.context;
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string){
+        this.username = zendeskUsername
     }
-    public logContext(){
-        console.log(this.octokit);
-        console.log(this.context);
+
+    public logUsername(){
+        console.log(this.username);
     }    
 
     private isCorrectLabel(){
