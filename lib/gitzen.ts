@@ -1,30 +1,25 @@
 const zendesk = require("node-zendesk");
 const github = require('@actions/github');
+const core = require('@actions/core');
+const myToken = core.getInput('GITHUB_TOKEN');
 
+const context = github.context;
 
 class Gitzen {
     client: any;
     octokit: any;
     context: any;
-
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken: string){
-
-        this.client = zendesk.createClient({
-            username:  zendeskUsername,
-            token:     zendeskToken,
-            remoteUri: zendeskURI
-          });
-
-          this.octokit = new github.GitHub(myToken);
-          this.context = github.context;
+    
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken:string){
+        this.octokit = new github.GitHub(myToken);
+        this.context = github.context;
     }
-
-    public logcontext(){
-        console.log(this.context);
-    }
+    public logContext(){
+        console.log(this.context.payload);
+    }    
 
     private isCorrectLabel(){
-
+        
     }
 
     private doesTicketAlreadyExist(){
@@ -47,13 +42,8 @@ class Gitzen {
     }
     
     public async getIssueThread(owner: string, repo: string, issue_number: any){
-        const commentThread = await this.octokit.issues.listComments({
-            owner,
-            repo,
-            issue_number,
-        });
-
-        return commentThread
+        console.log("ok");
+        
     }
 
     public generateTicket(){
@@ -63,6 +53,7 @@ class Gitzen {
     public createTicket(ticket: object){
         
     }
+
 
 }
 
