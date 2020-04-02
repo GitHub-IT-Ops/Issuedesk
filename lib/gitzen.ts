@@ -1,16 +1,13 @@
 const zendesk = require("node-zendesk");
 const github = require('@actions/github');
-const core = require('@actions/core');
-const myToken = core.getInput('GITHUB_TOKEN');
 
 class Gitzen {
     client: any;
     octokit: any;
     context: any;
     
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken:string){
-        console.log("hello");  
-        console.log(myToken);
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, myToken:string ,testToken:string){
+        console.log(testToken);  
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
     }

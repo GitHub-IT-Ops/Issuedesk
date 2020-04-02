@@ -4,8 +4,9 @@ const myToken = core.getInput('GITHUB_TOKEN');
 const zendeskUsername = core.getInput('ZENDESK_USERNAME');
 const zendeskToken = core.getInput('ZENDESK_TOKEN');
 const zendeskURI = core.getInput('ZENDESK_URI');
+const testToken = "testToken"
 const Gitzen = require('./lib/gitzen.js').Gitzen
-const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI, myToken)
+const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI, myToken, testToken)
 
 
 // let ticketTitle = context.payload
