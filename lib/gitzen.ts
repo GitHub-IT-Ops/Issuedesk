@@ -1,5 +1,3 @@
-const zendesk = require("node-zendesk");
-const github = require('@actions/github');
 
 class Gitzen {
     username: string | undefined;
