@@ -3,10 +3,10 @@ class Gitzen {
     username: string | undefined;
     
     contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string){
-        this.username = zendeskUsername
+        this.username = zendeskUsername;
     }
 
-    public logUsername(){
+    logUsername(){
         console.log(this.username);
     }    
 
