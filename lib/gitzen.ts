@@ -6,7 +6,7 @@ class Gitzen {
         this.username = zendeskUsername;
     }
 
-    logUsername = () => {
+    logUsername () {
         return this.username;
     }    
 
