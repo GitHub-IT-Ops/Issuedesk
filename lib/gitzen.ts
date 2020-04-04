@@ -1,13 +1,13 @@
 
 class Gitzen {
-    username: string | undefined;
+    token: string | undefined;
     
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string){
-        this.username = zendeskUsername;
+    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, testToken:string){
+        this.token = testToken;
     }
 
     logUsername () {
-        return this.username;
+        return this.token;
     }    
 
     private isCorrectLabel(){

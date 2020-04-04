@@ -17,7 +17,7 @@ const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI,testToken)
 // console.log(context.payload.comment.user.login);
 // console.log(context.payload.comment.body);
 // console.log(`To see issue, click [here](${context.payload.issue.url})`);
-console.log(zendeskUsername);
+console.log(testToken);
 console.log("-----");
 console.log(gitzen.logUsername())
 
