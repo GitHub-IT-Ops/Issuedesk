@@ -8,7 +8,7 @@ const octokit = new github.GitHub(myToken);
 const context = github.context;
 const testToken = "testToken"
 const Gitzen = require('./lib/gitzen.js').Gitzen
-const gitzen = new Gitzen (testToken, zendeskToken, zendeskURI)
+const gitzen = new Gitzen (zendeskUsername, zendeskToken, zendeskURI,testToken)
 
 
 // let ticketTitle = context.payload
@@ -17,7 +17,7 @@ const gitzen = new Gitzen (testToken, zendeskToken, zendeskURI)
 // console.log(context.payload.comment.user.login);
 // console.log(context.payload.comment.body);
 // console.log(`To see issue, click [here](${context.payload.issue.url})`);
-console.log(testToken);
+console.log(zendeskUsername);
 console.log("-----");
 console.log(gitzen.logUsername())
 
