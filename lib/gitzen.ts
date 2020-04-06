@@ -1,13 +1,26 @@
+const github = require('@actions/github');
+var zendesk = require('node-zendesk');
 
 class Gitzen {
     token: string | undefined;
-    
-    contructor(zendeskUsername:string, zendeskToken:string, zendeskURI:string, testToken:string){
-        this.token = testToken;
+    github: any;
+    context: object;
+    zendesk: any;
+    client: any;
+    constructor( myToken:string,zendeskUsername:string, zendeskToken:string, zendeskURI:string){
+        this.token = myToken
+        this.github = new github.GitHub(this.token);
+        this.context = github.context;
+        this.client = zendesk.createClient({
+            username:  process.env.USERNAME,
+            token:     process.env.ZENDESK_TOKEN,
+            remoteUri: process.env.URI
+          });
     }
 
-    logUsername () {
-        return this.token;
+    returnContext () {
+
+        return this.context
     }    
 
     private isCorrectLabel(){
