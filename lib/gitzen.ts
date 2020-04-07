@@ -64,8 +64,8 @@ class Gitzen {
     public async getIssueThread(){
         let owner = this.getRepoOwner()
         let repo = this.getRepoName()
-        let IssueNumber = this.getIssueNumber()
-        let data = await this.octokit.issues.listComments({owner,repo,IssueNumber});
+        let issue_number = this.getIssueNumber()
+        let data = await this.octokit.issues.listComments({owner,repo,issue_number});
         return data
     }
 
