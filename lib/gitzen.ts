@@ -44,7 +44,7 @@ class Gitzen {
     }
     
     private getRepoName(){
-
+        return this.context.payload.repository.name
     }
 
     private issueWasLabeled(){
@@ -62,7 +62,10 @@ class Gitzen {
 
     
     public async getIssueThread(){
-        let data = await this.octokit.issues.listComments(this.context);
+        let owner = this.getRepoOwner()
+        let repo = this.getRepoName()
+        let IssueNumber = this.getIssueNumber()
+        let data = await this.octokit.issues.listComments({owner,repo,IssueNumber});
         return data
     }
 
