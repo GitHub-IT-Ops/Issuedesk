@@ -1,10 +1,11 @@
 # Temporarily use this as trigger, until ready for prod
 on:
-  push
-  # issues:
-  #   types: [labeled]
-  # issue_comment:
-  #   types: [created, edited]
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created, edited]
+  push:
+    branches: master
 jobs:
   bot:
     runs-on: ubuntu-latest
