@@ -17,6 +17,7 @@ const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI)
 
 // console.log(gitzen.returnContext())
 console.log(gitzen.getRepoOwner());
+console.log(gitzen.getIssueNumber());
 console.log(gitzen.getIssueThread());
 
 
