@@ -2,14 +2,12 @@ const github = require('@actions/github');
 var zendesk = require('node-zendesk');
 
 class Gitzen {
-    token: string | undefined;
-    github: any;
-    context: object;
+    octokit: any;
+    context: any;
     zendesk: any;
     client: any;
-    constructor( myToken:string,zendeskUsername:string, zendeskToken:string, zendeskURI:string){
-        this.token = myToken
-        this.github = new github.GitHub(this.token);
+    constructor( myToken:string, zendeskUsername:string, zendeskToken:string, zendeskURI:string){
+        this.octokit = new github.GitHub(myToken);
         this.context = github.context;
         this.client = zendesk.createClient({
             username:  process.env.USERNAME,
@@ -23,8 +21,13 @@ class Gitzen {
         return this.context
     }    
 
-    private isCorrectLabel(){
-        
+    private isCorrectLabel(label:string){
+        if(this.context.payload.label.name == label){
+            return true
+        }
+        else{
+            return false
+        }
     }
 
     private doesTicketAlreadyExist(){
@@ -32,23 +35,35 @@ class Gitzen {
     }
 
     private getIssueNumber(){
+       return this.context.payload.issue.number
+    }
+    
 
+    private getRepoOwner(){
+        return this.context.payload.repository
     }
     
     private getRepoName(){
 
     }
 
-    private getIssueLabels(){
-
+    private issueWasLabeled(){
+        if (this.context.payload.action == "labeled"){
+            return true
+        }
+        else{
+            return false
+        }
     }
-    private containsCommand(){
 
-    }
+    private getLabelEventData(){
+        return this.context.payload.label 
+    }    
+
     
-    public async getIssueThread(owner: string, repo: string, issue_number: any){
-        console.log("ok");
-        
+    public async getIssueThread(){
+        let data = await this.octokit.issues.listComments(this.context);
+        return data
     }
 
     public generateTicket(){
