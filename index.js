@@ -18,12 +18,11 @@ const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI)
 console.log(gitzen.getRepoOwner());
 console.log(gitzen.getIssueNumber());
 console.log(gitzen.getRepoName());
-console.log(gitzen.getIssueThread());
 performAsyncTask();
+
 async function performAsyncTask(){
-    let issueThread = await getIssueThread()
+    let issueThread = await gitzen.getIssueThread()
     console.log(issueThread);
-    
 }
 
 
