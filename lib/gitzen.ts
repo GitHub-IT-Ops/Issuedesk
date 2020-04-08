@@ -40,7 +40,7 @@ class Gitzen {
     
 
     private getRepoOwner(){
-        return this.context.payload.repository
+        return this.context.payload.repository.owner.login
     }
     
     private getRepoName(){
