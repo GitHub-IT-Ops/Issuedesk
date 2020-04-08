@@ -14,6 +14,6 @@ performAsyncTask();
 
 async function performAsyncTask() {
   let issueThread = await gitzen.getListOfComments(); 
-  console.log(doesTicketAlreadyExist());
+  console.log(await gitzen.doesTicketAlreadyExist());
   
 }
