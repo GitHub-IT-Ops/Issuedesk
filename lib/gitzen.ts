@@ -6,6 +6,7 @@ class Gitzen {
     context: any;
     zendesk: any;
     client: any;
+    ticket: object;
     constructor( myToken:string, zendeskUsername:string, zendeskToken:string, zendeskURI:string){
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
@@ -14,6 +15,7 @@ class Gitzen {
             token:     process.env.ZENDESK_TOKEN,
             remoteUri: process.env.URI
           });
+        this.ticket = {}
     }
 
     returnContext () {
@@ -30,8 +32,14 @@ class Gitzen {
         }
     }
 
-    private doesTicketAlreadyExist(){
-
+    public async doesTicketAlreadyExist(){
+        this.client.tickets.list( (err: any, statusList: any, body: any, responseList: any, resultList: any) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+            console.log(JSON.stringify(body, null, 2));//will display all tickets
+          });
     }
 
     private getIssueNumber(){
