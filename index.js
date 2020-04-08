@@ -13,8 +13,7 @@ console.log(gitzen.getRepoName());
 performAsyncTask();
 
 async function performAsyncTask() {
-  let issueThread = await gitzen.getListOfComments();
-  console.log(issueThread[0].user);
+  let issueThread = await gitzen.getListOfComments(); 
   console.log(doesTicketAlreadyExist());
   
 }

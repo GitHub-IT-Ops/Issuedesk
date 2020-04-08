@@ -79,11 +79,13 @@ class Gitzen {
     
     public async formatListComments(listOfComments:[]){
         let issueThread = await this.getListOfComments()
-        for (let i=0; i <issueThread.length; i++){
+        for (let i=0; i < issueThread.length; i++){
             let commenter = issueThread[i].user.login
             let createdAt = issueThread[i].created_at
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
+            console.log(commenter, createdAt, updatedAt, comment);
+            
         }
     }
 
