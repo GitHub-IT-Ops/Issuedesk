@@ -16,7 +16,7 @@ performAsyncTask();
 
 async function performAsyncTask(){
     let issueThread = await gitzen.getlistOfComments()
-    console.log(issuethread[0].user)
+    console.log(issueThread[0].user)
 }
 
 
