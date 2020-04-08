@@ -61,14 +61,23 @@ class Gitzen {
     }    
 
     
-    public async getlistOfComments(){
+    public async getListOfComments(){
         let owner = this.getRepoOwner()
         let repo = this.getRepoName()
         let issue_number = this.getIssueNumber()
-        let comments = await this.octokit.issues.listComments({owner,repo,issue_number});
-        return comments.data
+        return await this.octokit.issues.listComments({owner,repo,issue_number});
     }
+
     
+    public async formatListComments(listOfComments:[]){
+        let issueThread = await this.getListOfComments()
+        for (let i=0; i <issueThread.length; i++){
+            let commenter = issueThread[i].user.login
+            let createdAt = issueThread[i].created_at
+            let updatedAt = issueThread[i].updated_at
+            let comment = issueThread[i].body
+        }
+    }
 
     public generateTicket(){
 
