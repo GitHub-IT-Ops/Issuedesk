@@ -61,13 +61,16 @@ class Gitzen {
     }    
 
     
-    public async getIssueThread(){
+    public async getlistOfComments(){
         let owner = this.getRepoOwner()
         let repo = this.getRepoName()
         let issue_number = this.getIssueNumber()
         let data = await this.octokit.issues.listComments({owner,repo,issue_number});
         return data
     }
+    
+
+
 
     public generateTicket(){
 

@@ -8,12 +8,6 @@ const Gitzen = require('./lib/gitzen.js').Gitzen
 const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI)
 
 
-// let ticketTitle = context.payload
-// console.log(context.payload);
-// console.log("\n");
-// console.log(context.payload.comment.user.login);
-// console.log(context.payload.comment.body);
-// console.log(`To see issue, click [here](${context.payload.issue.url})`);
 
 console.log(gitzen.getRepoOwner());
 console.log(gitzen.getIssueNumber());
@@ -21,8 +15,8 @@ console.log(gitzen.getRepoName());
 performAsyncTask();
 
 async function performAsyncTask(){
-    let issueThread = await gitzen.getIssueThread()
-    console.log(issueThread);
+    let issueThread = await gitzen.getlistOfComments()
+    console.log(issuethread[0].user)
 }
 
 
