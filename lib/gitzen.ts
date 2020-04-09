@@ -40,7 +40,7 @@ class Gitzen {
             }
     
             for (let i=0; i < resultList.length; i++){
-              console.log(resultList[i].subject);
+              console.log(resultList[i]);
             }
 
           });
