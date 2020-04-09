@@ -33,7 +33,7 @@ class Gitzen {
     }
 
     public async doesTicketAlreadyExist(){
-        const zenDeskTickets = this.client.tickets.list( (err: any, statusList: any, body: any, responseList: any, resultList: any) => {
+        const zenDeskTickets = await this.client.tickets.list( (err: any, statusList: any, body: any, responseList: any, resultList: any) => {
             if (err) {
               console.log(err);
               return;
