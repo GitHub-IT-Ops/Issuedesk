@@ -11,9 +11,9 @@ class Gitzen {
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
         this.client = zendesk.createClient({
-            username:  process.env.USERNAME,
-            token:     process.env.ZENDESK_TOKEN,
-            remoteUri: process.env.URI
+            username:  zendeskUsername,
+            token:     zendeskToken,
+            remoteUri: zendeskURI
           });
         this.ticket = {}
     }
