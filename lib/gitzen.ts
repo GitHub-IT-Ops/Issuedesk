@@ -38,12 +38,14 @@ class Gitzen {
               console.log(err);
               return;
             }
-            return JSON.stringify(body, null, 2)
+    
+            for (let i=0; i < resultList.length; i++){
+              console.log(resultList[i].subject);
+            }
+
           });
 
-        //   for (let i=0; i < zenDeskTickets.length; i++){
-        //       console.log(zenDeskTickets[i].subject);
-        //   }
+
     }
 
     private getIssueNumber(){
