@@ -39,12 +39,8 @@ class Gitzen {
               return;
             }
             
-            let formattedJSON = JSON.stringify(body, null, 2)
-            console.log(formattedJSON);
-            console.log("-----");
-        
-            for (let i=0; i < formattedJSON.length; i++){
-              console.log(resultList[i]);
+            for (let i=0; i < body.length; i++){
+              console.log(body[i].subject);
             }
 
           });
