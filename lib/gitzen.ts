@@ -34,16 +34,19 @@ class Gitzen {
 
     public async doesTicketAlreadyExist(){
         const zenDeskTickets = await this.client.tickets.list( (err: any, statusList: any, body: any, responseList: any, resultList: any) => {
-            if (err) {
-              console.log(err);
-              return;
+            try{
+                return JSON.stringify(body, null, 2)
             }
-            // console.log(JSON.stringify(body, null, 2));//will display all tickets
+            catch(err){
+                console.log(err);
+                return err
+            }
+           
           });
 
-          for (let i=0; i < zenDeskTickets.length; i++){
-              console.log(zenDeskTickets[i].subject);
-          }
+        //   for (let i=0; i < zenDeskTickets.length; i++){
+        //       console.log(zenDeskTickets[i].subject);
+        //   }
     }
 
     private getIssueNumber(){
