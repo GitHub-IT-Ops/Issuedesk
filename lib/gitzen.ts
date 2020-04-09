@@ -40,7 +40,8 @@ class Gitzen {
             }
             return JSON.stringify(body, null, 2);
           });
-        
+
+        console.log(zenDeskTickets);
         return zenDeskTickets
         //   for (let i=0; i < zenDeskTickets.length; i++){
         //       console.log(zenDeskTickets[i].subject);
