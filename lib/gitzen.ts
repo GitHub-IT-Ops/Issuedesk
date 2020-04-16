@@ -49,7 +49,7 @@ class Gitzen {
     }
 
     private getIssueNumber(){
-       return this.context.payload.issue.url
+       return this.context.payload.issue.number
     }
     
 
@@ -62,7 +62,7 @@ class Gitzen {
     }
 
     private getIssueUrl(){
-        return this.context.payload.issue.id
+        return this.context.payload.issue.url
     }
 
     private issueWasLabeled(){
