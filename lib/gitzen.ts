@@ -87,7 +87,7 @@ class Gitzen {
     }
 
     
-    public async generateTicketBody(listOfComments:[]){
+    public async generateTicketBody(){
         let issueThread = await this.getListOfComments()
         let ticketBody = ""
         for (let i=0; i < issueThread.length; i++){
