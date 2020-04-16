@@ -10,10 +10,12 @@ const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI);
 console.log(gitzen.getRepoOwner());
 console.log(gitzen.getIssueNumber());
 console.log(gitzen.getRepoName());
-performAsyncTask();
+asyncMain();
 
-async function performAsyncTask() {
+async function asyncMain() {
+
   let issueThread = await gitzen.getListOfComments(); 
-  console.log(await gitzen.doesTicketAlreadyExist());
+  console.log(issueThread)
+  // console.log(await gitzen.doesTicketAlreadyExist());
   
 }

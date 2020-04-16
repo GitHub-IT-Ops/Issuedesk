@@ -49,7 +49,7 @@ class Gitzen {
     }
 
     private getIssueNumber(){
-       return this.context.payload.issue.number
+       return this.context.payload.issue.url
     }
     
 
@@ -59,6 +59,10 @@ class Gitzen {
     
     private getRepoName(){
         return this.context.payload.repository.name
+    }
+
+    private getIssueUrl(){
+        return this.context.payload.issue.id
     }
 
     private issueWasLabeled(){
@@ -91,9 +95,19 @@ class Gitzen {
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
             console.log(commenter, createdAt, updatedAt, comment);
-            
         }
     }
+
+    public createCustomFieldForTicket(){
+        let issueId = this.getIssueUrl()
+        let customFields = { "custom_fields": [
+            {
+              "id":    27642,
+              "value": issueId
+            }
+        ]}
+    }
+    
 
     public generateTicket(){
 
