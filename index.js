@@ -15,7 +15,7 @@ asyncMain();
 async function asyncMain() {
 
   let issueThread = await gitzen.getListOfComments(); 
-  console.log(issueThread)
-  // console.log(await gitzen.doesTicketAlreadyExist());
+  let ticketBody = await generateTicketBody()
+  console.log(ticketBody);
   
 }

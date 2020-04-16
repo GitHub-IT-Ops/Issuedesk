@@ -6,7 +6,7 @@ class Gitzen {
     context: any;
     zendesk: any;
     client: any;
-    ticket: object;
+    ticket:  { [key: string]: any };
     constructor( myToken:string, zendeskUsername:string, zendeskToken:string, zendeskURI:string){
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
@@ -87,15 +87,19 @@ class Gitzen {
     }
 
     
-    public async formatListComments(listOfComments:[]){
+    public async generateTicketBody(listOfComments:[]){
         let issueThread = await this.getListOfComments()
+        let ticketBody = ""
         for (let i=0; i < issueThread.length; i++){
             let commenter = issueThread[i].user.login
             let createdAt = issueThread[i].created_at
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
-            console.log(commenter, createdAt, updatedAt, comment);
+            ticketBody += `Created at: ${createdAt}\n
+            ${commenter}: ${comment}\n`
         }
+        this.ticket["body"] = ticketBody
+        return ticketBody
     }
 
     public createCustomFieldForTicket(){
