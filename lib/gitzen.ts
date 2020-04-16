@@ -83,7 +83,8 @@ class Gitzen {
         let owner = this.getRepoOwner()
         let repo = this.getRepoName()
         let issue_number = this.getIssueNumber()
-        return await this.octokit.issues.listComments({owner,repo,issue_number});
+        let listOfComments = await this.octokit.issues.listComments({owner,repo,issue_number});
+        return listOfComments.data
     }
 
     
