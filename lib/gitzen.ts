@@ -99,6 +99,7 @@ class Gitzen {
             ${commenter}: ${comment}\n`
         }
         this.ticket["body"] = ticketBody
+        console.log(ticketBody);
         return ticketBody
     }
 
