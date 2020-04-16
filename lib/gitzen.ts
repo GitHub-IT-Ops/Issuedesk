@@ -95,8 +95,9 @@ class Gitzen {
             let createdAt = issueThread[i].created_at
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
-            ticketBody += `Created at: ${createdAt}\n
+            ticketBody += `\nCreated at: ${createdAt}\n
             ${commenter}: ${comment}\n`
+            console.log(ticketBody);
         }
         this.ticket["body"] = ticketBody
         console.log(ticketBody);
