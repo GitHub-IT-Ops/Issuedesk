@@ -125,6 +125,7 @@ class Gitzen {
     }
 
     public createTicket(){
+        console.log(this.ticket);
         this.client.tickets.create(this.ticket,  (err: any, req: any, result: any) => {
             if (err) return handleError(err);
             console.log(JSON.stringify(result, null, 2));
