@@ -126,16 +126,17 @@ class Gitzen {
 
     public createTicket(){
         console.log(this.ticket);
-        this.client.tickets.create(this.ticket,  (err: any, req: any, result: any) => {
-            if (err) return handleError(err);
-            console.log(JSON.stringify(result, null, 2));
-            console.log("Ticket created!");
-          });
+        
+        // this.client.tickets.create( this.ticket,  (err: any, req: any, result: any) => {
+        //     if (err) return handleError(err);
+        //     console.log(JSON.stringify(result, null, 2));
+        //     console.log("Ticket created!");
+        //   });
           
-          function handleError(err: any) {
-              console.log(err);
-              process.exit(-1);
-          }
+        //   function handleError(err: any) {
+        //       console.log(err);
+        //       process.exit(-1);
+        //   }
     }
 
 

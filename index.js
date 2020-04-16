@@ -11,9 +11,7 @@ asyncMain();
 
 async function asyncMain() {
 
-  let issueThread = await gitzen.getListOfComments(); 
-  console.log(issueThread);
-  
-  let ticketBody = await gitzen.generateTicketBody();
+  await gitzen.generateTicket()
+  gitzen.createTicket()
   
 }
