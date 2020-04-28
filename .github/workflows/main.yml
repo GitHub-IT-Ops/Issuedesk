@@ -4,8 +4,6 @@ on:
     types: [labeled]
   issue_comment:
     types: [created, edited]
-  push:
-    branches: master
 jobs:
   bot:
     runs-on: ubuntu-latest
