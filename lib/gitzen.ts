@@ -15,7 +15,7 @@ class Gitzen {
             token:     zendeskToken,
             remoteUri: zendeskURI
           });
-        this.ticket = {"ticket" : { }}
+        this.ticket = {"ticket" : {"subject" : "", "comment" : {"body": "" }}}
     }
 
     returnContext () {
@@ -114,7 +114,8 @@ class Gitzen {
     }
 
     public generateTicketSubject(){
-        this.ticket["comment"]["subject"] = this.getIssueUrl()
+        let subject = this.getIssueUrl()
+        this.ticket["ticket"]["subject"] = this.getIssueUrl()
         return this.ticket
     }
     
@@ -129,7 +130,7 @@ class Gitzen {
         
         // this.client.tickets.create( this.ticket,  (err: any, req: any, result: any) => {
         //     if (err) return handleError(err);
-        //     console.log(JSON.stringify(result, null, 2));
+        //     console.log(]JSON.stringify(result, null, 2));
         //     console.log("Ticket created!");
         //   });
           
