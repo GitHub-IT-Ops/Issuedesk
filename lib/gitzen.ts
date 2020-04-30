@@ -23,6 +23,11 @@ class Gitzen {
         return this.context
     }    
 
+    private async getTicketInfo(ticketID: string){
+        let ticket = await this.client.show(ticketID)
+        return ticket
+    }
+
     private isCorrectLabel(label:string){
         if(this.context.payload.label.name == label){
             return true
@@ -96,7 +101,7 @@ class Gitzen {
             let createdAt = issueThread[i].created_at
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
-            ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n `
+            ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         }
         this.ticket["ticket"]["comment"]["body"] = ticketBody
         return ticketBody

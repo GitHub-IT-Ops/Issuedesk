@@ -11,7 +11,11 @@ asyncMain();
 
 async function asyncMain() {
 
-  await gitzen.generateTicket()
-  gitzen.createTicket()
+  // await gitzen.generateTicket()
+  // gitzen.createTicket()
+
+  let ticket = await gitzen.getTicketInfo('4742')
+  console.log(ticket);
+  
   
 }
