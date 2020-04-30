@@ -23,10 +23,10 @@ class Gitzen {
         return this.context
     }    
 
-    public async getTicketInfo(ticketID: string){
+    public getTicketInfo(ticketID: string){
 
-        let ticket = this.client.ticket.show(ticketID, (res: any)=>{
-            console.log(res);   
+        let ticket = this.client.ticket.show(ticketID, (data: any) => {
+            console.log(data); 
         })
 
     }
