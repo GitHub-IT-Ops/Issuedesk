@@ -15,7 +15,7 @@ class Gitzen {
             token:     zendeskToken,
             remoteUri: zendeskURI
           });
-        this.ticket = {"ticket" : {"subject" : "", "comment" : {"body": "" }}}
+        this.ticket = {"ticket" : {"subject" : "", "comment" : {"body": "" }, "custom_fields" : []}}
     }
 
     returnContext () {
@@ -96,7 +96,7 @@ class Gitzen {
             let createdAt = issueThread[i].created_at
             let updatedAt = issueThread[i].updated_at
             let comment = issueThread[i].body
-            ticketBody += `\nCreated at: ${createdAt}\n ${commenter}: ${comment}\n`
+            ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n `
         }
         this.ticket["ticket"]["comment"]["body"] = ticketBody
         return ticketBody
@@ -106,10 +106,12 @@ class Gitzen {
         let issueId = this.getIssueUrl()
         this.ticket["ticket"]["custom_fields"] = [
             {
-              "id":    27642,
-              "value": issueId
+              "type": "text",
+              "gh_id": issueId
             }
         ]
+
+        return this.ticket
 
     }
 
@@ -123,6 +125,7 @@ class Gitzen {
     public async generateTicket(){
         this.generateTicketSubject()
         await this.generateTicketBody()
+        this.createCustomFieldForTicket()
     }
 
     public createTicket(){
@@ -130,7 +133,7 @@ class Gitzen {
         
         this.client.tickets.create( this.ticket,  (err: any, req: any, result: any) => {
             if (err) return handleError(err);
-            console.log(]JSON.stringify(result, null, 2));
+            console.log(JSON.stringify(result, null, 2));
             console.log("Ticket created!");
           });
           
