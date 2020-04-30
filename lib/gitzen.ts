@@ -24,8 +24,12 @@ class Gitzen {
     }    
 
     public async getTicketInfo(ticketID: string){
-        let ticket = await this.client.tickets.show(ticketID)
-        console.log(ticket);
+
+        let ticket = await this.client.tickets.show(ticketID, (info: any)=>{
+            console.log(info);
+            
+        })
+
         
     }
 
