@@ -25,7 +25,8 @@ class Gitzen {
 
     public async getTicketInfo(ticketID: string){
         let ticket = await this.client.tickets.show(ticketID)
-        return ticket
+        console.log(ticket);
+        
     }
 
     private isCorrectLabel(label:string){
