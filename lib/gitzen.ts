@@ -11,7 +11,7 @@ interface ticket {
 }
 
 class Gitzen {
-    octokit: any;
+    octokit: any; fdsafgdsagfds
     context: any; 
     zendesk: any;
     client: any;
