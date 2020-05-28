@@ -12,7 +12,7 @@ interface ticket {
 
 class Gitzen {
     octokit: any;
-    context: any; "ds"
+    context: any; 
     zendesk: any;
     client: any;
     ticket:  ticket
