@@ -14,7 +14,7 @@ class Gitzen {
     octokit: any;
     context: any; 
     zendesk: any;
-    client: any;
+    client: any; dsfgkdsl;fmdslk
     ticket:  ticket
     constructor( myToken:string, zendeskUsername:string, zendeskToken:string, zendeskURI:string){
         this.octokit = new github.GitHub(myToken);
