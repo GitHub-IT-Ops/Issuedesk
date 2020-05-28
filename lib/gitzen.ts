@@ -1,12 +1,21 @@
 const github = require('@actions/github');
-var zendesk = require('node-zendesk');
+const zendesk = require('node-zendesk');
+
+interface ticket {
+    "ticket" : 
+        {
+            "subject" : string,
+            "comment" : {"body" : string }, 
+            "external_id" : string
+        }
+}
 
 class Gitzen {
     octokit: any;
     context: any;
     zendesk: any;
     client: any;
-    ticket:  { [key: string]: any };
+    ticket:  ticket
     constructor( myToken:string, zendeskUsername:string, zendeskToken:string, zendeskURI:string){
         this.octokit = new github.GitHub(myToken);
         this.context = github.context;
@@ -15,7 +24,7 @@ class Gitzen {
             token:     zendeskToken,
             remoteUri: zendeskURI
           });
-        this.ticket = {"ticket" : {"subject" : "", "comment" : {"body": "" }, "custom_fields" : []}}
+        this.ticket = {"ticket" : {"subject" : "", "comment" : {"body": "" }, "external_id" : ""}}
     }
 
     returnContext () {
@@ -25,7 +34,7 @@ class Gitzen {
 
     public getTicketInfo(ticketID: string){
 
-        let ticket = this.client.ticket.show(ticketID, (data: any) => {
+        this.client.ticket.show(ticketID, (data: any) => {
             console.log(data); 
         })
 
@@ -41,7 +50,7 @@ class Gitzen {
     }
 
     public doesTicketAlreadyExist(){
-        this.client.tickets.list((err: any, statusList: any, body: any, responseList: any, resultList: any) => {
+        this.client.tickets.list((err: any, statusList: any, body: any) => {
             if (err) {
               console.log(err);
               return;
@@ -60,7 +69,6 @@ class Gitzen {
        return this.context.payload.issue.number
     }
     
-
     private getRepoOwner(){
         return this.context.payload.repository.owner.login
     }
@@ -73,6 +81,14 @@ class Gitzen {
         return this.context.payload.issue.url
     }
 
+    private getLabelEventData(){
+        return this.context.payload.label 
+    }    
+
+    private getIssueId(){
+        return this.context.payload.label
+    }
+
     public issueWasLabeled(){
         if (this.context.payload.action == "labeled"){
             return true
@@ -82,49 +98,31 @@ class Gitzen {
         }
     }
 
-    private getLabelEventData(){
-        return this.context.payload.label 
-    }    
 
     
     public async getListOfComments(){
-        let owner = this.getRepoOwner()
-        let repo = this.getRepoName()
-        let issue_number = this.getIssueNumber()
-        let listOfComments = await this.octokit.issues.listComments({owner,repo,issue_number});
+        const owner = this.getRepoOwner()
+        const repo = this.getRepoName()
+        const issue_number = this.getIssueNumber()
+        const listOfComments = await this.octokit.issues.listComments({owner,repo,issue_number});
         return listOfComments.data
     }
 
     
     public async generateTicketBody(){
-        let issueThread = await this.getListOfComments()
+        const issueThread = await this.getListOfComments()
         let ticketBody = ""
         for (let i=0; i < issueThread.length; i++){
-            let commenter = issueThread[i].user.login
-            let createdAt = issueThread[i].created_at
-            let updatedAt = issueThread[i].updated_at
-            let comment = issueThread[i].body
+            const commenter = issueThread[i].user.login
+            const createdAt = issueThread[i].created_at
+            const comment = issueThread[i].body
             ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         }
         this.ticket["ticket"]["comment"]["body"] = ticketBody
         return ticketBody
     }
 
-    public createCustomFieldForTicket(){
-        let issueId = this.getIssueUrl()
-        this.ticket["ticket"]["custom_fields"] = [
-            {
-              "type": "text",
-              "gh_id": issueId
-            }
-        ]
-
-        return this.ticket
-
-    }
-
     public generateTicketSubject(){
-        let subject = this.getIssueUrl()
         this.ticket["ticket"]["subject"] = this.getIssueUrl()
         return this.ticket
     }
@@ -133,7 +131,6 @@ class Gitzen {
     public async generateTicket(){
         this.generateTicketSubject()
         await this.generateTicketBody()
-        this.createCustomFieldForTicket()
     }
 
     public createTicket(){

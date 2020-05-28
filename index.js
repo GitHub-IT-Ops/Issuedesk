@@ -10,11 +10,8 @@ const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI);
 asyncMain();
 
 async function asyncMain() {
+  await gitzen.generateTicket();
+  gitzen.createTicket();
 
-  // await gitzen.generateTicket()
-  // gitzen.createTicket()
-
-  await gitzen.getTicketInfo('4742')
-
-  
+  gitzen.getTicketInfo("4742");
 }
