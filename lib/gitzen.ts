@@ -67,10 +67,12 @@ class Gitzen {
         const ticketExists = body[i]["external_id"] === issueUrl;
 
         if (ticketExists) {
+          console.log("ticket exists");
+
           return true;
         }
       }
-
+      console.log("ticket does not exist");
       return false;
     });
   }
