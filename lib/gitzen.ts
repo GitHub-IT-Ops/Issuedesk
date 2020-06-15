@@ -68,13 +68,13 @@ class Gitzen {
 
         if (ticketExists) {
           console.log("ticket exists");
-
           return true;
         }
       }
-      console.log("ticket does not exist");
-      return false;
     });
+
+    console.log("ticket does not exist");
+    return false;
   }
 
   private getIssueNumber() {
