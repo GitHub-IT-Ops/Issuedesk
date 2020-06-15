@@ -2,7 +2,8 @@
   "env": {
     "node": true,
     "commonjs": true,
-    "es6": true
+    "es6": true,
+    "jest/globals": true
   },
   "overrides": [
     {
@@ -11,7 +12,8 @@
   ],
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:jest/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -22,7 +24,7 @@
     "ecmaVersion": 2019,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "jest"],
   "rules": {
     "valid-typeof": "error"
   }

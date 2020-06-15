@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore",
-    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json)\"",
+    "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts)\"",
+    "check-format": "prettier --ignore-path .gitignore --list-different \"**/*.+(js|json)\"",
     "check-types": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "validate": "npm-run-all --parallel check-types format test lint"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run check-types && lint-staged",
-      "pre-push": "npm test"
+      "pre-commit": "npm run check-types && lint-staged"
     }
   },
   "repository": {
@@ -27,8 +28,11 @@
   "homepage": "https://github.com/teakopp/it-bot#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^3.0.2",
+    "eslint-plugin-jest": "^23.13.2",
     "husky": "^4.2.5",
+    "jest": "^26.0.1",
     "lint-staged": "^10.2.6",
+    "npm-run-all": "^4.1.5",
     "prettier": "2.0.2",
     "typescript": "^3.9.3"
   },

@@ -12,6 +12,5 @@ asyncMain();
 async function asyncMain() {
   await gitzen.generateTicket();
   gitzen.createTicket();
-
   gitzen.getTicketInfo("4742");
 }
