@@ -55,8 +55,8 @@ class Gitzen {
     return (this.ticket["ticket"]["external_id"] = externalId);
   }
 
-  public async doesTicketAlreadyExist() {
-    return await this.client.tickets.list(
+  public doesTicketAlreadyExist() {
+    const ticketStatus = this.client.tickets.list(
       (err: any, statusList: any, body: any) => {
         for (let i = 0; i < body.length; i++) {
           const issueUrl = this.getIssueUrl();
@@ -72,6 +72,8 @@ class Gitzen {
         return false;
       }
     );
+    console.log("ticket status");
+    console.log(ticketStatus);
   }
 
   private getIssueNumber() {
