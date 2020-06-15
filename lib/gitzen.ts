@@ -61,7 +61,10 @@ class Gitzen {
         for (let i = 0; i < body.length; i++) {
           const issueUrl = this.getIssueUrl();
 
-          if (body[i]["external_id"] === issueUrl) {
+          if (
+            body[i]["external_id"] === issueUrl &&
+            body[i]["status"] !== "solved"
+          ) {
             return true;
           }
         }

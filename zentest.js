@@ -22,10 +22,13 @@ function doesTicketAlreadyExist() {
     for (let i = 0; i < body.length; i++) {
       const ticketExists =
         body[i]["external_id"] ===
-        "https://api.github.com/repos/teakopp/it-bot/issues/1";
+          "https://api.github.com/repos/teakopp/it-bot/issues/1" &&
+        body[i]["status"] !== "solved";
 
       if (ticketExists) {
+        console.log(body[i]);
         console.log(true);
+
         return true;
       }
     }
