@@ -57,25 +57,16 @@ class Gitzen {
 
   public doesTicketAlreadyExist() {
     return this.client.tickets.list((err: any, statusList: any, body: any) => {
-      if (err) {
-        console.log(err);
-        return err;
-      }
+      let ticketExists = false;
 
       for (let i = 0; i < body.length; i++) {
         const issueUrl = this.getIssueUrl();
-        const ticketExists = body[i]["external_id"] === issueUrl;
-
-        console.log(body[i]["external_id"]);
-
-        if (ticketExists) {
-          console.log("ticket exists");
-          return true;
+        if (body[i]["external_id"] === issueUrl) {
+          ticketExists = true;
         }
       }
 
-      console.log("ticket does not exist");
-      return false;
+      return ticketExists;
     });
   }
 
