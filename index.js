@@ -11,7 +11,6 @@ asyncMain();
 
 async function asyncMain() {
   const ticketAlreadyExists = gitzen.doesTicketAlreadyExist();
-  console.log(ticketAlreadyExists);
 
   if (ticketAlreadyExists) {
     console.log("Ticket already exists! Exiting...");
