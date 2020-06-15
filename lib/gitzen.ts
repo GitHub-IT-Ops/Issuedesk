@@ -56,18 +56,23 @@ class Gitzen {
   }
 
   public doesTicketAlreadyExist() {
-    return this.client.tickets.list((err: any, statusList: any, body: any) => {
-      let ticketExists = false;
+    const ticketData = this.client.tickets.list(
+      (err: any, statusList: any, body: any) => {
+        let ticketExists = false;
 
-      for (let i = 0; i < body.length; i++) {
-        const issueUrl = this.getIssueUrl();
-        if (body[i]["external_id"] === issueUrl) {
-          ticketExists = true;
+        for (let i = 0; i < body.length; i++) {
+          const issueUrl = this.getIssueUrl();
+          console.log(body[i]["external_id"] === issueUrl);
+          if (body[i]["external_id"] === issueUrl) {
+            ticketExists = true;
+          }
         }
-      }
 
-      return ticketExists;
-    });
+        return ticketExists;
+      }
+    );
+
+    return ticketData;
   }
 
   private getIssueNumber() {
