@@ -56,7 +56,7 @@ class Gitzen {
   }
 
   public doesTicketAlreadyExist() {
-    this.client.tickets.list((err: any, statusList: any, body: any) => {
+    return this.client.tickets.list((err: any, statusList: any, body: any) => {
       if (err) {
         console.log(err);
         return err;
@@ -66,15 +66,17 @@ class Gitzen {
         const issueUrl = this.getIssueUrl();
         const ticketExists = body[i]["external_id"] === issueUrl;
 
+        console.log(body[i]["external_id"]);
+
         if (ticketExists) {
           console.log("ticket exists");
           return true;
         }
       }
-    });
 
-    console.log("ticket does not exist");
-    return false;
+      console.log("ticket does not exist");
+      return false;
+    });
   }
 
   private getIssueNumber() {
