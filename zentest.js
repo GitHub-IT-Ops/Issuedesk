@@ -12,10 +12,17 @@ const client = zendesk.createClient({
   remoteUri: zendeskURI
 });
 
-async function getTicketInfo(ticketID) {
-  await client.ticket.show(ticketID, data => {
-    console.log(data);
+function doesTicketAlreadyExist() {
+  client.tickets.list((err, statusList, body) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    for (let i = 0; i < body.length; i++) {
+      console.log(body[i]);
+    }
   });
 }
 
-getTicketInfo();
+doesTicketAlreadyExist();

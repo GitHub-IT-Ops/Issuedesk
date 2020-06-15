@@ -63,7 +63,10 @@ class Gitzen {
       }
 
       for (let i = 0; i < body.length; i++) {
-        console.log(body[i].subject);
+        const issueUrl = this.getIssueUrl();
+        const ticketExists = body[i]["external_id"] === issueUrl;
+        console.log(body[i]["external_id"] === issueUrl);
+        return ticketExists;
       }
     });
   }
@@ -119,7 +122,7 @@ class Gitzen {
       const commenter = issueThread[i].user.login;
       const createdAt = issueThread[i].created_at;
       const comment = issueThread[i].body;
-      ticketBody += `Author: ${commenter}\n\nComment: ${comment} \n\n*Created at: ${createdAt}*\n\n`;
+      ticketBody += `Author: ${commenter}\n\nComment: ${comment} \n\n*Created at: ${createdAt}*\n\n\n\n`;
     }
     this.ticket["ticket"]["comment"]["body"] = ticketBody;
     return ticketBody;
