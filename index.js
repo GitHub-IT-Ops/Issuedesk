@@ -10,7 +10,13 @@ const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI);
 asyncMain();
 
 async function asyncMain() {
-  await gitzen.generateTicket();
-  gitzen.createTicket();
-  gitzen.doesTicketAlreadyExist();
+  const ticketAlreadyExists = gitzen.doesTicketAlreadyExist();
+
+  if (ticketAlreadyExists) {
+    console.log("Ticket already exists! Exiting...");
+    return true;
+  } else {
+    await gitzen.generateTicket();
+    gitzen.createTicket();
+  }
 }

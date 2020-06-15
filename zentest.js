@@ -20,7 +20,10 @@ function doesTicketAlreadyExist() {
     }
 
     for (let i = 0; i < body.length; i++) {
-      console.log(body[i]);
+      console.log(
+        body[i]["external_id"] ===
+          "https://api.github.com/repos/teakopp/it-bot/issues/1"
+      );
     }
   });
 }

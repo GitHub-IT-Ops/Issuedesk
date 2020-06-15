@@ -65,9 +65,13 @@ class Gitzen {
       for (let i = 0; i < body.length; i++) {
         const issueUrl = this.getIssueUrl();
         const ticketExists = body[i]["external_id"] === issueUrl;
-        console.log(body[i]["external_id"] === issueUrl);
-        return ticketExists;
+
+        if (ticketExists) {
+          return true;
+        }
       }
+
+      return false;
     });
   }
 
