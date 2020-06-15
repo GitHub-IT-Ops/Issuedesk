@@ -20,11 +20,18 @@ function doesTicketAlreadyExist() {
     }
 
     for (let i = 0; i < body.length; i++) {
-      console.log(
+      const ticketExists =
         body[i]["external_id"] ===
-          "https://api.github.com/repos/teakopp/it-bot/issues/1"
-      );
+        "https://api.github.com/repos/teakopp/it-bot/issues/1";
+
+      if (ticketExists) {
+        console.log(true);
+        return true;
+      }
     }
+    console.log(false);
+
+    return false;
   });
 }
 

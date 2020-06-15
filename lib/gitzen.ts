@@ -59,7 +59,7 @@ class Gitzen {
     this.client.tickets.list((err: any, statusList: any, body: any) => {
       if (err) {
         console.log(err);
-        return;
+        return err;
       }
 
       for (let i = 0; i < body.length; i++) {
@@ -126,8 +126,9 @@ class Gitzen {
       const commenter = issueThread[i].user.login;
       const createdAt = issueThread[i].created_at;
       const comment = issueThread[i].body;
-      ticketBody += `Author: ${commenter}\n\nComment: ${comment} \n\n*Created at: ${createdAt}*\n\n\n\n`;
+      ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`;
     }
+    ticketBody += `\n\n\nOriginal issue can be found at ${this.getIssueUrl}`;
     this.ticket["ticket"]["comment"]["body"] = ticketBody;
     return ticketBody;
   }

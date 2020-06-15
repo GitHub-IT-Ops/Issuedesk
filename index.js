@@ -14,7 +14,6 @@ async function asyncMain() {
 
   if (ticketAlreadyExists) {
     console.log("Ticket already exists! Exiting...");
-    return true;
   } else {
     await gitzen.generateTicket();
     gitzen.createTicket();
