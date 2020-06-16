@@ -1,19 +1,18 @@
 # Temporarily use this as trigger, until ready for prod
 on:
-  issues:
-    types: [labeled]
-  issue_comment:
-    types: [created, edited]
+    issues:
+        types: [labeled]
+    issue_comment:
+        types: [created, edited]
 jobs:
-  bot:
-    runs-on: ubuntu-latest
-    name: Run the program
-    steps:
-    - uses: actions/checkout@v2
-    - uses: teakopp/it-bot@master
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
-        ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
-        ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
-        
+    bot:
+        runs-on: ubuntu-latest
+        name: Run the program
+        steps:
+            - uses: actions/checkout@v2
+            - uses: teakopp/it-bot@master
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
+                  ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
+                  ZENDESK_URI: ${{ secrets.ZENDESK_URI }}

@@ -1,24 +1,24 @@
 name: 'IT-Bot'
 description: 'Read the issues, open the tickets, rinse, repeat'
 inputs:
-  GITHUB_TOKEN:
-    description: |
-      Token to authenticate the request
-    required: true
-  ZENDESK_USERNAME:
-    description: |
-      Token to authenticate the request
-    required: true
-  ZENDESK_TOKEN:
-    description: |
-      Token to authenticate the request
-    required: true
-  ZENDESK_URI:
-    description: |
-      Token to authenticate the request
-    required: true
+    GITHUB_TOKEN:
+        description: |
+            Token to authenticate the request
+        required: true
+    ZENDESK_USERNAME:
+        description: |
+            Token to authenticate the request
+        required: true
+    ZENDESK_TOKEN:
+        description: |
+            Token to authenticate the request
+        required: true
+    ZENDESK_URI:
+        description: |
+            Token to authenticate the request
+        required: true
 steps:
-- uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 runs:
-  using: node12
-  main: index.js
+    using: node12
+    main: index.js
