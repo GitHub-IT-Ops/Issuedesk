@@ -18,5 +18,5 @@ async function ticketCreation(ticketExists) {
     }
 }
 
-const ticketExists = gitzen.doesTicketAlreadyExist()
+const ticketExists = gitzen.getTicketList(gitzen.doesTicketAlreadyExist())
 ticketCreation(ticketExists)
