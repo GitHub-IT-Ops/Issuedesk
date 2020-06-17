@@ -1,4 +1,0 @@
-"lint": "eslint . --ext .js,.ts,.tsx",
-
-node_modules/
-dist/

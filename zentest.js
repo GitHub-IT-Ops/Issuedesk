@@ -4,38 +4,44 @@ const zendeskUsername = process.env.USERNAME
 const zendeskToken = process.env.ZENDESK_TOKEN
 const zendeskURI = process.env.URI
 
-console.log(zendeskUsername)
-
 const client = zendesk.createClient({
     username: zendeskUsername,
     token: zendeskToken,
     remoteUri: zendeskURI,
 })
 
-function doesTicketAlreadyExist() {
+function getTicketList(doesTicketAlreadyExist) {
     client.tickets.list((err, statusList, body) => {
-        if (err) {
-            console.log(err)
-            return
-        }
+        console.log('do dis')
 
-        for (let i = 0; i < body.length; i++) {
-            const ticketExists =
-                body[i]['external_id'] ===
-                    'https://api.github.com/repos/teakopp/it-bot/issues/1' &&
-                body[i]['status'] !== 'solved'
-
-            if (ticketExists) {
-                console.log(body[i])
-                console.log(true)
-
-                return true
-            }
-        }
-        console.log(false)
-
-        return false
+        doesTicketAlreadyExist(body)
     })
+
+    //   for (let i = 0; i < body.length; i++) {
+    //     const issueUrl = this.getIssueUrl()
+
+    //     if (
+    //         body[i]['external_id'] === issueUrl &&
+    //         body[i]['status'] !== 'solved'
+    //     ) {
+    //       return callback(true)
+    //     }
+    // }
+}
+function doesTicketAlreadyExist(body) {
+    for (let i = 0; i < body.length; i++) {
+        if (
+            body[i]['external_id'] ===
+                'https://github.com/teakopp/it-bot/issues/1' &&
+            body[i]['status'] !== 'solved'
+        ) {
+            console.log(true)
+
+            return true
+        }
+    }
+    console.log(false)
+    return false
 }
 
-doesTicketAlreadyExist()
+getTicketList(doesTicketAlreadyExist)

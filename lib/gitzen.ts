@@ -55,25 +55,17 @@ class Gitzen {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
-    public doesTicketAlreadyExist() {
-        const ticketStatus = this.client.tickets.list(
-            (err: any, statusList: any, body: any) => {
-                for (let i = 0; i < body.length; i++) {
-                    const issueUrl = this.getIssueUrl()
+    // This function gets all ticket data and passes it into doesTicketAlreadyExist()
+    // as a callback. Didn't aabstract it because it is not meant for long term use.
+    // getTicketList() and doesTicketAlreadyExist() have been split into two functions
+    // in order to utilize node's callback mechanism, instead of await. This is due to node-zendesk 2.0.0 & 1.5.0 bug.
+    // Once resolved please combine into one function and use await for consistency
+    private getTicketList(doesTicketAlreadyExist: (arg0: any) => void) {
+        this.client.tickets.list((err: any, statusList: any, body: any) => {
+            console.log('do dis')
 
-                    if (
-                        body[i]['external_id'] === issueUrl &&
-                        body[i]['status'] !== 'solved'
-                    ) {
-                        return true
-                    }
-                }
-
-                return false
-            }
-        )
-        console.log('ticket status')
-        console.log(ticketStatus)
+            doesTicketAlreadyExist(body)
+        })
     }
 
     private getIssueNumber() {
@@ -161,6 +153,28 @@ class Gitzen {
             console.log(err)
             process.exit(-1)
         }
+    }
+
+    // This function is made to parse data from getTicketList() and return whether ticket already exists. It returns true or false.
+    // It exists to prevent duplicate tickets from being created and prevent tickets not being opened if original is closed as Solved
+    // and then reopened.
+    // Split into a seperate function due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
+    // Use of callbacks like this function and getTicketList() should only be used until issue is resolved
+    // in node-zendesk library.
+    public doesTicketAlreadyExist(body: string | any[]) {
+        const issueUrl = this.getIssueUrl
+
+        for (let i = 0; i < body.length; i++) {
+            if (
+                body[i]['external_id'] === issueUrl &&
+                body[i]['status'] !== 'solved'
+            ) {
+                console.log(true)
+                return true
+            }
+        }
+        console.log(false)
+        return false
     }
 }
 
