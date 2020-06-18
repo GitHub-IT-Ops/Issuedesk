@@ -8,7 +8,9 @@ const Gitzen = require('./lib/gitzen.js').Gitzen
 const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI)
 
 async function ticketCreation(ticketExists) {
-    if (ticketExists) {
+    const ticketExists = gitzen.getTicketList(gitzen.doesTicketAlreadyExist())
+
+    if (await ticketExists) {
         console.log('Ticket already exists! Exiting...')
     } else {
         console.log('This would create a ticket')
@@ -18,5 +20,5 @@ async function ticketCreation(ticketExists) {
     }
 }
 
-const ticketExists = gitzen.getTicketList(gitzen.doesTicketAlreadyExist())
+
 ticketCreation(ticketExists)

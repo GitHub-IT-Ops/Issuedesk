@@ -38,4 +38,4 @@ function doesTicketAlreadyExist(body) {
     return false
 }
 
-getTicketList(doesTicketAlreadyExist)
+// getTicketList(doesTicketAlreadyExist)
