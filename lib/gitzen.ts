@@ -62,8 +62,9 @@ class Gitzen {
     // Once resolved please combine into one function and use await for consistency
     private getTicketList(doesTicketAlreadyExist: (arg0: any) => void) {
         this.client.tickets.list((err: any, statusList: any, body: any) => {
-            console.log('do dis')
 
+            console.log(body);
+            
             doesTicketAlreadyExist(body)
         })
     }
@@ -163,7 +164,8 @@ class Gitzen {
     // in node-zendesk library.
     public doesTicketAlreadyExist(body: string | any[]) {
         const issueUrl = this.getIssueUrl
-
+        console.log(body);
+        
         for (let i = 0; i < body.length; i++) {
             if (
                 body[i]['external_id'] === issueUrl &&
