@@ -7,18 +7,5 @@ const zendeskURI = core.getInput('ZENDESK_URI')
 const Gitzen = require('./lib/gitzen.js').Gitzen
 const gitzen = new Gitzen(myToken, zendeskUsername, zendeskToken, zendeskURI)
 
-async function ticketCreation() {
-    const ticketExists = gitzen.getTicketList(gitzen.doesTicketAlreadyExist())
-
-    if (await ticketExists) {
-        console.log('Ticket already exists! Exiting...')
-    } else {
-        console.log('This would create a ticket')
-
-        // await gitzen.generateTicket();
-        // gitzen.createTicket();
-    }
-}
-
-
-ticketCreation()
+//This function will be abstracted once node-zendesk bug is fixed 
+gitzen.getTicketList()

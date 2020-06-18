@@ -13,10 +13,9 @@ const client = zendesk.createClient({
 })
 
 
-function getTicketList(doesTicketAlreadyExist) {
+function getTicketList() {
     client.tickets.list((err, statusList, body) => {
-        console.log(body)
-        doesTicketAlreadyExist(body)
+        return doesTicketAlreadyExist(body)
     })
 
 }
@@ -30,12 +29,26 @@ function doesTicketAlreadyExist(body) {
             body[i]['status'] !== 'solved'
         ) {
             console.log(true)
-
+            test(true)
             return true
         }
     }
-    console.log(false)
+    test(false)
     return false
 }
 
-// getTicketList(doesTicketAlreadyExist)
+
+async function test(ticketExists){
+
+    if (ticketExists) {
+        console.log('Ticket already exists! Exiting...')
+    } else {
+        console.log('This would create a ticket')
+
+        // await generateTicket();
+        // createTicket();
+    }
+
+}
+
+getTicketList()

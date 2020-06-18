@@ -156,6 +156,21 @@ class Gitzen {
         }
     }
 
+    // I hate that this function is neccesary. This is one of the 3 functions made to offset the bug in node-zendesk that prevents promises from working.
+    // This function exists soley to complete the creation process by nesting inside doesTicketAlreadyExist(). Remove as soon as possible in favor of async / await
+    async ticketCreation(ticketExists: boolean) {
+
+        if (ticketExists) {
+            console.log('Ticket already exists! Exiting...')
+        } else {
+            console.log('This would create a ticket')
+    
+            await this.generateTicket();
+            this.createTicket();
+        }
+    }
+
+    
     // This function is made to parse data from getTicketList() and return whether ticket already exists. It returns true or false.
     // It exists to prevent duplicate tickets from being created and prevent tickets not being opened if original is closed as Solved
     // and then reopened.
@@ -171,11 +186,11 @@ class Gitzen {
                 body[i]['external_id'] === issueUrl &&
                 body[i]['status'] !== 'solved'
             ) {
-                console.log(true)
+                this.ticketCreation(true)
                 return true
             }
         }
-        console.log(false)
+        this.ticketCreation(false)
         return false
     }
 }
