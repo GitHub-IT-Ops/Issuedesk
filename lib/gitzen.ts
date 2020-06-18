@@ -21,7 +21,7 @@ class Gitzen {
         zendeskToken: string,
         zendeskURI: string
     ) {
-        this.octokit = new github.GitHub(myToken)
+        this.octokit = github.getOctokit(myToken)
         this.context = github.context
         this.client = zendesk.createClient({
             username: zendeskUsername,
