@@ -4,6 +4,7 @@ const zendeskUsername = process.env.USERNAME
 const zendeskToken = process.env.ZENDESK_TOKEN
 const zendeskURI = process.env.URI
 
+
 const client = zendesk.createClient({
     username: zendeskUsername,
     token: zendeskToken,
@@ -12,23 +13,14 @@ const client = zendesk.createClient({
 
 function getTicketList(doesTicketAlreadyExist) {
     client.tickets.list((err, statusList, body) => {
-        console.log('do dis')
-
+        console.log(body)
         doesTicketAlreadyExist(body)
     })
 
-    //   for (let i = 0; i < body.length; i++) {
-    //     const issueUrl = this.getIssueUrl()
-
-    //     if (
-    //         body[i]['external_id'] === issueUrl &&
-    //         body[i]['status'] !== 'solved'
-    //     ) {
-    //       return callback(true)
-    //     }
-    // }
 }
+
 function doesTicketAlreadyExist(body) {
+
     for (let i = 0; i < body.length; i++) {
         if (
             body[i]['external_id'] ===
