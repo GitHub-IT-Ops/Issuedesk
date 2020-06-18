@@ -1,5 +1,6 @@
 require('dotenv').config()
 var zendesk = require('node-zendesk')
+
 const zendeskUsername = process.env.USERNAME
 const zendeskToken = process.env.ZENDESK_TOKEN
 const zendeskURI = process.env.URI
@@ -10,6 +11,7 @@ const client = zendesk.createClient({
     token: zendeskToken,
     remoteUri: zendeskURI,
 })
+
 
 function getTicketList(doesTicketAlreadyExist) {
     client.tickets.list((err, statusList, body) => {
