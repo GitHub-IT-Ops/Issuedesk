@@ -9,25 +9,19 @@ interface ticket {
     }
 }
 
-class Gitzen {
+class Ticketmaker {
     octokit: any
     context: any
-    zendesk: any
     client: any
     ticket: ticket
     constructor(
-        myToken: string,
-        zendeskUsername: string,
-        zendeskToken: string,
-        zendeskURI: string
+        client: any,
+        octokit: any,
+        context: any
     ) {
-        this.octokit = github.getOctokit(myToken)
-        this.context = github.context
-        this.client = zendesk.createClient({
-            username: zendeskUsername,
-            token: zendeskToken,
-            remoteUri: zendeskURI,
-        })
+        this.octokit = octokit
+        this.context = context
+        this.client = client
         this.ticket = {
             ticket: { subject: '', comment: { body: '' }, external_id: '' },
         }
@@ -79,7 +73,7 @@ class Gitzen {
         return this.context.payload.repository.name
     }
 
-    private getIssueUrl() {
+    private getIssueUrl(){
         return this.context.payload.issue.html_url
     }
 
@@ -192,4 +186,4 @@ class Gitzen {
     }
 }
 
-export { Gitzen }
+export { Ticketmaker }
