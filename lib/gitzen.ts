@@ -80,7 +80,7 @@ class Gitzen {
     }
 
     private getIssueUrl() {
-        return this.context.payload.issue.url
+        return this.context.payload.issue.html_url
     }
 
     private getLabelEventData() {
