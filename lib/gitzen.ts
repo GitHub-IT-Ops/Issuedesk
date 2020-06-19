@@ -176,7 +176,7 @@ class Gitzen {
     // Use of callbacks like this function and getTicketList() should only be used until issue is resolved
     // in node-zendesk library.
     public doesTicketAlreadyExist(body: string | any[]) {
-        const issueUrl = this.getIssueUrl
+        const issueUrl = this.getIssueUrl()
         
         for (let i = 0; i < body.length; i++) {
             if (

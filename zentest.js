@@ -23,6 +23,13 @@ function getTicketList() {
 function doesTicketAlreadyExist(body) {
 
     for (let i = 0; i < body.length; i++) {
+      console.log("\n");
+      console.log(body[i]);
+      console.log(body[i]['external_id'] ==='https://api.github.com/repos/teakopp/it-bot/issues/1')
+      console.log(body[i]['status'] !== 'solved')
+      console.log(body[i]['external_id'] === 'https://api.github.com/repos/teakopp/it-bot/issues/1' && body[i]['status'] !== 'solved');
+      
+      console.log("\n");
         if (
             body[i]['external_id'] ===
                 'https://github.com/teakopp/it-bot/issues/1' &&
