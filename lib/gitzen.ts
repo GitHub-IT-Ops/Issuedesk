@@ -63,9 +63,7 @@ class Gitzen {
     private getTicketList(doesTicketAlreadyExist: (arg0: any) => void) {
         this.client.tickets.list((err: any, statusList: any, body: any) => {
 
-            console.log(body);
-            
-            doesTicketAlreadyExist(body)
+            this.doesTicketAlreadyExist(body)
         })
     }
 
