@@ -177,7 +177,6 @@ class Gitzen {
     // in node-zendesk library.
     public doesTicketAlreadyExist(body: string | any[]) {
         const issueUrl = this.getIssueUrl
-        console.log(body);
         
         for (let i = 0; i < body.length; i++) {
             if (
