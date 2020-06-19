@@ -1,19 +1,13 @@
+
 const github = require('@actions/github')
 const zendesk = require('node-zendesk')
-
-interface ticket {
-    ticket: {
-        subject: string
-        comment: { body: string }
-        external_id: string
-    }
-}
+import {ticketType, listOfCommentsType } from '../types/types.js'
 
 class Ticketmaker {
     octokit: any
     context: any
     client: any
-    ticket: ticket
+    ticket: ticketType
     constructor(
         client: any,
         octokit: any,
@@ -27,9 +21,6 @@ class Ticketmaker {
         }
     }
 
-    returnContext() {
-        return this.context
-    }
 
     public getTicketInfo(ticketID: string) {
         this.client.ticket.show(ticketID, (data: any) => {
@@ -37,13 +28,6 @@ class Ticketmaker {
         })
     }
 
-    private isCorrectLabel(label: string) {
-        if (this.context.payload.label.name == label) {
-            return true
-        } else {
-            return false
-        }
-    }
 
     private setExternalId(externalId: string) {
         return (this.ticket['ticket']['external_id'] = externalId)
@@ -57,80 +41,38 @@ class Ticketmaker {
     private getTicketList(doesTicketAlreadyExist: (arg0: any) => void) {
         this.client.tickets.list((err: any, statusList: any, body: any) => {
 
-            this.doesTicketAlreadyExist(body)
+            doesTicketAlreadyExist(body)
         })
     }
 
-    private getIssueNumber() {
-        return this.context.payload.issue.number
-    }
 
-    private getRepoOwner() {
-        return this.context.payload.repository.owner.login
-    }
-
-    private getRepoName() {
-        return this.context.payload.repository.name
-    }
-
-    private getIssueUrl(){
-        return this.context.payload.issue.html_url
-    }
-
-    private getLabelEventData() {
-        return this.context.payload.label
-    }
-
-    private getIssueId() {
-        return this.context.payload.label
-    }
-
-    public issueWasLabeled() {
-        if (this.context.payload.action == 'labeled') {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    public async getListOfComments() {
-        const owner = this.getRepoOwner()
-        const repo = this.getRepoName()
-        const issue_number = this.getIssueNumber()
-        const listOfComments = await this.octokit.issues.listComments({
-            owner,
-            repo,
-            issue_number,
-        })
-        return listOfComments.data
-    }
-
-    public async generateTicketBody() {
-        const issueThread = await this.getListOfComments()
+    public async generateTicketBody(listOfComments: [listOfCommentsType], issueUrl: string) {
         let ticketBody = ''
-        for (let i = 0; i < issueThread.length; i++) {
-            const commenter = issueThread[i].user.login
-            const createdAt = issueThread[i].created_at
-            const comment = issueThread[i].body
+
+        for (let i = 0; i < listOfComments.length; i++) {
+            const commenter = listOfComments[i].user.login
+            const createdAt = listOfComments[i].created_at
+            const comment = listOfComments[i].body
             ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         }
-        ticketBody += `\n\n\nOriginal issue can be found at ${this.getIssueUrl()}`
+
+        ticketBody += `\n\n\nOriginal issue can be found at ${issueUrl}`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
 
-    public generateTicketSubject() {
-        this.ticket['ticket']['subject'] = this.getIssueUrl()
+    public generateTicketSubject(issueTitle: string) {
+        this.ticket['ticket']['subject'] = issueTitle
         return this.ticket
     }
 
-    public async generateTicket() {
-        this.setExternalId(this.getIssueUrl())
-        this.generateTicketSubject()
-        await this.generateTicketBody()
+    public async generateTicket(issueUrl: string, issueTitle: string, listOfComments: [listOfCommentsType]) {
+        this.setExternalId(issueUrl)
+        this.generateTicketSubject(issueTitle)
+        await this.generateTicketBody(listOfComments, issueUrl)
     }
 
-    public createTicket() {
+    private createTicket() {
         console.log(this.ticket)
 
         this.client.tickets.create(
@@ -150,14 +92,14 @@ class Ticketmaker {
 
     // I hate that this function is neccesary. This is one of the 3 functions made to offset the bug in node-zendesk that prevents promises from working.
     // This function exists soley to complete the creation process by nesting inside doesTicketAlreadyExist(). Remove as soon as possible in favor of async / await
-    async ticketCreation(ticketExists: boolean) {
+    private async ticketCreation(ticketExists: boolean, issueUrl: string, issueTitle: string, listOfComments: [listOfCommentsType]) {
 
         if (ticketExists) {
             console.log('Ticket already exists! Exiting...')
         } else {
             console.log('This would create a ticket')
     
-            await this.generateTicket();
+            await this.generateTicket(issueUrl,issueTitle, listOfComments);
             this.createTicket();
         }
     }
@@ -169,19 +111,18 @@ class Ticketmaker {
     // Split into a seperate function due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
     // Use of callbacks like this function and getTicketList() should only be used until issue is resolved
     // in node-zendesk library.
-    public doesTicketAlreadyExist(body: string | any[]) {
-        const issueUrl = this.getIssueUrl()
+    public createTicketIfItDoesNotExist(body: string | any[],ticketExists: boolean, issueUrl: string, issueTitle: string, listOfComments: [listOfCommentsType]) {
         
         for (let i = 0; i < body.length; i++) {
             if (
                 body[i]['external_id'] === issueUrl &&
                 body[i]['status'] !== 'solved'
             ) {
-                this.ticketCreation(true)
+                this.ticketCreation(true, issueUrl, issueTitle, listOfComments)
                 return true
             }
         }
-        this.ticketCreation(false)
+        this.ticketCreation(false, issueUrl, issueTitle, listOfComments)
         return false
     }
 }
