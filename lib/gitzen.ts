@@ -120,7 +120,7 @@ class Gitzen {
             const comment = issueThread[i].body
             ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         }
-        ticketBody += `\n\n\nOriginal issue can be found at ${this.getIssueUrl}`
+        ticketBody += `\n\n\nOriginal issue can be found at ${this.getIssueUrl()}`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
