@@ -29,7 +29,7 @@ class Issuedesk{
 
     
 
-    async watchIssueAndMakeTicket(){
+    async monitorIssueAndMakeTicket(){
         const issueMonitor = new IssueMonitor(this.context, this.octokit)
         const ticketMaker = new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()

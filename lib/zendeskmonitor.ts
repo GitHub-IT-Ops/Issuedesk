@@ -1,4 +1,4 @@
-class Ticketmaker {
+class ZendeskMonitor {
     client: any
     constructor(
         client: any,
@@ -7,4 +7,4 @@ class Ticketmaker {
     }
 }
 
-export { Ticketmaker }
+export { ZendeskMonitor }
