@@ -1,11 +1,7 @@
 
-const github = require('@actions/github')
-const zendesk = require('node-zendesk')
 import {ticketType, listOfCommentsType } from '../types/types.js'
 
 class Ticketmaker {
-    octokit: any
-    context: any
     client: any
     ticket: ticketType
     constructor(
@@ -13,8 +9,6 @@ class Ticketmaker {
         octokit: any,
         context: any
     ) {
-        this.octokit = octokit
-        this.context = context
         this.client = client
         this.ticket = {
             ticket: { subject: '', comment: { body: '' }, external_id: '' },
@@ -33,18 +27,18 @@ class Ticketmaker {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
+    //Call this function
     // This function gets all ticket data and passes it into doesTicketAlreadyExist()
     // as a callback. Didn't aabstract it because it is not meant for long term use.
-    // getTicketList() and doesTicketAlreadyExist() have been split into two functions
+    // createIfTicketDoesntExist() and doesTicketAlreadyExist() have been split into two functions
     // in order to utilize node's callback mechanism, instead of await. This is due to node-zendesk 2.0.0 & 1.5.0 bug.
     // Once resolved please combine into one function and use await for consistency
-    private getTicketList(doesTicketAlreadyExist: (arg0: any) => void) {
+    private createIfTicketDoesntExist(doesTicketAlreadyExist: (arg0: any) => void) {
         this.client.tickets.list((err: any, statusList: any, body: any) => {
 
             doesTicketAlreadyExist(body)
         })
     }
-
 
     public async generateTicketBody(listOfComments: [listOfCommentsType], issueUrl: string) {
         let ticketBody = ''
@@ -104,12 +98,11 @@ class Ticketmaker {
         }
     }
 
-    
-    // This function is made to parse data from getTicketList() and return whether ticket already exists. It returns true or false.
+    // This function is made to parse data from createIfTicketDoesntExist() and return whether ticket already exists. It returns true or false.
     // It exists to prevent duplicate tickets from being created and prevent tickets not being opened if original is closed as Solved
     // and then reopened.
     // Split into a seperate function due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
-    // Use of callbacks like this function and getTicketList() should only be used until issue is resolved
+    // Use of callbacks like this function and createIfTicketDoesntExist() should only be used until issue is resolved
     // in node-zendesk library.
     public createTicketIfItDoesNotExist(body: string | any[],ticketExists: boolean, issueUrl: string, issueTitle: string, listOfComments: [listOfCommentsType]) {
         
