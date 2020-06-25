@@ -1,8 +1,6 @@
 class ZendeskMonitor {
     client: any
-    constructor(
-        client: any,
-    ) {
+    constructor(client: any) {
         this.client = client
     }
 }

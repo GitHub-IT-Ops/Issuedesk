@@ -38,7 +38,7 @@ class IssueMonitor {
     }
 
     private getIssueId() {
-        return this.context.payload.label
+        return this.context.payload.issue.id
     }
 
     public issueWasLabeled() {

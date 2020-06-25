@@ -1,13 +1,12 @@
-import {ticketType} from '../types/types.js'
+import { ticketType } from '../types/types.js'
 const github = require('@actions/github')
 const zendesk = require('node-zendesk')
-const IssueMonitor = require('issuemonitor.js')
-const TicketMaker = require('ticketmaker.js')
-const ZendeskMonitor = require('zendeskmonitor.js')
-const ZendeskUpdater = require('zendeskupdater.js')
+const IssueMonitor = require('./issuemonitor.js')
+const TicketMaker = require('./ticketmaker.js')
+const ZendeskMonitor = require('./zendeskmonitor.js')
+const ZendeskUpdater = require('./zendeskupdater.js')
 
-class Issuedesk{
-
+class Issuedesk {
     octokit: any
     context: any
     zendesk: any
@@ -27,17 +26,13 @@ class Issuedesk{
         })
     }
 
-    
-
-    async monitorIssueAndMakeTicket(){
+    async monitorIssueAndMakeTicket() {
         const issueMonitor = new IssueMonitor(this.context, this.octokit)
         const ticketMaker = new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()
         await ticketMaker.generateTicketBody(listOfComments)
         await ticketMaker.createIfTicketDoesntExist()
     }
-
-
 }
 
 export { Issuedesk }
