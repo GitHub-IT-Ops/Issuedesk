@@ -1,9 +1,9 @@
 import { ticketType, listOfCommentsType } from '../types/types.js'
 
-class Ticketmaker {
+class TicketMaker {
     client: any
     ticket: ticketType
-    constructor(client: any, octokit: any, context: any) {
+    constructor(client: any) {
         this.client = client
         this.ticket = {
             ticket: { subject: '', comment: { body: '' }, external_id: '' },
@@ -130,4 +130,4 @@ class Ticketmaker {
     }
 }
 
-export { Ticketmaker }
+export { TicketMaker }

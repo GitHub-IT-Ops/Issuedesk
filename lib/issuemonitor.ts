@@ -1,10 +1,7 @@
 class IssueMonitor {
     octokit: any
     context: any
-    constructor(
-        octokit: any,
-        context: any
-    ) {
+    constructor(octokit: any, context: any) {
         this.octokit = octokit
         this.context = context
     }
@@ -29,7 +26,7 @@ class IssueMonitor {
         return this.context.payload.repository.name
     }
 
-    private getIssueUrl(){
+    private getIssueUrl() {
         return this.context.payload.issue.html_url
     }
 
@@ -61,7 +58,6 @@ class IssueMonitor {
 
         return listOfComments.data
     }
-
 }
 
-export{ IssueMonitor }
+export { IssueMonitor }
