@@ -14,6 +14,10 @@ class IssueMonitor {
         }
     }
 
+    private getContext() {
+        return this.context.payload
+    }
+
     private getIssueNumber() {
         return this.context.payload.issue.number
     }

@@ -25,6 +25,8 @@ class IssueDesk {
     }
 
     async monitorIssueAndMakeTicket() {
+        
+        console.log( this.context);
         const issueMonitor = new IssueMonitor(this.context, this.octokit)
         const ticketMaker = new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()
