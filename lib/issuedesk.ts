@@ -1,10 +1,10 @@
 import { ticketType } from '../types/types.js'
 const github = require('@actions/github')
 const zendesk = require('node-zendesk')
-const IssueMonitor = require('./issuemonitor.js')
-const TicketMaker = require('./ticketmaker.js')
+const IssueMonitor = require('./issuemonitor.js').IssueMonitor
+const TicketMaker = require('./ticketmaker.js').TicketMaker
 
-class Issuedesk {
+class IssueDesk {
     octokit: any
     context: any
     zendesk: any
@@ -30,8 +30,8 @@ class Issuedesk {
         const listOfComments = await issueMonitor.getListOfComments()
         const issueUrl = await issueMonitor.getIssueUrl()
         await ticketMaker.generateTicketBody(listOfComments, issueUrl)
-        await ticketMaker.createIfTicketDoesntExist()
+        await ticketMaker.createTicketIfItDoesNotExist()
     }
 }
 
-export { Issuedesk }
+export { IssueDesk }

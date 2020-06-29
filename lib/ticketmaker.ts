@@ -99,7 +99,7 @@ class TicketMaker {
     // This exists to prevent duplicate tickets from being created and prevent tickets not being opened if original is closed as Solved
     // and then reopened.
     // Split into a seperate function due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
-    // Use of callbacks like this function and createIfTicketDoesntExist() should only be used until issue is resolved
+    // Use of callbacks like this function and createTicketIfItDoesNotExist() should only be used until issue is resolved
     // in node-zendesk library.
 
     public createTicketIfItDoesNotExist(
