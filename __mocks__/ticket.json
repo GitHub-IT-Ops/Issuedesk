@@ -1,0 +1,76 @@
+[
+    {
+        "url": "***/tickets/999999.json",
+        "id": 999999,
+        "external_id": null,
+        "via": {
+            "channel": "api",
+            "source": [
+                {
+                    "created_at": "2020-05-05T00:08:21Z",
+                    "id": "01E7GZVZEBWYD50V00XEMYDMYP",
+                    "name": "My Library",
+                    "updated_at": "2020-05-05T00:08:21Z"
+                }
+            ]
+        },
+        "created_at": "2019-12-02T19:14:23Z",
+        "updated_at": "2020-01-21T18:59:14Z",
+        "type": "question",
+        "subject": "Gimme that cutting edge tech",
+        "raw_subject": "Abacus",
+        "description": "Is it possible to trade mylaptop in for an abacus?",
+        "priority": "normal",
+        "status": "open",
+        "recipient": null,
+        "requester_id": 999991699513,
+        "submitter_id": 999991699513,
+        "assignee_id": 999991699513,
+        "organization_id": 213455699774,
+        "group_id": 360005323114,
+        "collaborator_ids": [396758620753],
+        "follower_ids": [396758620753],
+        "email_cc_ids": [396758620753],
+        "forum_topic_id": null,
+        "problem_id": null,
+        "has_incidents": false,
+        "is_public": true,
+        "due_at": null,
+        "tags": ["bump_1", "high_touch", "procurement_request__hardware"],
+        "custom_fields": [
+            [{ "custom_field": "custom input" }],
+            [{ "custom_field_two": 2 }]
+        ],
+        "satisfaction_rating": { "score": "unoffered" },
+        "sharing_agreement_ids": [],
+        "fields": [
+            {
+                "id": 34,
+                "url": "https://company.zendesk.com/api/v2/ticket_fields/34.json",
+                "type": "subject",
+                "title": "Subject",
+                "raw_title": "{{dc.my_title}}",
+                "description": "This is the subject field of a ticket",
+                "raw_description": "This is the subject field of a ticket",
+                "position": 21,
+                "active": true,
+                "required": true,
+                "collapsed_for_agents": false,
+                "regexp_for_validation": null,
+                "title_in_portal": "Subject",
+                "raw_title_in_portal": "{{dc.my_title_in_portal}}",
+                "visible_in_portal": true,
+                "editable_in_portal": true,
+                "required_in_portal": true,
+                "tag": null,
+                "agent_description": "Agent only description",
+                "created_at": "2009-07-20T22:55:29Z",
+                "updated_at": "2011-05-05T10:38:52Z"
+            }
+        ],
+        "followup_ids": [],
+        "brand_id": 360002494854,
+        "allow_channelback": false,
+        "allow_attachments": true
+    }
+]
