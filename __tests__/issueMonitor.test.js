@@ -6,6 +6,10 @@ const octokit = require('../__mocks__/octokit.js')
 jest.mock('../__mocks__/octokit.js')
 const issueMonitor = new IssueMonitor(octokit, eventIssueComment)
 
+test('context value is not undefined', async () => {
+    expect(issueMonitor.getContext()).toBeDefined()
+})
+
 test('IssueMonitor returns correct issue number in context', () => {
     expect(issueMonitor.getIssueNumber()).toBe(1)
 })

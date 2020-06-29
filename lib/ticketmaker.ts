@@ -54,7 +54,6 @@ class TicketMaker {
     }
 
     private createTicket() {
- 
         this.client.tickets.create(
             this.ticket,
             (err: any, req: any, result: any) => {
@@ -85,7 +84,6 @@ class TicketMaker {
         ticket: { [x: string]: any },
         issueUrl: string
     ) {
-        
         if (
             ticket['external_id'] === issueUrl &&
             ticket['status'] !== 'solved'
@@ -123,7 +121,6 @@ class TicketMaker {
             this.ticketCreation(issueUrl, issueTitle, listOfComments)
             return false
         })
-
     }
 }
 

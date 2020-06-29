@@ -30,36 +30,50 @@ test('Ticket body is generated with correct info and in proper format', async ()
     expect(ticketBody).toBe(expectedTicketBody)
 })
 
-test("If ticket exists in Zendesk, it will not be created by TicketMaker", async () => {
+test('If ticket exists in Zendesk, it will not be created by TicketMaker', async () => {
     let mockTicketData = require('../__mocks__/ticket.json')
     const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/1'
-    mockTicketData[0]["external_id"] = issueUrl
+    mockTicketData[0]['external_id'] = issueUrl
     const ticketMaker = new TicketMaker(client)
-    const ticketExists = ticketMaker.doesTicketAlreadyExist(mockTicketData[0], issueUrl, 'Test Title', mockIssueCommentsData)
+    const ticketExists = ticketMaker.doesTicketAlreadyExist(
+        mockTicketData[0],
+        issueUrl,
+        'Test Title',
+        mockIssueCommentsData
+    )
     expect(ticketExists).toBe(true)
 })
 
-test("If ticket does not exist in Zendesk, it will be created by TicketMaker", async () => {
+test('If ticket does not exist in Zendesk, it will be created by TicketMaker', async () => {
     const mockTicketData = require('../__mocks__/ticket.json')
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/2'
-    mockTicketData[0]["external_id"] = 'https://github.com/Codertocat/Hello-World/issues/1'
+    mockTicketData[0]['external_id'] =
+        'https://github.com/Codertocat/Hello-World/issues/1'
     const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const ticketMaker = new TicketMaker(client)
-    const ticketExists = ticketMaker.doesTicketAlreadyExist(mockTicketData[0], issueUrl, "Test Title", mockIssueCommentsData)
+    const ticketExists = ticketMaker.doesTicketAlreadyExist(
+        mockTicketData[0],
+        issueUrl,
+        'Test Title',
+        mockIssueCommentsData
+    )
     expect(ticketExists).toBe(false)
 })
-
 
 test("ticketCreation() is called once if ticket doesn't exist", async () => {
     const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const mockTicketData = require('../__mocks__/ticket.json')
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/2'
-    mockTicketData[0]["external_id"] = 'https://github.com/Codertocat/Hello-World/issues/1'
+    mockTicketData[0]['external_id'] =
+        'https://github.com/Codertocat/Hello-World/issues/1'
 
     const ticketMaker = new TicketMaker(client)
-    ticketMaker.createTicketIfItDoesNotExist(mockTicketData, issueUrl, "Test Title", mockIssueCommentsData);
-    expect(client.tickets.list.mock.calls.length).toBe(1);
+    ticketMaker.createTicketIfItDoesNotExist(
+        mockTicketData,
+        issueUrl,
+        'Test Title',
+        mockIssueCommentsData
+    )
+    expect(client.tickets.list.mock.calls.length).toBe(1)
 })
-
-
