@@ -3,8 +3,6 @@ const github = require('@actions/github')
 const zendesk = require('node-zendesk')
 const IssueMonitor = require('./issuemonitor.js')
 const TicketMaker = require('./ticketmaker.js')
-const ZendeskMonitor = require('./zendeskmonitor.js')
-const ZendeskUpdater = require('./zendeskupdater.js')
 
 class Issuedesk {
     octokit: any
