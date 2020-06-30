@@ -3,19 +3,19 @@ description: 'Read the issues, open the tickets, rinse, repeat'
 inputs:
     GITHUB_TOKEN:
         description: |
-            Token to authenticate the request
+            GitHub Actions provided token to authenticate the request
         required: true
     ZENDESK_USERNAME:
         description: |
-            Token to authenticate the request
+            Youremail@yourcompany.com
         required: true
     ZENDESK_TOKEN:
         description: |
-            Token to authenticate the request
+            An API token provided by Zendesk
         required: true
     ZENDESK_URI:
         description: |
-            Token to authenticate the request
+            Usually https://<your workspace>.zendesk.com/api/v2/
         required: true
 steps:
     - uses: actions/checkout@v2

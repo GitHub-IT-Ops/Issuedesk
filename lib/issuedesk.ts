@@ -25,16 +25,27 @@ class IssueDesk {
         })
     }
 
-    async monitorIssueAndMakeTicket() {
-        
+    async monitorIssueAndMakeTicket(activationLabels: [string]) {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
-        const ticketMaker = new TicketMaker(this.client)
-        const listOfComments = await issueMonitor.getListOfComments()
-        const issueUrl = issueMonitor.getIssueUrl()
-        const issueTitle = issueMonitor.getIssueTitle()
-        const ticketSubject = issueMonitor.getIssueTitle()
-        ticketMaker.generateTicketSubject(ticketSubject)
-        await ticketMaker.createTicketIfItDoesNotExist(issueUrl, issueTitle, listOfComments)
+        const labelData = issueMonitor.getLabelEventData()
+
+        for (let i = 0; i > activationLabels.length; i++) {
+            if (activationLabels[i] === labelData) {
+                const ticketMaker = new TicketMaker(this.client)
+                const listOfComments = await issueMonitor.getListOfComments()
+                const issueUrl = issueMonitor.getIssueUrl()
+                const issueTitle = issueMonitor.getIssueTitle()
+                const ticketSubject = issueMonitor.getIssueTitle()
+                ticketMaker.generateTicketSubject(ticketSubject)
+                await ticketMaker.createTicketIfItDoesNotExist(
+                    issueUrl,
+                    issueTitle,
+                    listOfComments
+                )
+            } else {
+                return false
+            }
+        }
 
         return true
     }

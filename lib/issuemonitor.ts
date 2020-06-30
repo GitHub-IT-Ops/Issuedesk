@@ -42,7 +42,7 @@ class IssueMonitor {
         return this.context.payload.issue.id
     }
 
-    public getIssueTitle (){
+    public getIssueTitle() {
         return this.context.payload.issue.title
     }
 

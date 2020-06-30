@@ -10,7 +10,7 @@ class TicketMaker {
         }
     }
 
-    public getCurrentTicketInfo(){
+    public getCurrentTicketInfo() {
         return this.ticket
     }
 
@@ -83,8 +83,9 @@ class TicketMaker {
         issueUrl: string
     ) {
         if (
-            ticket['external_id'] === issueUrl && 
-            ticket['status'] !== 'closed' && ticket['status'] !== 'solved'
+            ticket['external_id'] === issueUrl &&
+            ticket['status'] !== 'closed' &&
+            ticket['status'] !== 'solved'
         ) {
             return true
         } else {

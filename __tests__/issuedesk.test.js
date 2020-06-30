@@ -5,34 +5,32 @@ const myToken = 'gitHubActionsToken'
 const zendeskUsername = 'test@test.com'
 const zendeskToken = 'EEEEEeeeeee9eeE9EEeeE99eeEeeee9e99eeEEEe'
 const zendeskURI = 'https://test.zendesk.com/api/v2/'
-jest.mock('../lib/issuemonitor.js')
-jest.mock('../lib/ticketmaker.js')
-jest.mock('@actions/github')
-jest.mock('node-zendesk')
-jest.mock('../__mocks__/octokit.js')
 
 afterEach(() => {
     jest.clearAllMocks()
 })
 
-test('IssueMonitor & TicketMaker are both instantiated in monitorIssueAndMakeTicket() and all function inputs are correct', async () => {
+test('monitorIssueAndMakeTicket returns true if getLabelEventData is found in activationLabels', async () => {
     let mockContext = require('../__mocks__/eventIssueComment.json')
-    let mockListOfComment = require('../__mocks__/getIssueComments.json')
-    
+    const octokit = require('../__mocks__/octokit.js')
+
+    jest.mock('../lib/issuemonitor.js')
+    jest.mock('../lib/ticketmaker.js')
+    jest.mock('@actions/github')
+    jest.mock('node-zendesk')
+    jest.mock('../__mocks__/octokit.js')
+
     const mockIssuedesk = new IssueDesk(
         myToken,
         zendeskUsername,
         zendeskToken,
         zendeskURI
     )
+    const issueMonitor = new IssueMonitor(octokit, mockContext)
+    let wasTicketCreated = await mockIssuedesk.monitorIssueAndMakeTicket(
+        ['This Is Fine'],
+        'This Is Fine'
+    )
 
-    await mockIssuedesk.monitorIssueAndMakeTicket()
-
-    const mockCreateTicketIfItDoesNotExist = TicketMaker.mock.instances[0].createTicketIfItDoesNotExist
-    expect(mockCreateTicketIfItDoesNotExist).toHaveBeenCalledWith(undefined, undefined, undefined)
-  
-    expect(IssueMonitor).toHaveBeenCalled()
-    expect(TicketMaker).toHaveBeenCalled()
-
+    expect(wasTicketCreated).toBe(true)
 })
-

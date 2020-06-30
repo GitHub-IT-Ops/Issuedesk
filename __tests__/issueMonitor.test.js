@@ -7,7 +7,6 @@ jest.mock('../__mocks__/octokit.js')
 const issueMonitor = new IssueMonitor(octokit, eventIssueComment)
 
 test('context value is not undefined and is initalized with context data', async () => {
-
     expect(issueMonitor.getContext()).toBe(eventIssueComment)
     expect(issueMonitor.getContext()).toBeDefined()
 })
@@ -35,5 +34,7 @@ test('IssueMonitor returns correct issue ID in context', () => {
 })
 
 test('', () => {
-    expect(issueMonitor.getIssueTitle()).toBe("Spelling error in the README file")
+    expect(issueMonitor.getIssueTitle()).toBe(
+        'Spelling error in the README file'
+    )
 })
