@@ -26,8 +26,8 @@ class IssueDesk {
 
     async monitorIssueAndMakeTicket() {
 
-        const issueMonitor = new IssueMonitor(this.octokit, this.context)
-        const ticketMaker = new TicketMaker(this.client)
+        const issueMonitor = await new IssueMonitor(this.octokit, this.context)
+        const ticketMaker = await new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()
         const issueUrl = await issueMonitor.getIssueUrl()
         await ticketMaker.generateTicketBody(listOfComments, issueUrl)
