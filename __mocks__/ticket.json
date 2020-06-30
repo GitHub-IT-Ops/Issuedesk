@@ -19,7 +19,7 @@
         "type": "question",
         "subject": "Gimme that cutting edge tech",
         "raw_subject": "Abacus",
-        "description": "Is it possible to trade mylaptop in for an abacus?",
+        "description": "Is it possible to trade my laptop in for an abacus?",
         "priority": "normal",
         "status": "open",
         "recipient": null,
@@ -45,7 +45,7 @@
         "sharing_agreement_ids": [],
         "fields": [
             {
-                "id": 34,
+                "id": 64,
                 "url": "https://company.zendesk.com/api/v2/ticket_fields/34.json",
                 "type": "subject",
                 "title": "Subject",

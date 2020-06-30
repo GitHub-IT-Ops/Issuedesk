@@ -27,11 +27,6 @@ test('IssueMonitor & TicketMaker are both instantiated in monitorIssueAndMakeTic
     )
 
     await mockIssuedesk.monitorIssueAndMakeTicket()
-    const issueMonitor = new IssueMonitor(this.octokit, this.context)
-    
-    await issueMonitor.getListOfComments.mockReturnValue(mockContext.payload.issue.title)
-    issueMonitor.getIssueUrl.mockReturnValue(mockContext.payload.issue.html_url)
-    issueMonitor.getIssueTitle.mockReturnValue(mockListOfComment)
 
     const mockCreateTicketIfItDoesNotExist = TicketMaker.mock.instances[0].createTicketIfItDoesNotExist
     expect(mockCreateTicketIfItDoesNotExist).toHaveBeenCalledWith(undefined, undefined, undefined)
