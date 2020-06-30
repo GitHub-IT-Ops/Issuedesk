@@ -25,13 +25,14 @@ class IssueDesk {
     }
 
     async monitorIssueAndMakeTicket() {
-
+        
         const issueMonitor = await new IssueMonitor(this.octokit, this.context)
         const ticketMaker = await new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()
         const issueUrl = await issueMonitor.getIssueUrl()
         await ticketMaker.generateTicketBody(listOfComments, issueUrl)
         await ticketMaker.createTicketIfItDoesNotExist()
+
     }
 }
 

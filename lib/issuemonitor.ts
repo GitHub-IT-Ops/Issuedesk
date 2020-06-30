@@ -15,7 +15,7 @@ class IssueMonitor {
     }
 
     private getContext() {
-        return this.context.payload
+        return this.context
     }
 
     private getIssueNumber() {

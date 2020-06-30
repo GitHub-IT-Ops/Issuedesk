@@ -6,7 +6,9 @@ const octokit = require('../__mocks__/octokit.js')
 jest.mock('../__mocks__/octokit.js')
 const issueMonitor = new IssueMonitor(octokit, eventIssueComment)
 
-test('context value is not undefined', async () => {
+test('context value is not undefined and is initalized with context data', async () => {
+
+    expect(issueMonitor.getContext()).toBe(eventIssueComment)
     expect(issueMonitor.getContext()).toBeDefined()
 })
 
