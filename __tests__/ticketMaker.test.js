@@ -77,3 +77,12 @@ test("ticketCreation() is called once if ticket doesn't exist", async () => {
     )
     expect(client.tickets.list.mock.calls.length).toBe(1)
 })
+
+
+test("generateTicketSubject() creates title in correct location for ticket", async () => {
+    const ticketMaker = new TicketMaker(client)
+    ticketMaker.generateTicketSubject("Spelling error in the README file")
+    const ticketInfo = ticketMaker.getCurrentTicketInfo()
+    expect(ticketInfo.ticket.subject).toBe("Spelling error in the README file")
+})
+

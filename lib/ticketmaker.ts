@@ -10,10 +10,8 @@ class TicketMaker {
         }
     }
 
-    public getTicketInfo(ticketID: string) {
-        this.client.ticket.show(ticketID, (data: any) => {
-            console.log(data)
-        })
+    public getCurrentTicketInfo(){
+        return this.ticket
     }
 
     private setExternalId(externalId: string) {

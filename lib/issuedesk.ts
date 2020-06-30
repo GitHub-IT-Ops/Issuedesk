@@ -32,6 +32,8 @@ class IssueDesk {
         const listOfComments = await issueMonitor.getListOfComments()
         const issueUrl = issueMonitor.getIssueUrl()
         const issueTitle = issueMonitor.getIssueTitle()
+        const ticketSubject = issueMonitor.getIssueTitle()
+        ticketMaker.generateTicketSubject(ticketSubject)
         await ticketMaker.createTicketIfItDoesNotExist(issueUrl, issueTitle, listOfComments)
 
         return true

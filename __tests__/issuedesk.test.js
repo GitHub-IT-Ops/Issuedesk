@@ -30,7 +30,7 @@ test('IssueMonitor & TicketMaker are both instantiated in monitorIssueAndMakeTic
 
     const mockCreateTicketIfItDoesNotExist = TicketMaker.mock.instances[0].createTicketIfItDoesNotExist
     expect(mockCreateTicketIfItDoesNotExist).toHaveBeenCalledWith(undefined, undefined, undefined)
-
+  
     expect(IssueMonitor).toHaveBeenCalled()
     expect(TicketMaker).toHaveBeenCalled()
 
