@@ -35,6 +35,7 @@ test('If ticket exists in Zendesk, it will not be created by TicketMaker', async
     const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/1'
     mockTicketData[0]['external_id'] = issueUrl
+    
     const ticketMaker = new TicketMaker(client)
     const ticketExists = ticketMaker.doesTicketAlreadyExist(
         mockTicketData[0],
@@ -43,6 +44,7 @@ test('If ticket exists in Zendesk, it will not be created by TicketMaker', async
         mockIssueCommentsData
     )
     expect(ticketExists).toBe(true)
+
 })
 
 test('If ticket does not exist in Zendesk, it will be created by TicketMaker', async () => {
@@ -52,13 +54,30 @@ test('If ticket does not exist in Zendesk, it will be created by TicketMaker', a
         'https://github.com/Codertocat/Hello-World/issues/1'
     const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const ticketMaker = new TicketMaker(client)
-    const ticketExists = ticketMaker.doesTicketAlreadyExist(
+
+    let ticketExists = ticketMaker.doesTicketAlreadyExist(
         mockTicketData[0],
         issueUrl,
-        'Test Title',
-        mockIssueCommentsData
+    )
+
+    expect(ticketExists).toBe(false)
+
+
+    mockTicketData[0]['status'] = 'closed'
+    ticketExists = ticketMaker.doesTicketAlreadyExist(
+        mockTicketData[0],
+        issueUrl,
     )
     expect(ticketExists).toBe(false)
+
+    mockTicketData[0]['status'] = 'solved'
+    ticketExists = ticketMaker.doesTicketAlreadyExist(
+        mockTicketData[0],
+        issueUrl
+    )
+    expect(ticketExists).toBe(false)
+    
+
 })
 
 test("ticketCreation() is called once if ticket doesn't exist", async () => {
@@ -85,4 +104,6 @@ test("generateTicketSubject() creates title in correct location for ticket", asy
     const ticketInfo = ticketMaker.getCurrentTicketInfo()
     expect(ticketInfo.ticket.subject).toBe("Spelling error in the README file")
 })
+
+
 
