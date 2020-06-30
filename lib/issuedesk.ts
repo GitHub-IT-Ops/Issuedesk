@@ -1,5 +1,6 @@
 import { ticketType } from '../types/types.js'
 const github = require('@actions/github')
+
 const zendesk = require('node-zendesk')
 const IssueMonitor = require('./issuemonitor.js').IssueMonitor
 const TicketMaker = require('./ticketmaker.js').TicketMaker
@@ -26,13 +27,14 @@ class IssueDesk {
 
     async monitorIssueAndMakeTicket() {
         
-        const issueMonitor = await new IssueMonitor(this.octokit, this.context)
-        const ticketMaker = await new TicketMaker(this.client)
+        const issueMonitor = new IssueMonitor(this.octokit, this.context)
+        const ticketMaker = new TicketMaker(this.client)
         const listOfComments = await issueMonitor.getListOfComments()
-        const issueUrl = await issueMonitor.getIssueUrl()
-        await ticketMaker.generateTicketBody(listOfComments, issueUrl)
-        await ticketMaker.createTicketIfItDoesNotExist()
+        const issueUrl = issueMonitor.getIssueUrl()
+        const issueTitle = issueMonitor.getIssueTitle()
+        await ticketMaker.createTicketIfItDoesNotExist(issueTitle, issueUrl, listOfComments)
 
+        return true
     }
 }
 

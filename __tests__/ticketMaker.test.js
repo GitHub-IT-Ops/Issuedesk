@@ -11,7 +11,7 @@ test('Ticket body is generated with correct info and in proper format', async ()
     const ticketMaker = new TicketMaker(client)
     let mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const expectedTicketBody =
-        'Author: octocat\n' +
+    'Author: octocat\n' +
         'Comment: Me too \n' +
         '*Created at: 2011-04-14T16:00:49Z*\n' +
         '\n' +

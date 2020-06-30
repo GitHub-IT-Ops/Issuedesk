@@ -101,7 +101,6 @@ class TicketMaker {
     // in node-zendesk library.
 
     public createTicketIfItDoesNotExist(
-        body: string | any[],
         issueUrl: string,
         issueTitle: string,
         listOfComments: [listOfCommentsType]

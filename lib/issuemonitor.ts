@@ -6,7 +6,11 @@ class IssueMonitor {
         this.context = context
     }
 
-    private isCorrectLabel(label: string) {
+    private getContext() {
+        return this.context
+    }
+
+    public isCorrectLabel(label: string) {
         if (this.context.payload.label.name == label) {
             return true
         } else {
@@ -14,32 +18,32 @@ class IssueMonitor {
         }
     }
 
-    private getContext() {
-        return this.context
-    }
-
-    private getIssueNumber() {
+    public getIssueNumber() {
         return this.context.payload.issue.number
     }
 
-    private getRepoOwner() {
+    public getRepoOwner() {
         return this.context.payload.repository.owner.login
     }
 
-    private getRepoName() {
+    public getRepoName() {
         return this.context.payload.repository.name
     }
 
-    private getIssueUrl() {
+    public getIssueUrl() {
         return this.context.payload.issue.html_url
     }
 
-    private getLabelEventData() {
+    public getLabelEventData() {
         return this.context.payload.label
     }
 
-    private getIssueId() {
+    public getIssueId() {
         return this.context.payload.issue.id
+    }
+
+    public getIssueTitle (){
+        return this.context.payload.issue.title
     }
 
     public issueWasLabeled() {

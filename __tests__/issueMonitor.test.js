@@ -33,3 +33,7 @@ test('IssueMonitor returns correct issue url in context', () => {
 test('IssueMonitor returns correct issue ID in context', () => {
     expect(issueMonitor.getIssueId()).toBe(444500041)
 })
+
+test('', () => {
+    expect(issueMonitor.getIssueTitle()).toBe("Spelling error in the README file")
+})
