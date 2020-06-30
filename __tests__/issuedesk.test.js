@@ -33,4 +33,11 @@ test('monitorIssueAndMakeTicket returns true if getLabelEventData is found in ac
     )
 
     expect(wasTicketCreated).toBe(true)
+
+    let wasTicketCreated = await mockIssuedesk.monitorIssueAndMakeTicket(
+        ['This Is Not Fine'],
+        'This Is Fine'
+    )
+
+    expect(wasTicketCreated).toBe(false)
 })
