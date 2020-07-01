@@ -17,11 +17,10 @@ inputs:
         description: |
             Usually https://<your workspace>.zendesk.com/api/v2/
         required: true
-      ACTIVATION_LABEL:
+    ACTIVATION_LABEL:
         description: |
             A label that will trigger issue creation on Zendesk if applied to issue. Example: Ready for IT 
         required: true
-
 steps:
     - uses: actions/checkout@v2
 runs:
