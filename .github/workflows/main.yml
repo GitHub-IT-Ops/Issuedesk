@@ -13,4 +13,4 @@ jobs:
                   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
                   ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
                   ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
-                  ACTIVATION_LABELS: ${{ ["Ready for IT"] }}
+                  ACTIVATION_LABELS: "Ready for IT"
