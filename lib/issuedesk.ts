@@ -42,14 +42,12 @@ class IssueDesk {
                     issueTitle,
                     listOfComments
                 )
-                
+
                 return true
-            } 
-            else {
+            } else {
                 return false
             }
         }
-
     }
 }
 

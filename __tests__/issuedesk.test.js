@@ -19,5 +19,4 @@ test('monitorIssueAndMakeTicket returns true if getLabelEventData is found in ac
     jest.mock('../__mocks__/octokit.js')
     jest.mock('../lib/issuemonitor.js')
     jest.mock('../lib/ticketmaker.js')
-
 })
