@@ -11,7 +11,7 @@ const issuedesk = new IssueDesk(
     zendeskUsername,
     zendeskToken,
     zendeskURI,
-    activationLabels
+    activationLabel
 )
 
 issuedesk.monitorIssueAndMakeTicket(activationLabel)
