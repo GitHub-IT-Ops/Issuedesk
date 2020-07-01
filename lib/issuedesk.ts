@@ -26,7 +26,7 @@ class IssueDesk {
 
     async monitorIssueAndMakeTicket(activationLabel: string) {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
-        const labelData = issueMonitor.getLabelEventData()
+        const labelData = issueMonitor.getLabelName()
 
         if (activationLabel === labelData) {
             const ticketMaker = new TicketMaker(this.client)
