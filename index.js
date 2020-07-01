@@ -14,4 +14,4 @@ const issuedesk = new IssueDesk(
     activationLabels
 )
 
-issuedesk.monitorIssueAndMakeTicket()
+issuedesk.monitorIssueAndMakeTicket(activationLabels)
