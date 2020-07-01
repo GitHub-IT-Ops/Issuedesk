@@ -43,7 +43,7 @@ class IssueDesk {
             return true
         } else {
             console.log(
-                `${activationLabel} is not an activation label. Ticket will not be created`
+                `${labelData} is not an activation label. Ticket will not be created`
             )
             return false
         }
