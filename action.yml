@@ -19,7 +19,7 @@ inputs:
         required: true
       ACTIVATION_LABELS:
         description: |
-            A label that will trigger issue creation on Zendesk if applied to issue. Pass string value. Example: "Ready for IT" 
+            A label that will trigger issue creation on Zendesk if applied to issue. Example: Ready for IT 
         required: true
 
 steps:
