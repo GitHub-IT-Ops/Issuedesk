@@ -34,8 +34,8 @@ class IssueMonitor {
         return this.context.payload.issue.html_url
     }
 
-    public getLabelEventData() {
-        return this.context.payload.label
+    public getLabelName() {
+        return this.context.payload.label.name
     }
 
     public getIssueId() {

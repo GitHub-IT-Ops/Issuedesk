@@ -1,17 +1,19 @@
 // Create test for node-zendesk
 const IssueMonitor = require('../lib/issuemonitor.js').IssueMonitor
-const eventIssueComment = require('../__mocks__/eventIssueComment.json')
-const getIssueComments = require('../__mocks__/getIssueComments.json')
+const eventIssueLabel = require('../__mocks__/eventIssueLabel.json')
 const octokit = require('../__mocks__/octokit.js')
 jest.mock('../__mocks__/octokit.js')
-const issueMonitor = new IssueMonitor(octokit, eventIssueComment)
+
+const issueMonitor = new IssueMonitor(octokit, eventIssueLabel)
 
 test('context value is not undefined and is initalized with context data', async () => {
-    expect(issueMonitor.getContext()).toBe(eventIssueComment)
+
+    expect(issueMonitor.getContext()).toBe(eventIssueLabel)
     expect(issueMonitor.getContext()).toBeDefined()
 })
 
 test('IssueMonitor returns correct issue number in context', () => {
+
     expect(issueMonitor.getIssueNumber()).toBe(1)
 })
 
@@ -33,8 +35,6 @@ test('IssueMonitor returns correct issue ID in context', () => {
     expect(issueMonitor.getIssueId()).toBe(444500041)
 })
 
-test('', () => {
-    expect(issueMonitor.getIssueTitle()).toBe(
-        'Spelling error in the README file'
-    )
+test('getLabelName returns correct label name in context', () => {
+    expect(issueMonitor.getLabelName()).toBe('')
 })
