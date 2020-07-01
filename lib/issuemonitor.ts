@@ -1,3 +1,5 @@
+
+//This class exists to handle all github related events and data. Most of the function names explain their purpose and just pull and return info from this.context
 class IssueMonitor {
     octokit: any
     context: any
@@ -6,6 +8,7 @@ class IssueMonitor {
         this.context = context
     }
 
+    // exists soley for test function check
     private getContext() {
         return this.context
     }
@@ -54,6 +57,7 @@ class IssueMonitor {
         }
     }
 
+    // uses octokit to fetch list of comments for speficied issue.
     public async getListOfComments() {
         const owner = this.getRepoOwner()
         const repo = this.getRepoName()
