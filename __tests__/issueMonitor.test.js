@@ -36,5 +36,5 @@ test('IssueMonitor returns correct issue ID in context', () => {
 })
 
 test('getLabelName returns correct label name in context', () => {
-    expect(issueMonitor.getLabelName()).toBe('')
+    expect(issueMonitor.getLabelName()).toBe(":bug: Bugfix")
 })
