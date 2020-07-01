@@ -12,10 +12,10 @@ on:
 jobs:
     bot:
         runs-on: ubuntu-latest
-        name: Run the program
+        name: Create ticket if needed
         steps:
             - uses: actions/checkout@v2
-            - uses: teakopp/it-bot@master
+            - uses: github/issuedesk@master
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
