@@ -41,10 +41,10 @@ class IssueDesk {
                     issueUrl,
                     issueTitle,
                     listOfComments
-                )
-
+                )                
                 return true
             } else {
+                console.log(`${activationLabel} is not an activation label. Ticket will not be created`)
                 return false
             }
         }
