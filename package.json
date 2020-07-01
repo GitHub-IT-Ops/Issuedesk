@@ -1,5 +1,5 @@
 {
-    "name": "it-bot",
+    "name": "issuedesk",
     "version": "1.0.0",
     "description": "Opens tickets and issues. Responds to tickets and issues",
     "main": "index.js",
