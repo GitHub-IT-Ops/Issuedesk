@@ -3,7 +3,9 @@ const myToken = core.getInput('GITHUB_TOKEN')
 const zendeskUsername = core.getInput('ZENDESK_USERNAME')
 const zendeskToken = core.getInput('ZENDESK_TOKEN')
 const zendeskURI = core.getInput('ZENDESK_URI')
-const activationLabels = core.getInput('ACTIVATION_LABELS')
+const activationLabel = core.getInput('ACTIVATION_LABEL')
+const settings = require('./settings/settings.json')
+
 
 const IssueDesk = require('./lib/issuedesk.js').IssueDesk
 const issuedesk = new IssueDesk(
@@ -14,4 +16,4 @@ const issuedesk = new IssueDesk(
     activationLabels
 )
 
-issuedesk.monitorIssueAndMakeTicket(activationLabels)
+issuedesk.monitorIssueAndMakeTicket(activationLabel)

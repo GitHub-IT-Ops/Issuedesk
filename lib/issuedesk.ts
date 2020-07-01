@@ -25,12 +25,12 @@ class IssueDesk {
         })
     }
 
-    async monitorIssueAndMakeTicket(activationLabels: [string]) {
+    async monitorIssueAndMakeTicket(activationLabel: string) {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
         const labelData = issueMonitor.getLabelEventData()
 
-        for (let i = 0; i > activationLabels.length; i++) {
-            if (activationLabels[i] === labelData) {
+        for (let i = 0; i > activationLabel.length; i++) {
+            if (activationLabel === labelData) {
                 const ticketMaker = new TicketMaker(this.client)
                 const listOfComments = await issueMonitor.getListOfComments()
                 const issueUrl = issueMonitor.getIssueUrl()
