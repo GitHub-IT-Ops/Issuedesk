@@ -1,6 +1,5 @@
 import { ticketType } from '../types/types.js'
 const github = require('@actions/github')
-
 const zendesk = require('node-zendesk')
 const IssueMonitor = require('./issuemonitor.js').IssueMonitor
 const TicketMaker = require('./ticketmaker.js').TicketMaker
@@ -29,24 +28,24 @@ class IssueDesk {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
         const labelData = issueMonitor.getLabelEventData()
 
-        for (let i = 0; i > activationLabel.length; i++) {
-            if (activationLabel === labelData) {
-                const ticketMaker = new TicketMaker(this.client)
-                const listOfComments = await issueMonitor.getListOfComments()
-                const issueUrl = issueMonitor.getIssueUrl()
-                const issueTitle = issueMonitor.getIssueTitle()
-                const ticketSubject = issueMonitor.getIssueTitle()
-                ticketMaker.generateTicketSubject(ticketSubject)
-                await ticketMaker.createTicketIfItDoesNotExist(
-                    issueUrl,
-                    issueTitle,
-                    listOfComments
-                )                
-                return true
-            } else {
-                console.log(`${activationLabel} is not an activation label. Ticket will not be created`)
-                return false
-            }
+        if (activationLabel === labelData) {
+            const ticketMaker = new TicketMaker(this.client)
+            const listOfComments = await issueMonitor.getListOfComments()
+            const issueUrl = issueMonitor.getIssueUrl()
+            const issueTitle = issueMonitor.getIssueTitle()
+            const ticketSubject = issueMonitor.getIssueTitle()
+            ticketMaker.generateTicketSubject(ticketSubject)
+            await ticketMaker.createTicketIfItDoesNotExist(
+                issueUrl,
+                issueTitle,
+                listOfComments
+            )
+            return true
+        } else {
+            console.log(
+                `${activationLabel} is not an activation label. Ticket will not be created`
+            )
+            return false
         }
     }
 }
