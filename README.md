@@ -4,7 +4,7 @@ If an issue is labeled on GitHub with a specific "activation label", a ticket wi
 
 ### How To Install On Repo
 
-Create
+Create `issuedesk.yml`
 ```
 on:
     issues:
