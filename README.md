@@ -1,6 +1,6 @@
 ### What this does
 
-If an issue is labeled on GitHub with a specific "activation label", a ticket will be created on Zendesk, if it doesn't already exist. 
+If an issue is labeled on GitHub with a specific "activation label", a ticket will be created on Zendesk, granted it doesn't already exist. 
 
 ### How To Install On Repo
 
