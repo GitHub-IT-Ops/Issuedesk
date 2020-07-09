@@ -31,7 +31,7 @@ jobs:
                   ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
                   ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
 ```
-Then navigate to https://github.com/ <Owner or Org> / <repo> /settings/secrets and define 
+Then navigate to https://github.com/`<owner or org>`/`<repo name>`/settings/secrets and define 
     `ZENDESK_USERNAME`
     `ZENDESK_TOKEN`
     `ZENDESK_URI`
