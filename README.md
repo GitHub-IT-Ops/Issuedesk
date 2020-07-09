@@ -31,12 +31,11 @@ jobs:
                   ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
                   ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
 ```
-Then make sure to define 
+Then navigate to https://github.com/ <Owner or Org> / <repo> /settings/secrets and define 
     `ZENDESK_USERNAME`
     `ZENDESK_TOKEN`
     `ZENDESK_URI`
     `ACTIVATION_LABEL`
-in https://github.com/<Owner or Org>/<repo>/settings/secrets
 
 After all secrets are defined, action should automatically kick off when issue is labeled 
 
