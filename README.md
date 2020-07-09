@@ -4,18 +4,26 @@ If an issue is labeled on GitHub with a specific "activation label", a ticket wi
 
 ### How To Install On Repo
 
-Create `issuedesk.yml`
+Create `issuedesk.yml` in `.github` directory (if `.github` directory doesn't exist feel free to create it)
+then paste the below workflow config into `issuedesk.yml`
+
 ```
 on:
     issues:
         types: [labeled]
 jobs:
-    bot:
+    issuedesk:
         runs-on: ubuntu-latest
         name: Create ticket if needed
         steps:
             - uses: actions/checkout@v2
-            - uses: github/issuedesk@master
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
+                  ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
+                  ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
+                  ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
+            - uses: GitHub-IT-Ops/Issuedesk@0.0.1
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
@@ -23,6 +31,14 @@ jobs:
                   ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
                   ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
 ```
+Then make sure to define 
+    `ZENDESK_USERNAME`
+    `ZENDESK_TOKEN`
+    `ZENDESK_URI`
+    `ACTIVATION_LABEL`
+in https://github.com/<Owner or Org>/<repo>/settings/secrets
+
+After all secrets are defined, action should automatically kick off when issue is labeled 
 
 ### Local Devlopment
 1. In terminal run $`git clone git@github.com:teakopp/Issuedesk.git` in the directory you wish to store in.
