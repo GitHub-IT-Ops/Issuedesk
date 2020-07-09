@@ -4,7 +4,7 @@ If an issue is labeled on GitHub with a specific "activation label", a ticket wi
 
 ### How To Install On Repo
 
-Create `issuedesk.yml` in `.github` directory (if `.github` directory doesn't exist feel free to create it)
+Create `issuedesk.yml` in `.github/workflows` directory (if `.github/workflows` doesn't exist, feel free to create it)
 then paste the below workflow config into `issuedesk.yml`
 
 ```
