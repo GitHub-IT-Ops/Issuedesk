@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { ticketType, listOfCommentsType } from '../types/types.js'
 
 // class exists to generate and then create ticket in zendesk 

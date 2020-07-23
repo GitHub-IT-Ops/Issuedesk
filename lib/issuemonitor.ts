@@ -58,7 +58,7 @@ class IssueMonitor {
     }
 
     public getIssueBody(){
-        return this.context.payload.body
+        return this.context.payload.issue.body
     }
 
     // uses octokit to fetch list of comments for speficied issue.
