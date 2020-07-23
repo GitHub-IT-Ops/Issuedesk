@@ -1,4 +1,3 @@
-import { ticketType } from '../types/types.js'
 const github = require('@actions/github')
 const zendesk = require('node-zendesk')
 const IssueMonitor = require('./issuemonitor.js').IssueMonitor

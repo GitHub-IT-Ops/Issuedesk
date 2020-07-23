@@ -1,6 +1,5 @@
 const TicketMaker = require('../lib/ticketmaker.js').TicketMaker
 const client = require('../__mocks__/client.js')
-const { IssueMonitor } = require('../lib/issuemonitor.js')
 jest.mock('../__mocks__/client.js')
 
 afterEach(() => {
@@ -51,7 +50,7 @@ test('If ticket does not exist in Zendesk, it will be created by TicketMaker', a
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/2'
     mockTicketData[0]['external_id'] =
         'https://github.com/Codertocat/Hello-World/issues/1'
-    const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
+
     const ticketMaker = new TicketMaker(client)
 
     let ticketExists = ticketMaker.doesTicketAlreadyExist(
