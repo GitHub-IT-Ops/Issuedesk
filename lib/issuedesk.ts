@@ -40,12 +40,16 @@ class IssueDesk {
             const listOfComments = await issueMonitor.getListOfComments()
             const issueUrl = issueMonitor.getIssueUrl()
             const issueTitle = issueMonitor.getIssueTitle()
-            const ticketSubject = issueMonitor.getIssueTitle()
-            ticketMaker.generateTicketSubject(ticketSubject)
+            const issueBody = issueMonitor.getIssueBody()
+            const issueAuthor = issueMonitor.getIssueAuthor()
+            const timeIssueCreatedAt = issueMonitor.getTimeIssueCreatedAt()
+
+            ticketMaker.generateTicketSubject(issueTitle)
+            ticketMaker.setExternalId(issueUrl)
+            ticketMaker.generateTicketBody(issueBody, issueAuthor, timeIssueCreatedAt, listOfComments, issueUrl)
+            
             await ticketMaker.createTicketIfItDoesNotExist(
-                issueUrl,
-                issueTitle,
-                listOfComments
+                ticketMaker.getTicket()
             )
             return true
         } else {

@@ -61,6 +61,14 @@ class IssueMonitor {
         return this.context.payload.issue.body
     }
 
+    public getIssueAuthor(){
+        return this.context.payload.issue.user.login
+    }
+
+    public getTimeIssueCreatedAt(){
+        return this.context.payload.issue.created_at
+    }
+
     // uses octokit to fetch list of comments for speficied issue.
     public async getListOfComments() {
         const owner = this.getRepoOwner()
