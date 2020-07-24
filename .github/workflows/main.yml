@@ -7,7 +7,7 @@ jobs:
         name: Run the program
         steps:
             - uses: actions/checkout@v2
-            - uses: GitHub-IT-Ops/it-bot@master
+            - uses: GitHub-IT-Ops/Issuedesk@master
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
