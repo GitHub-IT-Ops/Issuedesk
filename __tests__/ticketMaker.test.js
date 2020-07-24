@@ -36,7 +36,6 @@ test('Ticket body is generated with correct info and in proper format', async ()
     expect(ticketBody).toBe(expectedTicketBody)
 })
 
-
 test('generateTicketSubject() creates title in correct location for ticket', async () => {
     const ticketMaker = new TicketMaker(client)
     ticketMaker.generateTicketSubject('Spelling error in the README file')

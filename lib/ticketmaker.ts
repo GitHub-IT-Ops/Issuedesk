@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import { ticketType, listOfCommentsType } from '../types/types.js'
 
-// class exists to generate and then create ticket in zendesk 
+// class exists to generate and then create ticket in zendesk
 // ticket is created and stored in this.ticket so that operations in this class can modify it
 class TicketMaker {
     ticket: ticketType
@@ -21,7 +21,6 @@ class TicketMaker {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
-    
     // creates ticket body from info passed to it by github api
     public generateTicketBody(
         issueBody: string,
@@ -29,7 +28,6 @@ class TicketMaker {
         timeIssueCreatedAt: string,
         listOfComments: [listOfCommentsType],
         issueUrl: string
-
     ) {
         let ticketBody = `Issue Created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n`
 
@@ -45,14 +43,11 @@ class TicketMaker {
         return ticketBody
     }
 
-
     // Sets ticket subject to string, usually set to same name as issue
     public generateTicketSubject(issueTitle: string) {
         this.ticket['ticket']['subject'] = issueTitle
         return this.ticket
     }
-
-    
 }
 
 export { TicketMaker }

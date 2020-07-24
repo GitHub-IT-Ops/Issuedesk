@@ -4,7 +4,7 @@ const IssueMonitor = require('./issuemonitor.js').IssueMonitor
 const TicketMaker = require('./ticketmaker.js').TicketMaker
 const ZendeskMonitor = require('./zendeskmonitor.js').ZendeskMonitor
 
-//Passes github & zendesk instances into issuedesk class so that children classes can use them. 
+//Passes github & zendesk instances into issuedesk class so that children classes can use them.
 //issuedesk class exists primarily to delegate takes to child classes and handle higher order processes, such as deciding whether event even requires action
 class IssueDesk {
     octokit: any
@@ -27,7 +27,7 @@ class IssueDesk {
     }
 
     // This function will analyze whether an action should be taken by the IssueDesk class, in event of an issue being labeled
-    // Takes argument activationLabel, which is then compared to the labelName. 
+    // Takes argument activationLabel, which is then compared to the labelName.
     // labelName is extracted from this.context info by issueMonitor.getLabelName()
     // If label passes check, IssueDesk extracts info needed to create a zendesk ticket.
     // IssueDesk uses an instance of class TicketMaker to generate a ticket and then create it in zendesk.
@@ -47,8 +47,14 @@ class IssueDesk {
 
             ticketMaker.generateTicketSubject(issueTitle)
             ticketMaker.setExternalId(issueUrl)
-            ticketMaker.generateTicketBody(issueBody, issueAuthor, timeIssueCreatedAt, listOfComments, issueUrl)
-            
+            ticketMaker.generateTicketBody(
+                issueBody,
+                issueAuthor,
+                timeIssueCreatedAt,
+                listOfComments,
+                issueUrl
+            )
+
             const zendeskMonitor = new ZendeskMonitor(this.client)
             await zendeskMonitor.createTicketIfItDoesNotExist(
                 ticketMaker.getTicket()

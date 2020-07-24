@@ -1,4 +1,3 @@
-
 //This class exists to handle all github related events and data. Most of the function names explain their purpose and just pull and return info from this.context
 class IssueMonitor {
     octokit: any
@@ -57,15 +56,15 @@ class IssueMonitor {
         }
     }
 
-    public getIssueBody(){
+    public getIssueBody() {
         return this.context.payload.issue.body
     }
 
-    public getIssueAuthor(){
+    public getIssueAuthor() {
         return this.context.payload.issue.user.login
     }
 
-    public getTimeIssueCreatedAt(){
+    public getTimeIssueCreatedAt() {
         return this.context.payload.issue.created_at
     }
 

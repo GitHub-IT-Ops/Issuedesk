@@ -8,8 +8,8 @@
             "name": ":bug: Bugfix",
             "color": "cceeaa",
             "default": false
-          },
-            "issue": {
+        },
+        "issue": {
             "url": "https://api.github.com/repos/Codertocat/Hello-World/issues/1",
             "repository_url": "https://api.github.com/repos/Codertocat/Hello-World",
             "labels_url": "https://api.github.com/repos/Codertocat/Hello-World/issues/1/labels{/name}",
@@ -42,12 +42,12 @@
             },
             "labels": [
                 {
-                "id": 1362934389,
-                "node_id": "MDU6TGFiZWwxMzYyOTM0Mzg5",
-                "url": "https://api.github.com/repos/Codertocat/Hello-World/labels/bug",
-                "name": "bug",
-                "color": "d73a4a",
-                "default": true
+                    "id": 1362934389,
+                    "node_id": "MDU6TGFiZWwxMzYyOTM0Mzg5",
+                    "url": "https://api.github.com/repos/Codertocat/Hello-World/labels/bug",
+                    "name": "bug",
+                    "color": "d73a4a",
+                    "default": true
                 }
             ],
             "state": "open",
@@ -74,24 +74,24 @@
             },
             "assignees": [
                 {
-                "login": "Codertocat",
-                "id": 21031067,
-                "node_id": "MDQ6VXNlcjIxMDMxMDY3",
-                "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
-                "gravatar_id": "",
-                "url": "https://api.github.com/users/Codertocat",
-                "html_url": "https://github.com/Codertocat",
-                "followers_url": "https://api.github.com/users/Codertocat/followers",
-                "following_url": "https://api.github.com/users/Codertocat/following{/other_user}",
-                "gists_url": "https://api.github.com/users/Codertocat/gists{/gist_id}",
-                "starred_url": "https://api.github.com/users/Codertocat/starred{/owner}{/repo}",
-                "subscriptions_url": "https://api.github.com/users/Codertocat/subscriptions",
-                "organizations_url": "https://api.github.com/users/Codertocat/orgs",
-                "repos_url": "https://api.github.com/users/Codertocat/repos",
-                "events_url": "https://api.github.com/users/Codertocat/events{/privacy}",
-                "received_events_url": "https://api.github.com/users/Codertocat/received_events",
-                "type": "User",
-                "site_admin": false
+                    "login": "Codertocat",
+                    "id": 21031067,
+                    "node_id": "MDQ6VXNlcjIxMDMxMDY3",
+                    "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+                    "gravatar_id": "",
+                    "url": "https://api.github.com/users/Codertocat",
+                    "html_url": "https://github.com/Codertocat",
+                    "followers_url": "https://api.github.com/users/Codertocat/followers",
+                    "following_url": "https://api.github.com/users/Codertocat/following{/other_user}",
+                    "gists_url": "https://api.github.com/users/Codertocat/gists{/gist_id}",
+                    "starred_url": "https://api.github.com/users/Codertocat/starred{/owner}{/repo}",
+                    "subscriptions_url": "https://api.github.com/users/Codertocat/subscriptions",
+                    "organizations_url": "https://api.github.com/users/Codertocat/orgs",
+                    "repos_url": "https://api.github.com/users/Codertocat/repos",
+                    "events_url": "https://api.github.com/users/Codertocat/events{/privacy}",
+                    "received_events_url": "https://api.github.com/users/Codertocat/received_events",
+                    "type": "User",
+                    "site_admin": false
                 }
             ],
             "milestone": {
@@ -104,24 +104,24 @@
                 "title": "v1.0",
                 "description": "Add new space flight simulator",
                 "creator": {
-                "login": "Codertocat",
-                "id": 21031067,
-                "node_id": "MDQ6VXNlcjIxMDMxMDY3",
-                "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
-                "gravatar_id": "",
-                "url": "https://api.github.com/users/Codertocat",
-                "html_url": "https://github.com/Codertocat",
-                "followers_url": "https://api.github.com/users/Codertocat/followers",
-                "following_url": "https://api.github.com/users/Codertocat/following{/other_user}",
-                "gists_url": "https://api.github.com/users/Codertocat/gists{/gist_id}",
-                "starred_url": "https://api.github.com/users/Codertocat/starred{/owner}{/repo}",
-                "subscriptions_url": "https://api.github.com/users/Codertocat/subscriptions",
-                "organizations_url": "https://api.github.com/users/Codertocat/orgs",
-                "repos_url": "https://api.github.com/users/Codertocat/repos",
-                "events_url": "https://api.github.com/users/Codertocat/events{/privacy}",
-                "received_events_url": "https://api.github.com/users/Codertocat/received_events",
-                "type": "User",
-                "site_admin": false
+                    "login": "Codertocat",
+                    "id": 21031067,
+                    "node_id": "MDQ6VXNlcjIxMDMxMDY3",
+                    "avatar_url": "https://avatars1.githubusercontent.com/u/21031067?v=4",
+                    "gravatar_id": "",
+                    "url": "https://api.github.com/users/Codertocat",
+                    "html_url": "https://github.com/Codertocat",
+                    "followers_url": "https://api.github.com/users/Codertocat/followers",
+                    "following_url": "https://api.github.com/users/Codertocat/following{/other_user}",
+                    "gists_url": "https://api.github.com/users/Codertocat/gists{/gist_id}",
+                    "starred_url": "https://api.github.com/users/Codertocat/starred{/owner}{/repo}",
+                    "subscriptions_url": "https://api.github.com/users/Codertocat/subscriptions",
+                    "organizations_url": "https://api.github.com/users/Codertocat/orgs",
+                    "repos_url": "https://api.github.com/users/Codertocat/repos",
+                    "events_url": "https://api.github.com/users/Codertocat/events{/privacy}",
+                    "received_events_url": "https://api.github.com/users/Codertocat/received_events",
+                    "type": "User",
+                    "site_admin": false
                 },
                 "open_issues": 1,
                 "closed_issues": 0,
@@ -137,10 +137,9 @@
             "closed_at": null,
             "author_association": "OWNER",
             "body": "It looks like you accidently spelled 'commit' with two 't's."
-            },
-            "changes": {
-            },
-            "repository": {
+        },
+        "changes": {},
+        "repository": {
             "id": 186853002,
             "node_id": "MDEwOlJlcG9zaXRvcnkxODY4NTMwMDI=",
             "name": "Hello-World",
@@ -233,8 +232,8 @@
             "open_issues": 1,
             "watchers": 0,
             "default_branch": "master"
-            },
-            "sender": {
+        },
+        "sender": {
             "login": "Codertocat",
             "id": 21031067,
             "node_id": "MDQ6VXNlcjIxMDMxMDY3",
@@ -255,4 +254,4 @@
             "site_admin": false
         }
     }
-  }
+}

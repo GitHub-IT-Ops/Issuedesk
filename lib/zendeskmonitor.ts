@@ -24,7 +24,6 @@ class ZendeskMonitor {
             process.exit(-1)
         }
     }
-    
 
     // Makes sure ticket doesn't exist, but will create another ticket if ticket containing same external_id, but has status solved or closed
     // This was done to protect against accidentally closed or solved tickets. Once two way communication is implemented between zendesk and github, this will be immensly important
@@ -33,7 +32,8 @@ class ZendeskMonitor {
         newTicket: ticketType
     ) {
         if (
-            existingTicket['external_id'] === newTicket['ticket']['external_id'] &&
+            existingTicket['external_id'] ===
+                newTicket['ticket']['external_id'] &&
             existingTicket['status'] !== 'closed' &&
             existingTicket['status'] !== 'solved'
         ) {
@@ -49,28 +49,25 @@ class ZendeskMonitor {
     // Handles entirety of ticket creation process. uses this.client.tickets.list to load all tickets and then runs them through doesTicketAlreadyExist() to make sure duplicate tickets aren't created, if
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
 
-    public createTicketIfItDoesNotExist(
-        ticket: ticketType
-    ) {
-        this.client.tickets.list((err: any, statusList: any, existingTickets: any) => {
-            for (let i = 0; i < existingTickets.length; i++) {
-                const ticketExists = this.doesTicketAlreadyExist(existingTickets[i], ticket)
+    public createTicketIfItDoesNotExist(ticket: ticketType) {
+        this.client.tickets.list(
+            (err: any, statusList: any, existingTickets: any) => {
+                for (let i = 0; i < existingTickets.length; i++) {
+                    const ticketExists = this.doesTicketAlreadyExist(
+                        existingTickets[i],
+                        ticket
+                    )
 
-                if (ticketExists) {
-                    console.log('Ticket already exists! Exiting...')
-                    return true
+                    if (ticketExists) {
+                        console.log('Ticket already exists! Exiting...')
+                        return true
+                    }
                 }
+                this.createTicket(ticket)
+                return false
             }
-            this.createTicket(ticket)
-            return false
-        })
+        )
     }
-
-    
 }
-
-
-
-
 
 export { ZendeskMonitor }
