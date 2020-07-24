@@ -38,3 +38,13 @@ test('IssueMonitor returns correct issue ID in context', () => {
 test('getLabelName returns correct label name in context', () => {
     expect(issueMonitor.getLabelName()).toBe(":bug: Bugfix")
 })
+
+test('getIssueBody() returns issue body from context', () => {
+    expect(issueMonitor.getIssueBody()).toBe("It looks like you accidently spelled 'commit' with two 't's.")
+})
+
+
+test('getTimeIssueCreatedAt() returns issue created_at for issue from context', () => {
+    expect(issueMonitor.getTimeIssueCreatedAt()).toBe("2019-05-15T15:20:18Z")
+})
+
