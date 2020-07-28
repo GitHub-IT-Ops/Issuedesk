@@ -4,7 +4,6 @@ const IssueMonitor = require('./issuemonitor.js').IssueMonitor
 const TicketMaker = require('./ticketmaker.js').TicketMaker
 const ZendeskMonitor = require('./zendeskmonitor.js').ZendeskMonitor
 
-
 //Passes github & zendesk instances into issuedesk class so that children classes can use them.
 //issuedesk class exists primarily to delegate takes to child classes and handle higher order processes, such as deciding whether event even requires action
 class IssueDesk {
@@ -58,9 +57,7 @@ class IssueDesk {
             )
 
             const ticket = await ticketMaker.getTicket()
-            await zendeskMonitor.createTicketIfItDoesNotExist(
-                ticket
-            )
+            await zendeskMonitor.createTicketIfItDoesNotExist(ticket)
             return true
         } else {
             console.log(

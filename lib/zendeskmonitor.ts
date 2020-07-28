@@ -43,16 +43,17 @@ class ZendeskMonitor {
         }
     }
 
-    private async getAllZendeskTickets(){
+    private async getAllZendeskTickets() {
         const allTickets: [ticketType] = await this.client.tickets.list(
             (err: any, statusList: any, tickets: any) => {
                 for (let i = 0; i < tickets.length; i++) {
                     allTickets.push(tickets[i])
-            }
+                }
 
-            return allTickets  
-        })
-        
+                return allTickets
+            }
+        )
+
         return allTickets
     }
 
@@ -63,23 +64,22 @@ class ZendeskMonitor {
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
 
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
-                const existingTickets = await this.getAllZendeskTickets()
+        const existingTickets = await this.getAllZendeskTickets()
 
-                for (let i = 0; i < existingTickets.length; i++) {
-                    const ticketExists = this.doesTicketAlreadyExist(
-                        existingTickets[i],
-                        ticket
-                    )
+        for (let i = 0; i < existingTickets.length; i++) {
+            const ticketExists = this.doesTicketAlreadyExist(
+                existingTickets[i],
+                ticket
+            )
 
-                    if (ticketExists) {
-                        console.log('Ticket already exists! Exiting...')
-                        return true
-                    }
-                }
-                this.createTicket(ticket)
-                return false
-
+            if (ticketExists) {
+                console.log('Ticket already exists! Exiting...')
+                return true
+            }
         }
+        this.createTicket(ticket)
+        return false
+    }
 }
 
 export { ZendeskMonitor }
