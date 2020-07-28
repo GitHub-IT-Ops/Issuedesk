@@ -64,19 +64,15 @@ test('If ticket does not exist in Zendesk, doesTicketAlreadyExist returns false'
     expect(ticketExists).toBe(false)
 })
 
-test("ticketCreation() is called once if ticket doesn't exist", async () => {
-    const mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
+test("createTicket() is called once if ticket doesn't exist", async () => {
     const mockTicketData = require('../__mocks__/ticket.json')
-    const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/2'
     mockTicketData[0]['external_id'] =
         'https://github.com/Codertocat/Hello-World/issues/1'
 
     const zendeskMonitor = new ZendeskMonitor(client)
     zendeskMonitor.createTicketIfItDoesNotExist(
-        mockTicketData,
-        issueUrl,
-        'Test Title',
-        mockIssueCommentsData
+        mockTicketData
     )
     expect(client.tickets.list.mock.calls.length).toBe(1)
 })
+

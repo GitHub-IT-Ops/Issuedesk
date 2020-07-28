@@ -43,20 +43,6 @@ class ZendeskMonitor {
         }
     }
 
-    private async getAllZendeskTickets() {
-        const allTickets: [ticketType] = await this.client.tickets.list(
-            (err: any, statusList: any, tickets: any) => {
-                for (let i = 0; i < tickets.length; i++) {
-                    allTickets.push(tickets[i])
-                }
-
-                return allTickets
-            }
-        )
-
-        return allTickets
-    }
-
     // Uses callbacks due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
     // Use of callbacks like this function and createTicketIfItDoesNotExist() should only be used until issue is resolved
     // in node-zendesk library, after that switch it to async/await.
@@ -64,21 +50,27 @@ class ZendeskMonitor {
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
 
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
-        const existingTickets = await this.getAllZendeskTickets()
 
-        for (let i = 0; i < existingTickets.length; i++) {
-            const ticketExists = this.doesTicketAlreadyExist(
-                existingTickets[i],
-                ticket
-            )
+        await this.client.tickets.list(
+            (err: any, statusList: any, existingTickets: any) => {
+                console.log(existingTickets.length);
+                for (let i = 0; i < existingTickets.length; i++) {
+                    
+                    
+                    const ticketExists = this.doesTicketAlreadyExist(
+                        existingTickets[i],
+                        ticket
+                    )
 
-            if (ticketExists) {
-                console.log('Ticket already exists! Exiting...')
-                return true
+                    if (ticketExists) {
+                        console.log('Ticket already exists! Exiting...')
+                        return true
+                    }
+                }
+                this.createTicket(ticket)
+                return false
             }
-        }
-        this.createTicket(ticket)
-        return false
+        )
     }
 }
 
