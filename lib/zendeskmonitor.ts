@@ -43,15 +43,28 @@ class ZendeskMonitor {
         }
     }
 
+    private async getAllZendeskTickets(){
+        const allTickets: [ticketType] = await this.client.tickets.list(
+            (err: any, statusList: any, tickets: any) => {
+                for (let i = 0; i < tickets.length; i++) {
+                    allTickets.push(tickets[i])
+            }
+
+            return allTickets  
+        })
+        
+        return allTickets
+    }
+
     // Uses callbacks due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
     // Use of callbacks like this function and createTicketIfItDoesNotExist() should only be used until issue is resolved
     // in node-zendesk library, after that switch it to async/await.
     // Handles entirety of ticket creation process. uses this.client.tickets.list to load all tickets and then runs them through doesTicketAlreadyExist() to make sure duplicate tickets aren't created, if
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
 
-    public createTicketIfItDoesNotExist(ticket: ticketType) {
-        this.client.tickets.list(
-            (err: any, statusList: any, existingTickets: any) => {
+    public async createTicketIfItDoesNotExist(ticket: ticketType) {
+                const existingTickets = await this.getAllZendeskTickets()
+
                 for (let i = 0; i < existingTickets.length; i++) {
                     const ticketExists = this.doesTicketAlreadyExist(
                         existingTickets[i],
@@ -65,9 +78,8 @@ class ZendeskMonitor {
                 }
                 this.createTicket(ticket)
                 return false
-            }
-        )
-    }
+
+        }
 }
 
 export { ZendeskMonitor }

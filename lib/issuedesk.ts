@@ -39,6 +39,7 @@ class IssueDesk {
 
         if (activationLabel === labelName) {
             const ticketMaker = new TicketMaker()
+            const zendeskMonitor = new ZendeskMonitor(this.client)
             const listOfComments = await issueMonitor.getListOfComments()
             const issueUrl = issueMonitor.getIssueUrl()
             const issueTitle = issueMonitor.getIssueTitle()
@@ -56,8 +57,7 @@ class IssueDesk {
                 issueUrl
             )
 
-            const ticket = ticketMaker.getTicket()
-            const zendeskMonitor = new ZendeskMonitor(this.client)
+            const ticket = await ticketMaker.getTicket()
             await zendeskMonitor.createTicketIfItDoesNotExist(
                 ticket
             )
