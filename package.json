@@ -42,6 +42,6 @@
         "@typescript-eslint/parser": "^3.7.1",
         "dotenv": "^8.2.0",
         "eslint": "^7.5.0",
-        "node-zendesk": "^1.5.0"
+        "node-zendesk": "^1.4.0"
     }
 }

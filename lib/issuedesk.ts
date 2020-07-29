@@ -45,8 +45,6 @@ class IssueDesk {
             const issueBody = issueMonitor.getIssueBody()
             const issueAuthor = issueMonitor.getIssueAuthor()
             const timeIssueCreatedAt = issueMonitor.getTimeIssueCreatedAt()
-            //test call
-            await zendeskMonitor.getAllZendeskTickets()
 
             ticketMaker.generateTicketSubject(issueTitle)
             ticketMaker.setExternalId(issueUrl)
@@ -59,7 +57,7 @@ class IssueDesk {
             )
 
             const ticket = await ticketMaker.getTicket()
-            // await zendeskMonitor.createTicketIfItDoesNotExist(ticket)
+            await zendeskMonitor.createTicketIfItDoesNotExist(ticket)
             return true
         } else {
             console.log(
