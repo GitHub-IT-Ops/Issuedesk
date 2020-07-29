@@ -67,10 +67,7 @@ class ZendeskMonitor {
 
         const allZendeskTickets = await this.getAllZendeskTickets()
 
-        console.log(allZendeskTickets.length)
-
         for (let i = 0; i < allZendeskTickets.length; i++) {
-            console.log('loop started')
 
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i],
