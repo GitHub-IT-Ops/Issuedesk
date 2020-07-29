@@ -59,8 +59,8 @@ class IssueDesk {
             const ticket = await ticketMaker.getTicket()
 
             //temp for testing
-            zendeskMonitor.getAllZendeskTickets()
-            
+            await zendeskMonitor.getAllZendeskTickets()
+
             await zendeskMonitor.createTicketIfItDoesNotExist(ticket)
             return true
         } else {
