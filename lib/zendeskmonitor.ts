@@ -48,6 +48,8 @@ class ZendeskMonitor {
         
         return await this.client.tickets.list(
             (err: any, statusList: any, body: [ticketType]) => {
+                console.log(body);
+                
                 return body
             }
         )
@@ -60,12 +62,10 @@ class ZendeskMonitor {
     // Handles entirety of ticket creation process. uses this.client.tickets.list to load all tickets and then runs them through doesTicketAlreadyExist() to make sure duplicate tickets aren't created, if
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
-        console.log("loaded");
-        
+  
         const allZendeskTickets = await this.getAllZendeskTickets()
-                console.log("pre-loop");
-                
-                for (let i = 0; i < allZendeskTickets.length; i++) {
+
+                for (let i = 0; i < await allZendeskTickets.length; i++) {
                     console.log("loop started");
                     
                     const ticketExists = this.doesTicketAlreadyExist(
