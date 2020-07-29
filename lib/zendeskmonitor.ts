@@ -43,7 +43,7 @@ class ZendeskMonitor {
         }
     }
 
-    private getAllZendeskTickets() {
+    public getAllZendeskTickets() {
         return this.client.tickets.list(
             (err: any, statusList: any, body: [ticketType]) => {
                 try {
