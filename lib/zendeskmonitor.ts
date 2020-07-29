@@ -48,10 +48,16 @@ class ZendeskMonitor {
         
         return await this.client.tickets.list(
             (err: any, statusList: any, body: [ticketType]) => {
+            try{
                 console.log(body);
-                
                 return body
             }
+            catch(err){
+                console.log(err);
+                
+            }
+            }
+          
         )
     }
 
@@ -64,7 +70,8 @@ class ZendeskMonitor {
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
   
         const allZendeskTickets = await this.getAllZendeskTickets()
-
+        console.log(allZendeskTickets);
+        
                 for (let i = 0; i < await allZendeskTickets.length; i++) {
                     console.log("loop started");
                     
