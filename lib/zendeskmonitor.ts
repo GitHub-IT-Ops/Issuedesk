@@ -44,6 +44,8 @@ class ZendeskMonitor {
     }
 
     public getAllZendeskTickets(): Promise<[ticketType]> {
+        console.log("getAllZendeskTickets");
+        
         return new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
@@ -54,6 +56,7 @@ class ZendeskMonitor {
                 }
             })
         })
+        
     }
 
     // Uses callbacks due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
