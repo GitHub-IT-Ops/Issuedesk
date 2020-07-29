@@ -35,7 +35,8 @@ class IssueDesk {
     async monitorIssueAndMakeTicket(activationLabel: string) {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
         const labelName = issueMonitor.getLabelName()
-
+        console.log(activationLabel === labelName);
+        
         if (activationLabel === labelName) {
             const ticketMaker = new TicketMaker()
             const zendeskMonitor = new ZendeskMonitor(this.client)
