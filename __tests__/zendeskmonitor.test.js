@@ -70,9 +70,6 @@ test("createTicket() is called once if ticket doesn't exist", async () => {
         'https://github.com/Codertocat/Hello-World/issues/1'
 
     const zendeskMonitor = new ZendeskMonitor(client)
-    zendeskMonitor.createTicketIfItDoesNotExist(
-        mockTicketData
-    )
+    zendeskMonitor.createTicketIfItDoesNotExist(mockTicketData)
     expect(client.tickets.list.mock.calls.length).toBe(1)
 })
-
