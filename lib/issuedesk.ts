@@ -26,13 +26,18 @@ class IssueDesk {
         })
     }
 
+    public getIssueAction() {
+        const actionMonitor = new IssueMonitor(this.octokit, this.context)
+        return actionMonitor.getEventAction()
+    }
+
     // This function will analyze whether an action should be taken by the IssueDesk class, in event of an issue being labeled
     // Takes argument activationLabel, which is then compared to the labelName.
     // labelName is extracted from this.context info by issueMonitor.getLabelName()
     // If label passes check, IssueDesk extracts info needed to create a zendesk ticket.
     // IssueDesk uses an instance of class TicketMaker to generate a ticket and then create it in zendesk.
     // It does this by using the zendesk.client passed to TicketMaker instance
-    async monitorIssueAndMakeTicket(activationLabel: string) {
+    public async monitorIssueAndMakeTicket(activationLabel: string) {
         const issueMonitor = new IssueMonitor(this.octokit, this.context)
         const labelName = issueMonitor.getLabelName()
 
@@ -65,6 +70,10 @@ class IssueDesk {
             )
             return false
         }
+    }
+
+    public closeIssue() {
+        //close issue
     }
 }
 

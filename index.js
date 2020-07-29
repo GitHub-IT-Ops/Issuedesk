@@ -15,7 +15,12 @@ const issuedesk = new IssueDesk(
     activationLabel
 )
 
-// Handles "Issue Labeled" events. Passed variable in via Actions variables.
-// It was purposely done to make it customizeable as well as private (if needed) for other users.
-// May switch to global env variables in the future
-issuedesk.monitorIssueAndMakeTicket(activationLabel)
+const eventAction = issuedesk.getIssueAction()
+
+switch (eventAction) {
+    case 'labeled':
+        issuedesk.monitorIssueAndMakeTicket(activationLabel)
+        break
+    case 'closed':
+        issuedesk.closeIssue()
+}

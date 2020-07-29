@@ -44,7 +44,6 @@ class ZendeskMonitor {
     }
 
     public getAllZendeskTickets(): Promise<[ticketType]> {
-
         return new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
@@ -55,7 +54,6 @@ class ZendeskMonitor {
                 }
             })
         })
-        
     }
 
     // Uses callbacks due to node-zendesks 2.0.0 & 1.5.0 version issues at the time.
@@ -64,11 +62,9 @@ class ZendeskMonitor {
     // Handles entirety of ticket creation process. uses this.client.tickets.list to load all tickets and then runs them through doesTicketAlreadyExist() to make sure duplicate tickets aren't created, if
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
-
         const allZendeskTickets = await this.getAllZendeskTickets()
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
-
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i],
                 ticket

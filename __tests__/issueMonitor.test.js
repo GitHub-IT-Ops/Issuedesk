@@ -46,3 +46,7 @@ test('getIssueBody() returns issue body from context', () => {
 test('getTimeIssueCreatedAt() returns issue created_at for issue from context', () => {
     expect(issueMonitor.getTimeIssueCreatedAt()).toBe('2019-05-15T15:20:18Z')
 })
+
+test('getEventAction returns action info from context', () => {
+    expect(issueMonitor.getEventAction()).toBe('labeled')
+})

@@ -68,6 +68,10 @@ class IssueMonitor {
         return this.context.payload.issue.created_at
     }
 
+    public getEventAction() {
+        return this.context.payload.action
+    }
+
     // uses octokit to fetch list of comments for speficied issue.
     public async getListOfComments() {
         const owner = this.getRepoOwner()
