@@ -44,8 +44,7 @@ class ZendeskMonitor {
     }
 
     public getAllZendeskTickets(): Promise<[ticketType]> {
-        console.log("getAllZendeskTickets");
-        
+
         return new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
