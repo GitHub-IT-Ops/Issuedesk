@@ -66,7 +66,6 @@ class ZendeskMonitor {
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
         const allZendeskTickets = await this.getAllZendeskTickets()
-        console.log(allZendeskTickets)
 
         for (let i = 0; i < (allZendeskTickets.length); i++) {
             console.log('loop started')
