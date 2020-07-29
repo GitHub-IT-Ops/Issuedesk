@@ -69,6 +69,8 @@ class ZendeskMonitor {
         
         const allZendeskTickets = await this.getAllZendeskTickets()
         console.log("pre-loop");
+        console.log(allZendeskTickets.length);
+        
         
         for (let i = 0; i < (allZendeskTickets.length); i++) {
             console.log('loop started')
