@@ -18,5 +18,4 @@ const issuedesk = new IssueDesk(
 // Handles "Issue Labeled" events. Passed variable in via Actions variables.
 // It was purposely done to make it customizeable as well as private (if needed) for other users.
 // May switch to global env variables in the future
-console.log("is running");
 issuedesk.monitorIssueAndMakeTicket(activationLabel)
