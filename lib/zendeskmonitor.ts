@@ -43,8 +43,8 @@ class ZendeskMonitor {
         }
     }
 
-    public async getAllZendeskTickets(): Promise<[ticketType]> {
-        return await new Promise((resolve) => {
+    public getAllZendeskTickets(): Promise<[ticketType]> {
+        return new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
                     console.log(body)
