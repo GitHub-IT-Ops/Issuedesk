@@ -22,5 +22,5 @@ switch (eventAction) {
         issuedesk.monitorIssueAndMakeTicket(activationLabel)
         break
     case 'closed':
-        issuedesk.closeIssue()
+        issuedesk.closeTicket()
 }
