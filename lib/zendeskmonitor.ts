@@ -66,8 +66,12 @@ class ZendeskMonitor {
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
         console.log('createTicketIfItDoesNotExist')
 
-        const allZendeskTickets = await this.getAllZendeskTickets()
-        console.log('pre-loop')
+        const allZendeskTickets: [ticketType]  = await new Promise((resolve) => {
+            this.client.tickets.list((err: any, statusList: any, body: any) => {
+                resolve(body)
+            })
+        })
+        
         console.log(allZendeskTickets.length)
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
