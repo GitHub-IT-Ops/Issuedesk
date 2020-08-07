@@ -72,8 +72,9 @@ class IssueDesk {
         }
     }
 
-    public closeIssue() {
-        //close issue
+    public closeTicket() {
+        const zendeskMonitor = new ZendeskMonitor(this.client)
+        zendeskMonitor.closeTicket()
     }
 }
 
