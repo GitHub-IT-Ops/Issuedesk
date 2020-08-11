@@ -38,22 +38,48 @@ class ZendeskMonitor {
         return allTicketsWithExternalId
     }
 
+    private isTicketOpen(ticketStatus: string){
+        if (
+            ticketStatus !== 'closed' &&
+            ticketStatus !== 'solved'
+        ) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     // Makes sure ticket doesn't exist, but will create another ticket if ticket containing same external_id, but has status solved or closed
     // This was done to protect against accidentally closed or solved tickets. Once two way communication is implemented between zendesk and github, this will be immensly important
     private doesTicketAlreadyExist(
         existingTicket: { [x: string]: any },
         newTicket: ticketType
     ) {
+        const ticketIsOpen = this.isTicketOpen(existingTicket['status'])
+
         if (
             existingTicket['external_id'] ===
-                newTicket['ticket']['external_id'] &&
-            existingTicket['status'] !== 'closed' &&
-            existingTicket['status'] !== 'solved'
+                newTicket['ticket']['external_id'] && ticketIsOpen
         ) {
             return true
         } else {
             return false
         }
+    }
+
+    public async addIssueCommentToTicket(ticket: ticketType){
+        const allZendeskTickets: { [x: string]: any } = await this.getAllZendeskTickets()
+        for(let i=0; i < allZendeskTickets.length; i++){
+            const ticketExists = this.doesTicketAlreadyExist(allZendeskTickets[i], ticket)
+
+            if(ticketExists){
+                
+                await this.client.tickets.update(allZendeskTickets[i]["id"], ticket)
+
+            }
+
+        }
+   
     }
 
     public async getAllZendeskTickets(): Promise<[ticketType]> {

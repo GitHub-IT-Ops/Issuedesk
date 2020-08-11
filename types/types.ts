@@ -1,6 +1,6 @@
 interface ticketType {
     ticket: {
-        subject: string
+        subject?: string
         comment: { body: string }
         external_id: string
     }
