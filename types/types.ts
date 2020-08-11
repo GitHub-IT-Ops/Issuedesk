@@ -2,7 +2,7 @@ interface ticketType {
     ticket: {
         subject?: string
         comment: { body: string }
-        external_id: string
+        external_id?: string
     }
 }
 
