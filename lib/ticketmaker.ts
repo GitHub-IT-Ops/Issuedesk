@@ -7,7 +7,7 @@ class TicketMaker {
     ticket: ticketType
     constructor() {
         this.ticket = {
-            ticket: { comment: { body: '' }, external_id: '' },
+            ticket: { comment: { body: '' } },
         }
     }
 

@@ -25,24 +25,21 @@ class ZendeskMonitor {
         }
     }
 
-    private async getAllTicketsWithExternalId(external_id: string){
-
-        const allTickets: [{ [x: string]: any }] = await this.getAllZendeskTickets()
+    private async getAllTicketsWithExternalId(external_id: string) {
+        const allTickets: [
+            { [x: string]: any }
+        ] = await this.getAllZendeskTickets()
         const allTicketsWithExternalId = []
-        for (let i=0; i < allTickets.length; i++){
-            if(allTickets[i]['external_id'] === external_id){
+        for (let i = 0; i < allTickets.length; i++) {
+            if (allTickets[i]['external_id'] === external_id) {
                 allTicketsWithExternalId.push(allTickets[i])
             }
-
         }
         return allTicketsWithExternalId
     }
 
-    private isTicketOpen(ticketStatus: string){
-        if (
-            ticketStatus !== 'closed' &&
-            ticketStatus !== 'solved'
-        ) {
+    private isTicketOpen(ticketStatus: string) {
+        if (ticketStatus !== 'closed' && ticketStatus !== 'solved') {
             return true
         } else {
             return false
@@ -59,7 +56,8 @@ class ZendeskMonitor {
 
         if (
             existingTicket['external_id'] ===
-                newTicket['ticket']['external_id'] && ticketIsOpen
+                newTicket['ticket']['external_id'] &&
+            ticketIsOpen
         ) {
             return true
         } else {
@@ -67,19 +65,23 @@ class ZendeskMonitor {
         }
     }
 
-    public async addIssueCommentToTicket(ticket: ticketType){
-        const allZendeskTickets: { [x: string]: any } = await this.getAllZendeskTickets()
-        for(let i=0; i < allZendeskTickets.length; i++){
-            const ticketExists = this.doesTicketAlreadyExist(allZendeskTickets[i], ticket)
+    public async addIssueCommentToTicket(ticket: ticketType) {
+        const allZendeskTickets: {
+            [x: string]: any
+        } = await this.getAllZendeskTickets()
+        for (let i = 0; i < allZendeskTickets.length; i++) {
+            const ticketExists = this.doesTicketAlreadyExist(
+                allZendeskTickets[i],
+                ticket
+            )
 
-            if(ticketExists){
-                
-                await this.client.tickets.update(allZendeskTickets[i]["id"], ticket)
-
+            if (ticketExists) {
+                await this.client.tickets.update(
+                    allZendeskTickets[i]['id'],
+                    ticket
+                )
             }
-
         }
-   
     }
 
     public async getAllZendeskTickets(): Promise<[ticketType]> {
@@ -117,7 +119,6 @@ class ZendeskMonitor {
         this.createTicket(ticket)
         return false
     }
-
 }
 
 export { ZendeskMonitor }
