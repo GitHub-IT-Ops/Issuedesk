@@ -65,7 +65,7 @@ class ZendeskMonitor {
         }
     }
 
-    public async addIssueCommentToTicket(ticket: ticketType) {
+    public async updateTicketWithIssueComment(ticket: ticketType) {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
@@ -74,8 +74,9 @@ class ZendeskMonitor {
                 allZendeskTickets[i],
                 ticket
             )
-
+                
             if (ticketExists) {
+               
                 await this.client.tickets.update(
                     allZendeskTickets[i]['id'],
                     ticket

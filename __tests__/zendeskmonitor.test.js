@@ -71,5 +71,25 @@ test("createTicket() is called once if ticket doesn't exist", async () => {
 
     const zendeskMonitor = new ZendeskMonitor(client)
     zendeskMonitor.createTicketIfItDoesNotExist(mockTicketData)
-    expect(client.tickets.list.mock.calls.length).toBe(1)
+    expect(client.tickets.list).toHaveBeenCalled()
+})
+
+test("addIssueCommentToTicket() calls ticketExists() once", async () => {
+    const mockTicketData = require('../__mocks__/ticket.json')
+    mockTicketData[0]['external_id'] =
+        'https://github.com/Codertocat/Hello-World/issues/1'
+    const mockNewTicket = {"ticket": {
+        subject : "mock ticket", "external_id": mockTicketData[0]['external_id'] 
+    }}
+
+    const zendeskMonitor = new ZendeskMonitor(client)
+    zendeskMonitor.getAllZendeskTickets = jest.fn()
+    const spyOnDoesTicketAlreadyExist = await jest.spyOn(zendeskMonitor, 'doesTicketAlreadyExist')
+    await zendeskMonitor.getAllZendeskTickets.mockResolvedValue(mockTicketData)
+    await zendeskMonitor.updateTicketWithIssueComment(mockNewTicket)
+
+    expect(spyOnDoesTicketAlreadyExist).toHaveBeenCalledTimes(1);
+    expect(zendeskMonitor.getAllZendeskTickets).toHaveBeenCalledTimes(1)
+    expect(zendeskMonitor.doesTicketAlreadyExist).toHaveBeenCalledTimes(1)
+    expect()
 })
