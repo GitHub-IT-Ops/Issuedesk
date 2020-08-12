@@ -74,9 +74,8 @@ class ZendeskMonitor {
                 allZendeskTickets[i],
                 ticket
             )
-                
+
             if (ticketExists) {
-               
                 await this.client.tickets.update(
                     allZendeskTickets[i]['id'],
                     ticket
