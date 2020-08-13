@@ -72,10 +72,6 @@ class IssueDesk {
         }
     }
 
-    public closeTicket() {
-        const zendeskMonitor = new ZendeskMonitor(this.client)
-        zendeskMonitor.closeTicket()
-    }
 }
 
 export { IssueDesk }
