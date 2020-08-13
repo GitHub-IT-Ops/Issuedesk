@@ -39,6 +39,7 @@ class ZendeskMonitor {
     }
 
     private isTicketOpen(ticketStatus: string) {
+        
         if (ticketStatus !== 'closed' && ticketStatus !== 'solved') {
             return true
         } else {
@@ -69,13 +70,16 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
+
         for (let i = 0; i < allZendeskTickets.length; i++) {
+
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i],
                 ticket
             )
-
+                
             if (ticketExists) {
+
                 await this.client.tickets.update(
                     allZendeskTickets[i]['id'],
                     ticket
@@ -104,8 +108,9 @@ class ZendeskMonitor {
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
     public async createTicketIfItDoesNotExist(ticket: ticketType) {
         const allZendeskTickets = await this.getAllZendeskTickets()
-
+        
         for (let i = 0; i < allZendeskTickets.length; i++) {
+     
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i],
                 ticket
