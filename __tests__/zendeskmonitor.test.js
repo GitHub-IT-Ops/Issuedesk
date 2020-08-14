@@ -25,7 +25,8 @@ test('If ticket exists in Zendesk, doesTicketAlreadyExist returns true', async (
     )
     expect(ticketExists).toBe(true)
 
-    newTicket['ticket']['external_id'] ='https://github.com/Codertocat/Hello-World/issues/2'
+    newTicket['ticket']['external_id'] =
+        'https://github.com/Codertocat/Hello-World/issues/2'
     ticketExists = zendeskMonitor.doesTicketAlreadyExist(
         mockTicketData[0],
         newTicket
@@ -82,19 +83,18 @@ test("createTicket() is called once if ticket doesn't exist", async () => {
     expect(client.tickets.list).toHaveBeenCalled()
 })
 
-test("isTicketOpen() returns true if ticket is open, false if closed", async () => {
+test('isTicketOpen() returns true if ticket is open, false if closed', async () => {
     let mockTicketData = require('../__mocks__/ticket.json')
     mockTicketData[0]['external_id'] =
         'https://github.com/Codertocat/Hello-World/issues/1'
 
     const zendeskMonitor = new ZendeskMonitor(client)
-    let status = zendeskMonitor.isTicketOpen(mockTicketData[0]["status"])
+    let status = zendeskMonitor.isTicketOpen(mockTicketData[0]['status'])
 
     mockTicketData[0]['status'] = 'closed'
-    status = zendeskMonitor.isTicketOpen(mockTicketData[0]["status"])
+    status = zendeskMonitor.isTicketOpen(mockTicketData[0]['status'])
     expect(status).toBe(false)
 })
-
 
 test('addIssueCommentToTicket() updates ticket if ticket doesTicketAlreadyExist returns true', async () => {
     const mockTicketData = require('../__mocks__/ticket.json')
@@ -108,7 +108,9 @@ test('addIssueCommentToTicket() updates ticket if ticket doesTicketAlreadyExist 
     }
 
     const zendeskMonitor = new ZendeskMonitor(client)
-    zendeskMonitor.getAllZendeskTickets =  jest.fn().mockResolvedValue(mockTicketData)
+    zendeskMonitor.getAllZendeskTickets = jest
+        .fn()
+        .mockResolvedValue(mockTicketData)
     zendeskMonitor.doesTicketAlreadyExist = jest.fn().mockReturnValue(false)
     await zendeskMonitor.updateTicketWithIssueComment(mockNewTicket)
     expect(client.tickets.update).toHaveBeenCalledTimes(0)

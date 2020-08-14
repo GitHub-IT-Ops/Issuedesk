@@ -53,13 +53,15 @@ test('getEventAction returns action info from context', () => {
 
 test('ticketHasActivationLabel returns issue label data', () => {
     const labels = issueMonitor.getIssueLabels()
-    expect(labels[0]["name"]).toBe("bug")
+    expect(labels[0]['name']).toBe('bug')
 })
 
 test('getIssueComment returns single issue comment on issue comment event', () => {
-    jest.clearAllMocks();
+    jest.clearAllMocks()
     const eventIssueLabel = require('../__mocks__/eventIssueComment.json')
     const issueMonitor = new IssueMonitor(octokit, eventIssueLabel)
     const comment = issueMonitor.getIssueComment()
-    expect(comment).toBe("You are totally right! I'll get this fixed right away.")
+    expect(comment).toBe(
+        "You are totally right! I'll get this fixed right away."
+    )
 })

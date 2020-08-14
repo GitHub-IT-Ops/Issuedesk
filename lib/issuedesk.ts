@@ -19,10 +19,12 @@ class IssueDesk {
         myToken: string,
         zendeskUsername: string,
         zendeskToken: string,
-        zendeskURI: string,
-    
+        zendeskURI: string
     ) {
-        this.issueMonitor = new IssueMonitor(github.getOctokit(myToken), github.context)
+        this.issueMonitor = new IssueMonitor(
+            github.getOctokit(myToken),
+            github.context
+        )
         this.ticketMaker = new TicketMaker()
         this.zendeskMonitor = new ZendeskMonitor(this.client)
         this.client = zendesk.createClient({
@@ -30,20 +32,19 @@ class IssueDesk {
             token: zendeskToken,
             remoteUri: zendeskURI,
         })
-        
     }
 
     public getIssueAction() {
-
         return this.issueMonitor.getEventAction()
-
     }
 
-    public doesIssueLabelMatchActivationLabel(activationLabel:string, labelName:string){
-        if(activationLabel === labelName){
+    public doesIssueLabelMatchActivationLabel(
+        activationLabel: string,
+        labelName: string
+    ) {
+        if (activationLabel === labelName) {
             return true
-        }
-        else{
+        } else {
             return false
         }
     }
@@ -85,18 +86,16 @@ class IssueDesk {
         }
     }
 
-    public async updateTicket(activationLabel: string){
-
+    public async updateTicket(activationLabel: string) {
         const labeData = this.issueMonitor.getIssueLabels()
-        for(let i=0; i < labeData.length; i++){
-            const labelName = labeData[i]["name"]
+        for (let i = 0; i < labeData.length; i++) {
+            const labelName = labeData[i]['name']
             if (activationLabel === labelName) {
                 this.ticketMaker
                 this.zendeskMonitor.updateTicketWithIssueComment()
                 break
             }
         }
-
     }
 }
 

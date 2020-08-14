@@ -21,7 +21,11 @@ class TicketMaker {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
-    public generateTicketComment(githubHandle: string, comment: string, createdAt: string){
+    public generateTicketComment(
+        githubHandle: string,
+        comment: string,
+        createdAt: string
+    ) {
         const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         return ticketComments
     }

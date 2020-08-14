@@ -9,11 +9,15 @@ class ZendeskMonitor {
     }
 
     //Creates ticket in zendesk. Should be called after ticket is generated using generateTicket()
-    private createTicket(subject: string, commentBody: string, external_id: string) {
-        const ticket =  {
-            "subject": subject,
-            "comment": { "body": commentBody},
-            "external_id":  external_id
+    private createTicket(
+        subject: string,
+        commentBody: string,
+        external_id: string
+    ) {
+        const ticket = {
+            subject: subject,
+            comment: { body: commentBody },
+            external_id: external_id,
         }
 
         this.client.tickets.create(
@@ -31,9 +35,7 @@ class ZendeskMonitor {
         }
     }
 
-
     private isTicketOpen(ticketStatus: string) {
-        
         if (ticketStatus !== 'closed' && ticketStatus !== 'solved') {
             return true
         } else {
@@ -50,36 +52,37 @@ class ZendeskMonitor {
     ) {
         const ticketIsOpen = this.isTicketOpen(existingTicketStatus)
 
-        if (
-            existingTicketExternalId === newTicketExternalId &&
-            ticketIsOpen
-        ) {
+        if (existingTicketExternalId === newTicketExternalId && ticketIsOpen) {
             return true
         } else {
             return false
         }
     }
 
-    public async updateTicketWithIssueComment(commentBody: string, external_id: string) {
+    public async updateTicketWithIssueComment(
+        commentBody: string,
+        external_id: string
+    ) {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
-
             const ticketExists = this.doesTicketAlreadyExist(
-                allZendeskTickets[i]['status'],allZendeskTickets[i]['external_id'],
+                allZendeskTickets[i]['status'],
+                allZendeskTickets[i]['external_id'],
                 external_id
             )
-                
-            if (ticketExists) {
 
-                const ticket = {'ticket' : {
-                    "comment" : {"body" : commentBody}
-                }}
+            if (ticketExists) {
+                const ticket = {
+                    ticket: {
+                        comment: { body: commentBody },
+                    },
+                }
 
                 await this.client.tickets.update(
-                    external_id,
+                    allZendeskTickets[i]['id'],
                     ticket
                 )
             }
@@ -104,14 +107,20 @@ class ZendeskMonitor {
     // in node-zendesk library, after that switch it to async/await.
     // Handles entirety of ticket creation process. uses this.client.tickets.list to load all tickets and then runs them through doesTicketAlreadyExist() to make sure duplicate tickets aren't created, if
     // ticket already exist on zendesk. Use this single function to handle all of creation process until bug is solved.
-    public async createTicketIfItDoesNotExist(ticket: ticketType) {
-        const allZendeskTickets = await this.getAllZendeskTickets()
-        
+    public async createTicketIfItDoesNotExist(
+        subject: string,
+        commentBody: string,
+        external_id: string
+    ) {
+        const allZendeskTickets: {
+            [x: string]: any
+        } = await this.getAllZendeskTickets()
+
         for (let i = 0; i < allZendeskTickets.length; i++) {
-     
             const ticketExists = this.doesTicketAlreadyExist(
-                allZendeskTickets[i],
-                ticket
+                allZendeskTickets[i]['status'],
+                allZendeskTickets[i]['external_id'],
+                external_id
             )
 
             if (ticketExists) {
@@ -119,7 +128,7 @@ class ZendeskMonitor {
                 return true
             }
         }
-        this.createTicket(ticket)
+        this.createTicket(subject, commentBody, external_id)
         return false
     }
 }

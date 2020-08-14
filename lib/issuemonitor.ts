@@ -72,12 +72,12 @@ class IssueMonitor {
         return this.context.payload.action
     }
 
-    public getIssueLabels(){
+    public getIssueLabels() {
         return this.context.payload.issue.labels
     }
 
     // specifically for use in issue comment events
-    public getIssueComment(){
+    public getIssueComment() {
         return this.context.payload.comment.body
     }
 
