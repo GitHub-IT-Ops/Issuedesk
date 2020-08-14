@@ -8,12 +8,12 @@ afterEach(() => {
 
 test('Ticket body is generated with correct info and in proper format', async () => {
     const ticketMaker = new TicketMaker(client)
-    const issueBody = 'test'
-    const issueAuthor = 'mona'
+    const issueBody = 'Me too'
+    const issueAuthor = 'octocat'
     const timeIssueCreatedAt = '2011-04-14T16:00:49Z'
     const expectedTicketBody =
-        'Author: octocat\n' +
-        'Comment: Me too \n' +
+        'Issue Created by: octocat\n' +
+        'Issue Content: Me too \n' +
         '*Created at: 2011-04-14T16:00:49Z*\n' +
         '\n' +
         '\n' +
@@ -22,14 +22,14 @@ test('Ticket body is generated with correct info and in proper format', async ()
         'Original issue can be found at https://github.com/Codertocat/Hello-World/issues/1'
 
     const issueURL = 'https://github.com/Codertocat/Hello-World/issues/1'
-    const ticketBody = ticketMaker.generateTicketBody(
+    ticketMaker.generateTicketBody(
         issueBody,
         issueAuthor,
         timeIssueCreatedAt,
         issueURL
     )
 
-    expect(ticketBody).toBe(expectedTicketBody)
+    expect(ticketMaker.getTicketBody()).toBe(expectedTicketBody)
 })
 
 test('Ticket Comment is generated with correct info and in proper format', async () => {
@@ -42,8 +42,8 @@ test('Ticket Comment is generated with correct info and in proper format', async
         comment,
         createdAt
     ) 
-        const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
-        expect(ticketMaker.getTicketComments()).toBe(ticketComments)
+        const expectedTicketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
+        expect(ticketMaker.getTicketComments()).toBe(expectedTicketComments)
 })
 
 test('generateTicketSubject() creates title in correct location for ticket', async () => {
