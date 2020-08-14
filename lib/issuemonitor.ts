@@ -72,6 +72,15 @@ class IssueMonitor {
         return this.context.payload.action
     }
 
+    public getIssueLabels(){
+        return this.context.payload.issue.labels
+    }
+
+    // specifically for use in issue comment events
+    public getIssueComment(){
+        return this.context.payload.comment.body
+    }
+
     // uses octokit to fetch list of comments for speficied issue.
     public async getListOfComments() {
         const owner = this.getRepoOwner()

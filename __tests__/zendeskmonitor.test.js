@@ -30,7 +30,7 @@ test('If ticket exists in Zendesk, doesTicketAlreadyExist returns true', async (
         mockTicketData[0],
         newTicket
     )
-    console.log(ticketExists);
+
     expect(ticketExists).toBe(false)
 })
 

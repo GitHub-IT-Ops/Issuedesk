@@ -21,27 +21,25 @@ class TicketMaker {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
+    public generateTicketComment(githubHandle: string, comment: string, createdAt: string,){
+        const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
+        return ticketComments
+    }
+
     // creates ticket body from info passed to it by github api
     public generateTicketBody(
         issueBody: string,
-        issueAuthor: string,
+        githubHandle: string,
         timeIssueCreatedAt: string,
-        listOfComments: [listOfCommentsType],
+
         issueUrl: string
     ) {
-        let ticketBody = `Issue Created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n`
-
-        for (let i = 0; i < listOfComments.length; i++) {
-            const commenter = listOfComments[i].user.login
-            const createdAt = listOfComments[i].created_at
-            const comment = listOfComments[i].body
-            ticketBody += `Author: ${commenter}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
-        }
-
+        let ticketBody = `Issue Created by: ${githubHandle}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n`
         ticketBody += `\n\n\nOriginal issue can be found at ${issueUrl}`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
+
 
     // Sets ticket subject to string, usually set to same name as issue
     public generateTicketSubject(issueTitle: string) {

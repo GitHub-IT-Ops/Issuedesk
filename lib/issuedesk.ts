@@ -11,24 +11,41 @@ class IssueDesk {
     context: any
     zendesk: any
     client: any
+    issueMonitor: any
+    ticketMaker: any
+    zendeskMonitor: any
+
     constructor(
         myToken: string,
         zendeskUsername: string,
         zendeskToken: string,
-        zendeskURI: string
+        zendeskURI: string,
+    
     ) {
-        this.octokit = github.getOctokit(myToken)
-        this.context = github.context
+        this.issueMonitor = new IssueMonitor(github.getOctokit(myToken), github.context)
+        this.ticketMaker = new TicketMaker()
+        this.zendeskMonitor = new ZendeskMonitor(this.client)
         this.client = zendesk.createClient({
             username: zendeskUsername,
             token: zendeskToken,
             remoteUri: zendeskURI,
         })
+        
     }
 
     public getIssueAction() {
-        const actionMonitor = new IssueMonitor(this.octokit, this.context)
-        return actionMonitor.getEventAction()
+
+        return this.issueMonitor.getEventAction()
+
+    }
+
+    public doesIssueLabelMatchActivationLabel(activationLabel:string, labelName:string){
+        if(activationLabel === labelName){
+            return true
+        }
+        else{
+            return false
+        }
     }
 
     // This function will analyze whether an action should be taken by the IssueDesk class, in event of an issue being labeled
@@ -38,22 +55,18 @@ class IssueDesk {
     // IssueDesk uses an instance of class TicketMaker to generate a ticket and then create it in zendesk.
     // It does this by using the zendesk.client passed to TicketMaker instance
     public async monitorIssueAndMakeTicket(activationLabel: string) {
-        const issueMonitor = new IssueMonitor(this.octokit, this.context)
-        const labelName = issueMonitor.getLabelName()
-
+        const labelName = this.issueMonitor.getLabelName()
         if (activationLabel === labelName) {
-            const ticketMaker = new TicketMaker()
-            const zendeskMonitor = new ZendeskMonitor(this.client)
-            const listOfComments = await issueMonitor.getListOfComments()
-            const issueUrl = issueMonitor.getIssueUrl()
-            const issueTitle = issueMonitor.getIssueTitle()
-            const issueBody = issueMonitor.getIssueBody()
-            const issueAuthor = issueMonitor.getIssueAuthor()
-            const timeIssueCreatedAt = issueMonitor.getTimeIssueCreatedAt()
+            const listOfComments = await this.issueMonitor.getListOfComments()
+            const issueUrl = this.issueMonitor.getIssueUrl()
+            const issueTitle = this.issueMonitor.getIssueTitle()
+            const issueBody = this.issueMonitor.getIssueBody()
+            const issueAuthor = this.issueMonitor.getIssueAuthor()
+            const timeIssueCreatedAt = this.issueMonitor.getTimeIssueCreatedAt()
 
-            ticketMaker.generateTicketSubject(issueTitle)
-            ticketMaker.setExternalId(issueUrl)
-            ticketMaker.generateTicketBody(
+            this.ticketMaker.generateTicketSubject(issueTitle)
+            this.ticketMaker.setExternalId(issueUrl)
+            this.ticketMaker.generateTicketBody(
                 issueBody,
                 issueAuthor,
                 timeIssueCreatedAt,
@@ -61,8 +74,8 @@ class IssueDesk {
                 issueUrl
             )
 
-            const ticket = await ticketMaker.getTicket()
-            await zendeskMonitor.createTicketIfItDoesNotExist(ticket)
+            const ticket = await this.ticketMaker.getTicket()
+            await this.zendeskMonitor.createTicketIfItDoesNotExist(ticket)
             return true
         } else {
             console.log(
@@ -72,6 +85,18 @@ class IssueDesk {
         }
     }
 
+    public async updateTicket(activationLabel: string){
+
+        const labeData = this.issueMonitor.getIssueLabels()
+        for(let i=0; i < labeData.length; i++){
+            const labelName = labeData[i]["name"]
+            if (activationLabel === labelName) {
+                this.zendeskMonitor.updateTicketWithIssueComment()
+                break
+            }
+        }
+
+    }
 }
 
 export { IssueDesk }

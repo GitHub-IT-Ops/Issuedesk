@@ -10,6 +10,7 @@ class ZendeskMonitor {
 
     //Creates ticket in zendesk. Should be called after ticket is generated using generateTicket()
     private createTicket(ticket: ticketType) {
+        
         this.client.tickets.create(
             ticket,
             (err: any, req: any, result: any) => {
