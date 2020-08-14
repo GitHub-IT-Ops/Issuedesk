@@ -11,11 +11,19 @@ class TicketMaker {
         }
     }
 
-    public getTicket() {
-        return this.ticket
+    public getTicketBody() {
+        return this.ticket['ticket']['comment']['body']
     }
 
-    //currently used to link Zendesk Ticket to github issue by setting external_id to issue's html_url
+    public getTicketSubject(){
+        return this.ticket['ticket']['subject']
+    }
+
+    public getTicketExternalId(){
+        return this.ticket['ticket']['external_id']
+    }
+
+    // Currently used to link Zendesk Ticket to github issue by setting external_id to issue's html_url
     // This will be useful when two communication between zendesk and github is enabled
     public setExternalId(externalId: string) {
         return (this.ticket['ticket']['external_id'] = externalId)

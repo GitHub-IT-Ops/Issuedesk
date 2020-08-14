@@ -13,7 +13,6 @@ test('Ticket body is generated with correct info and in proper format', async ()
     const issueAuthor = 'mona'
     const timeIssueCreatedAt = '2011-04-14T16:00:49Z'
     const expectedTicketBody =
-        `Issue Created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n` +
         'Author: octocat\n' +
         'Comment: Me too \n' +
         '*Created at: 2011-04-14T16:00:49Z*\n' +
@@ -34,6 +33,21 @@ test('Ticket body is generated with correct info and in proper format', async ()
     )
 
     expect(ticketBody).toBe(expectedTicketBody)
+})
+
+test('Ticket Comment is generated with correct info and in proper format', async () => {
+    const ticketMaker = new TicketMaker(client)
+    const comment = 'test'
+    const githubHandle = 'mona'
+    const createdAt = '2011-04-14T16:00:49Z'
+    ticketMaker.generateTicketComment(
+        githubHandle,
+        comment,
+        createdAt
+    ) 
+        const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
+        return ticketComments
+
 })
 
 test('generateTicketSubject() creates title in correct location for ticket', async () => {
