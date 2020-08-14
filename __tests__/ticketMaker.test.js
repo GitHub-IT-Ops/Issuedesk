@@ -8,7 +8,6 @@ afterEach(() => {
 
 test('Ticket body is generated with correct info and in proper format', async () => {
     const ticketMaker = new TicketMaker(client)
-    let mockIssueCommentsData = require('../__mocks__/getIssueComments.json')
     const issueBody = 'test'
     const issueAuthor = 'mona'
     const timeIssueCreatedAt = '2011-04-14T16:00:49Z'
@@ -22,13 +21,11 @@ test('Ticket body is generated with correct info and in proper format', async ()
         '\n' +
         'Original issue can be found at https://github.com/Codertocat/Hello-World/issues/1'
 
-    const listOfComments = mockIssueCommentsData
     const issueURL = 'https://github.com/Codertocat/Hello-World/issues/1'
     const ticketBody = ticketMaker.generateTicketBody(
         issueBody,
         issueAuthor,
         timeIssueCreatedAt,
-        listOfComments,
         issueURL
     )
 
@@ -46,8 +43,7 @@ test('Ticket Comment is generated with correct info and in proper format', async
         createdAt
     ) 
         const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
-        return ticketComments
-
+        expect(ticketMaker.getTicketComments()).toBe(ticketComments)
 })
 
 test('generateTicketSubject() creates title in correct location for ticket', async () => {
