@@ -44,14 +44,14 @@ class ZendeskMonitor {
     // Makes sure ticket doesn't exist, but will create another ticket if ticket containing same external_id, but has status solved or closed
     // This was done to protect against accidentally closed or solved tickets. Once two way communication is implemented between zendesk and github, this will be immensly important
     private doesTicketAlreadyExist(
-        existingTicket: { [x: string]: any },
-        newTicket: ticketType
+        existingTicketStatus: string,
+        existingTicketExternalId: string,
+        newTicketExternalId: string
     ) {
-        const ticketIsOpen = this.isTicketOpen(existingTicket['status'])
+        const ticketIsOpen = this.isTicketOpen(existingTicketStatus)
 
         if (
-            existingTicket['external_id'] ===
-                newTicket['ticket']['external_id'] &&
+            existingTicketExternalId === newTicketExternalId &&
             ticketIsOpen
         ) {
             return true
@@ -60,7 +60,7 @@ class ZendeskMonitor {
         }
     }
 
-    public async updateTicketWithIssueComment(ticket: ticketType) {
+    public async updateTicketWithIssueComment(commentBody: string, external_id: string) {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
@@ -68,14 +68,18 @@ class ZendeskMonitor {
         for (let i = 0; i < allZendeskTickets.length; i++) {
 
             const ticketExists = this.doesTicketAlreadyExist(
-                allZendeskTickets[i],
-                ticket
+                allZendeskTickets[i]['status'],allZendeskTickets[i]['external_id'],
+                external_id
             )
                 
             if (ticketExists) {
 
+                const ticket = {'ticket' : {
+                    "comment" : {"body" : commentBody}
+                }}
+
                 await this.client.tickets.update(
-                    allZendeskTickets[i]['id'],
+                    external_id,
                     ticket
                 )
             }
