@@ -35,7 +35,7 @@ class TicketMaker {
         createdAt: string
     ) {
         const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
-        this.ticket['ticket']['comment']['body'] = ticketComments
+        this.ticket['ticket']['comment']['body'] += ticketComments
         return ticketComments
     }
 

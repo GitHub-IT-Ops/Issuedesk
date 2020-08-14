@@ -65,18 +65,22 @@ class IssueDesk {
             const issueAuthor = this.issueMonitor.getIssueAuthor()
             const timeIssueCreatedAt = this.issueMonitor.getTimeIssueCreatedAt()
 
-            this.ticketMaker.generateTicketSubject(issueTitle)
             this.ticketMaker.setExternalId(issueUrl)
             this.ticketMaker.generateTicketBody(
                 issueBody,
                 issueAuthor,
                 timeIssueCreatedAt,
-                listOfComments,
                 issueUrl
             )
 
-            const ticket = await this.ticketMaker.getTicket()
-            await this.zendeskMonitor.createTicketIfItDoesNotExist(ticket)
+            for(let i=0; i < listOfComments.length; i++){
+                const githubHandle = listOfComments[i]["user"]["login"]
+                const commentBody =  listOfComments[i]["body"]
+                const createdAt = listOfComments[i]["created_at"]
+                this.ticketMaker.generateTicketComment(githubHandle, commentBody, createdAt)
+            }
+            
+            await this.zendeskMonitor.createTicketIfItDoesNotExist(issueTitle, this.ticketMaker.getTicketBody(), issueUrl)
             return true
         } else {
             console.log(
