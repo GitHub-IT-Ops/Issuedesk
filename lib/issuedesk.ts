@@ -79,7 +79,7 @@ class IssueDesk {
                 const createdAt = listOfComments[i]["created_at"]
                 this.ticketMaker.generateTicketComment(githubHandle, commentBody, createdAt)
             }
-            
+
             await this.zendeskMonitor.createTicketIfItDoesNotExist(issueTitle, this.ticketMaker.getTicketBody(), issueUrl)
             return true
         } else {
@@ -90,14 +90,21 @@ class IssueDesk {
         }
     }
 
-    public async updateTicket(activationLabel: string) {
-        const labeData = this.issueMonitor.getIssueLabels()
-        for (let i = 0; i < labeData.length; i++) {
-            const labelName = labeData[i]['name']
+    public async updateTicketWithComment(activationLabel: string) {
+        const labelData = this.issueMonitor.getIssueLabels()
+        for (let i = 0; i < labelData.length; i++) {
+            const labelName = labelData[i]['name']
             if (activationLabel === labelName) {
-                this.ticketMaker
-                this.zendeskMonitor.updateTicketWithIssueComment()
-                break
+                const commenterGithubHandle = this.issueMonitor.getIssueAuthor()
+                const comment = this.issueMonitor.getIssueComment()
+                const createdAt = this.issueMonitor.getCommentCreatedAtTime
+                this.ticketMaker.generateTicketComment(commenterGithubHandle, comment, createdAt)
+                this.zendeskMonitor.updateTicketWithIssueComment(this.ticketMaker.getTicketBody(), this.issueMonitor.getIssueUrl())      
+                return true
+            }
+            else{
+                console.log(`${activationLabel} is not an Activation Label.`);
+                return false
             }
         }
     }

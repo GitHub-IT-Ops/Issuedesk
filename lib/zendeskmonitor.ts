@@ -84,13 +84,16 @@ class ZendeskMonitor {
                     allZendeskTickets[i]['id'],
                     ticket
                 )
-            } else {
-                console.log('Ticket does not exist and will not be updated')
+            }
+
+            else{
+                console.log("Ticket does not exist and will not be updated");
             }
         }
     }
 
     public async getAllZendeskTickets(): Promise<[ticketType]> {
+        
         return await new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
