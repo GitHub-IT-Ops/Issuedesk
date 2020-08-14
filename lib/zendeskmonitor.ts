@@ -86,6 +86,10 @@ class ZendeskMonitor {
                     ticket
                 )
             }
+
+            else{
+                console.log("Ticket does not exist and will not be updated");
+            }
         }
     }
 
