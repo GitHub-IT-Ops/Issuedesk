@@ -1,6 +1,8 @@
 on:
     issues:
         types: [labeled]
+    issue_comment:
+        types: [created]
 jobs:
     bot:
         runs-on: ubuntu-latest
