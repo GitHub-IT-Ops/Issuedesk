@@ -73,14 +73,22 @@ class IssueDesk {
                 issueUrl
             )
 
-            for(let i=0; i < listOfComments.length; i++){
-                const githubHandle = listOfComments[i]["user"]["login"]
-                const commentBody =  listOfComments[i]["body"]
-                const createdAt = listOfComments[i]["created_at"]
-                this.ticketMaker.generateTicketComment(githubHandle, commentBody, createdAt)
+            for (let i = 0; i < listOfComments.length; i++) {
+                const githubHandle = listOfComments[i]['user']['login']
+                const commentBody = listOfComments[i]['body']
+                const createdAt = listOfComments[i]['created_at']
+                this.ticketMaker.generateTicketComment(
+                    githubHandle,
+                    commentBody,
+                    createdAt
+                )
             }
 
-            await this.zendeskMonitor.createTicketIfItDoesNotExist(issueTitle, this.ticketMaker.getTicketBody(), issueUrl)
+            await this.zendeskMonitor.createTicketIfItDoesNotExist(
+                issueTitle,
+                this.ticketMaker.getTicketBody(),
+                issueUrl
+            )
             return true
         } else {
             console.log(
@@ -98,12 +106,18 @@ class IssueDesk {
                 const commenterGithubHandle = this.issueMonitor.getIssueAuthor()
                 const comment = this.issueMonitor.getIssueComment()
                 const createdAt = this.issueMonitor.getCommentCreatedAtTime
-                this.ticketMaker.generateTicketComment(commenterGithubHandle, comment, createdAt)
-                this.zendeskMonitor.updateTicketWithIssueComment(this.ticketMaker.getTicketBody(), this.issueMonitor.getIssueUrl())      
+                this.ticketMaker.generateTicketComment(
+                    commenterGithubHandle,
+                    comment,
+                    createdAt
+                )
+                this.zendeskMonitor.updateTicketWithIssueComment(
+                    this.ticketMaker.getTicketBody(),
+                    this.issueMonitor.getIssueUrl()
+                )
                 return true
-            }
-            else{
-                console.log(`${activationLabel} is not an Activation Label.`);
+            } else {
+                console.log(`${activationLabel} is not an Activation Label.`)
                 return false
             }
         }

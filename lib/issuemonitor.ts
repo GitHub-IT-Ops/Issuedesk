@@ -86,7 +86,6 @@ class IssueMonitor {
         return this.context.payload.comment.body
     }
 
-
     // uses octokit to fetch list of comments for speficied issue.
     public async getListOfComments() {
         const owner = this.getRepoOwner()
