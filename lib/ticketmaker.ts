@@ -15,11 +15,11 @@ class TicketMaker {
         return this.ticket['ticket']['comment']['body']
     }
 
-    public getTicketSubject(){
+    public getTicketSubject() {
         return this.ticket['ticket']['subject']
     }
 
-    public getTicketExternalId(){
+    public getTicketExternalId() {
         return this.ticket['ticket']['external_id']
     }
 
@@ -35,6 +35,7 @@ class TicketMaker {
         createdAt: string
     ) {
         const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
+        this.ticket['ticket']['comment']['body'] = ticketComments
         return ticketComments
     }
 

@@ -19,7 +19,6 @@ class ZendeskMonitor {
             comment: { body: commentBody },
             external_id: external_id,
         }
-
         this.client.tickets.create(
             ticket,
             (err: any, req: any, result: any) => {
@@ -85,10 +84,8 @@ class ZendeskMonitor {
                     allZendeskTickets[i]['id'],
                     ticket
                 )
-            }
-
-            else{
-                console.log("Ticket does not exist and will not be updated");
+            } else {
+                console.log('Ticket does not exist and will not be updated')
             }
         }
     }

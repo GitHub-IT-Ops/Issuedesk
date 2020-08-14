@@ -19,10 +19,7 @@ test('If ticket exists in Zendesk, doesTicketAlreadyExist returns true', async (
     mockTicketData[0]['external_id'] = issueUrl
 
     const zendeskMonitor = new ZendeskMonitor(client)
-    let ticketExists = zendeskMonitor.doesTicketAlreadyExist(
-        mockTicketData[0],
-        newTicket
-    )
+    let ticketExists = zendeskMonitor.doesTicketAlreadyExist()
     expect(ticketExists).toBe(true)
 
     newTicket['ticket']['external_id'] =
