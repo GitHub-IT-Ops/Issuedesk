@@ -21,7 +21,7 @@ class TicketMaker {
         return (this.ticket['ticket']['external_id'] = externalId)
     }
 
-    public generateTicketComment(githubHandle: string, comment: string, createdAt: string,){
+    public generateTicketComment(githubHandle: string, comment: string, createdAt: string){
         const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         return ticketComments
     }
@@ -39,7 +39,6 @@ class TicketMaker {
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
-
 
     // Sets ticket subject to string, usually set to same name as issue
     public generateTicketSubject(issueTitle: string) {

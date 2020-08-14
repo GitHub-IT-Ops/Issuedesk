@@ -91,6 +91,7 @@ class IssueDesk {
         for(let i=0; i < labeData.length; i++){
             const labelName = labeData[i]["name"]
             if (activationLabel === labelName) {
+                this.ticketMaker
                 this.zendeskMonitor.updateTicketWithIssueComment()
                 break
             }

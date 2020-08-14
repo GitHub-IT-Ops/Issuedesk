@@ -9,8 +9,13 @@ class ZendeskMonitor {
     }
 
     //Creates ticket in zendesk. Should be called after ticket is generated using generateTicket()
-    private createTicket(ticket: ticketType) {
-        
+    private createTicket(subject: string, commentBody: string, external_id: string) {
+        const ticket =  {
+            "subject": subject,
+            "comment": { "body": commentBody},
+            "external_id":  external_id
+        }
+
         this.client.tickets.create(
             ticket,
             (err: any, req: any, result: any) => {
@@ -26,18 +31,6 @@ class ZendeskMonitor {
         }
     }
 
-    private async getAllTicketsWithExternalId(external_id: string) {
-        const allTickets: [
-            { [x: string]: any }
-        ] = await this.getAllZendeskTickets()
-        const allTicketsWithExternalId = []
-        for (let i = 0; i < allTickets.length; i++) {
-            if (allTickets[i]['external_id'] === external_id) {
-                allTicketsWithExternalId.push(allTickets[i])
-            }
-        }
-        return allTicketsWithExternalId
-    }
 
     private isTicketOpen(ticketStatus: string) {
         
