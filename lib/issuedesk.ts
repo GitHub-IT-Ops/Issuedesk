@@ -1,5 +1,4 @@
 const github = require('@actions/github')
-const zendesk = require('node-zendesk')
 const IssueMonitor = require('./issuemonitor.js').IssueMonitor
 const TicketMaker = require('./ticketmaker.js').TicketMaker
 const ZendeskMonitor = require('./zendeskmonitor.js').ZendeskMonitor
@@ -26,12 +25,7 @@ class IssueDesk {
             github.context
         )
         this.ticketMaker = new TicketMaker()
-        this.client = zendesk.createClient({
-            username: zendeskUsername,
-            token: zendeskToken,
-            remoteUri: zendeskURI,
-        })
-        this.zendeskMonitor = new ZendeskMonitor(this.client)
+        this.zendeskMonitor = new ZendeskMonitor(zendeskUsername, zendeskToken, zendeskURI)
     }
 
     public getIssueAction() {

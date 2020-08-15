@@ -1,11 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import { ticketType, listOfCommentsType } from '../types/types.js'
+const zendesk = require('node-zendesk')
 
 //This class exists to handle all zendesk related events and data. Will eventually split some of ticketmaker.ts into this class once node-zendesk bug is fixed
 class ZendeskMonitor {
     client: any
-    constructor(client: any) {
-        this.client = client
+    constructor(zendeskUsername: string,
+        zendeskToken: string,
+        zendeskURI: string) {
+        this.client = zendesk.createClient({
+            username: zendeskUsername,
+            token: zendeskToken,
+            remoteUri: zendeskURI,
+        })
     }
 
     //Creates ticket in zendesk. Should be called after ticket is generated using generateTicket()
