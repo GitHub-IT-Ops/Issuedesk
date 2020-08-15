@@ -115,8 +115,6 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
-        console.log(allZendeskTickets);
-        
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
 
