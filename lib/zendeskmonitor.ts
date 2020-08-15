@@ -94,7 +94,6 @@ class ZendeskMonitor {
         return await new Promise((resolve) => {
             this.client.tickets.list((err: any, statusList: any, body: any) => {
                 try {
-                    console.log(body)
                     resolve(body)
                 } catch (err) {
                     console.log(err)
