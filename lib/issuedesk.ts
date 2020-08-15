@@ -26,12 +26,12 @@ class IssueDesk {
             github.context
         )
         this.ticketMaker = new TicketMaker()
-        this.zendeskMonitor = new ZendeskMonitor(this.client)
         this.client = zendesk.createClient({
             username: zendeskUsername,
             token: zendeskToken,
             remoteUri: zendeskURI,
         })
+        this.zendeskMonitor = new ZendeskMonitor(this.client)
     }
 
     public getIssueAction() {
