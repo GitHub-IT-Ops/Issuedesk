@@ -26,6 +26,7 @@ class ZendeskMonitor {
                 console.log(JSON.stringify(result, null, 2))
                 console.log('Ticket created!')
             }
+
         )
 
         function handleError(err: any) {
@@ -67,6 +68,7 @@ class ZendeskMonitor {
         } = await this.getAllZendeskTickets()
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
+
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i]['status'],
                 allZendeskTickets[i]['external_id'],
@@ -75,8 +77,8 @@ class ZendeskMonitor {
 
             if (ticketExists) {
                 const ticket = {
-                    ticket: {
-                        comment: { body: commentBody },
+                    "ticket": {
+                        "comment": { "body": commentBody },
                     },
                 }
 
@@ -84,6 +86,7 @@ class ZendeskMonitor {
                     allZendeskTickets[i]['id'],
                     ticket
                 )
+                return true
             } else {
                 console.log('Ticket does not exist and will not be updated')
             }
