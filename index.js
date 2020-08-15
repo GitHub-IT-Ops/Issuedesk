@@ -23,4 +23,5 @@ switch (eventAction) {
         break
     case 'issue_comment':
         issuedesk.updateTicketWithComment(activationLabel)
+        break
 }
