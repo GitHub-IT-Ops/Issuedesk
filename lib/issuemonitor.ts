@@ -83,7 +83,7 @@ class IssueMonitor {
 
     // specifically for use in issue comment events
     public getCommentCreatedAtTime() {
-        return this.context.payload.comment.body
+        return this.context.payload.comment.created_at
     }
 
     // uses octokit to fetch list of comments for speficied issue.
