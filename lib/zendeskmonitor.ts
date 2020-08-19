@@ -22,9 +22,11 @@ class ZendeskMonitor {
         external_id: string
     ) {
         const ticket = {
-            subject: subject,
-            comment: { body: commentBody },
-            external_id: external_id,
+            "ticket" : {
+                "subject": subject,
+                "comment": { "body": commentBody },
+                "external_id": external_id
+            }
         }
         this.client.tickets.create(
             ticket,
