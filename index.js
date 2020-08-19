@@ -21,7 +21,7 @@ switch (eventAction) {
     case 'labeled':
         issuedesk.monitorIssueAndMakeTicket(activationLabel)
         break
-    case 'issue_comment':
+    case 'created':
         issuedesk.updateTicketWithComment(activationLabel)
         break
 }
