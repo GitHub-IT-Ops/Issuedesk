@@ -99,7 +99,7 @@ class IssueDesk {
             if (activationLabel === labelName) {
                 const commenterGithubHandle = this.issueMonitor.getIssueAuthor()
                 const comment = this.issueMonitor.getIssueComment()
-                const createdAt = this.issueMonitor.getCommentCreatedAtTime
+                const createdAt = this.issueMonitor.getCommentCreatedAtTime()
                 this.ticketMaker.generateTicketComment(
                     commenterGithubHandle,
                     comment,
