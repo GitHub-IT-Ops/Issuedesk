@@ -1,6 +1,7 @@
 ### What this does
 
-If an issue is labeled on GitHub with a specific "activation label", a ticket will be created on Zendesk, granted it doesn't already exist. 
+1. If an issue is labeled on GitHub with a specific "activation label", a ticket will be created on Zendesk, granted it doesn't already exist. 
+2. If an issue has the activation label, all comment updates to the issue will be reflected in Zendesk ticket.
 
 ### How To Install On Repo
 
@@ -29,7 +30,7 @@ jobs:
 jobs:
     issuedesk:
         runs-on: ubuntu-latest
-        name: Create ticket if needed
+        name: Create Zendesk ticket if needed or update existing ticket
         steps:
             - uses: actions/checkout@v2
               env:
