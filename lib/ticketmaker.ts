@@ -34,7 +34,7 @@ class TicketMaker {
         comment: string,
         createdAt: string
     ) {
-        const ticketComments = `Author: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
+        const ticketComments = `\n\nAuthor: ${githubHandle}\nComment: ${comment} \n*Created at: ${createdAt}*\n\n`
         this.ticket['ticket']['comment']['body'] += ticketComments
         return ticketComments
     }
@@ -47,8 +47,8 @@ class TicketMaker {
 
         issueUrl: string
     ) {
-        let ticketBody = `Issue Created by: ${githubHandle}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n`
-        ticketBody += `\n\n\nOriginal issue can be found at ${issueUrl}\n\n`
+        let ticketBody = `Issue Created by: ${githubHandle}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n\n`
+        ticketBody += `Original issue can be found at ${issueUrl}\n\n\n`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
