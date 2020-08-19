@@ -16,7 +16,7 @@ const issuedesk = new IssueDesk(
 )
 
 const eventAction = issuedesk.getIssueAction()
-console.log(eventAction);
+
 switch (eventAction) {
     case 'labeled':
         issuedesk.monitorIssueAndMakeTicket(activationLabel)
