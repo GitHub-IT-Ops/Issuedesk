@@ -5,9 +5,11 @@ const zendesk = require('node-zendesk')
 //This class exists to handle all zendesk related events and data. Will eventually split some of ticketmaker.ts into this class once node-zendesk bug is fixed
 class ZendeskMonitor {
     client: any
-    constructor(zendeskUsername: string,
+    constructor(
+        zendeskUsername: string,
         zendeskToken: string,
-        zendeskURI: string) {
+        zendeskURI: string
+    ) {
         this.client = zendesk.createClient({
             username: zendeskUsername,
             token: zendeskToken,
@@ -22,11 +24,11 @@ class ZendeskMonitor {
         external_id: string
     ) {
         const ticket = {
-            "ticket" : {
-                "subject": subject,
-                "comment": { "body": commentBody },
-                "external_id": external_id
-            }
+            ticket: {
+                subject: subject,
+                comment: { body: commentBody },
+                external_id: external_id,
+            },
         }
         this.client.tickets.create(
             ticket,
@@ -35,7 +37,6 @@ class ZendeskMonitor {
                 console.log(JSON.stringify(result, null, 2))
                 console.log('Ticket created!')
             }
-
         )
 
         function handleError(err: any) {
@@ -75,9 +76,8 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
-    
-        for (let i = 0; i < allZendeskTickets.length; i++) {
 
+        for (let i = 0; i < allZendeskTickets.length; i++) {
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i]['status'],
                 allZendeskTickets[i]['external_id'],
@@ -85,10 +85,9 @@ class ZendeskMonitor {
             )
 
             if (ticketExists) {
-                
                 const ticket = {
-                    "ticket": {
-                        "comment": { "body": commentBody },
+                    ticket: {
+                        comment: { body: commentBody },
                     },
                 }
 
@@ -97,7 +96,7 @@ class ZendeskMonitor {
                     ticket
                 )
                 return true
-            } 
+            }
         }
     }
 
@@ -128,7 +127,6 @@ class ZendeskMonitor {
         } = await this.getAllZendeskTickets()
 
         for (let i = 0; i < allZendeskTickets.length; i++) {
-
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i]['status'],
                 allZendeskTickets[i]['external_id'],
