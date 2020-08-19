@@ -101,10 +101,7 @@ class ZendeskMonitor {
                     }
                 )
 
-                return true
-            } else {
-                return false
-            }
+            } 
         }
     }
 
