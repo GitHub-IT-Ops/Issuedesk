@@ -11,6 +11,21 @@ then paste the below workflow config into `issuedesk.yml`
 on:
     issues:
         types: [labeled]
+    issue_comment:
+        types: [created]
+jobs:
+    bot:
+        runs-on: ubuntu-latest
+        name: Run the program
+        steps:
+            - uses: actions/checkout@v2
+            - uses: GitHub-IT-Ops/Issuedesk@master
+              with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
+                  ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
+                  ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
+                  ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
 jobs:
     issuedesk:
         runs-on: ubuntu-latest
