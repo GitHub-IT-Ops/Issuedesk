@@ -48,7 +48,7 @@ class TicketMaker {
         issueUrl: string
     ) {
         let ticketBody = `Issue Created by: ${githubHandle}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n`
-        ticketBody += `\n\n\nOriginal issue can be found at ${issueUrl}`
+        ticketBody += `\n\n\nOriginal issue can be found at ${issueUrl}\n\n`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
