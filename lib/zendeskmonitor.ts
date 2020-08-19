@@ -71,7 +71,7 @@ class ZendeskMonitor {
 
     public async updateTicketWithIssueComment(
         commentBody: string,
-        external_id: string,
+        external_id: string
     ) {
         const allZendeskTickets: {
             [x: string]: any
@@ -93,15 +93,16 @@ class ZendeskMonitor {
 
                 await this.client.tickets.update(
                     allZendeskTickets[i]['id'],
-                    ticket, () => {
-                        console.log(`Ticket #${allZendeskTickets[i]['id']} has been updated!`);
-                        
+                    ticket,
+                    () => {
+                        console.log(
+                            `Ticket #${allZendeskTickets[i]['id']} has been updated!`
+                        )
                     }
                 )
 
                 return true
-            }
-            else{
+            } else {
                 return false
             }
         }
@@ -132,7 +133,7 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
-        
+
         for (let i = 0; i < allZendeskTickets.length; i++) {
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i]['status'],

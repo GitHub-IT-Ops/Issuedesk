@@ -56,7 +56,6 @@ test('ticketHasActivationLabel returns issue label data', () => {
     expect(labels[0]['name']).toBe('bug')
 })
 
-
 test('getIssueComment returns single issue comment on issue comment event', () => {
     jest.clearAllMocks()
     const eventIssueLabel = require('../__mocks__/eventIssueComment.json')
@@ -67,13 +66,10 @@ test('getIssueComment returns single issue comment on issue comment event', () =
     )
 })
 
-
 test('ticketHasActivationLabel returns issue label data', () => {
     jest.clearAllMocks()
     const eventIssueLabel = require('../__mocks__/eventIssueComment.json')
     const issueMonitor = new IssueMonitor(octokit, eventIssueLabel)
     const time = issueMonitor.getCommentCreatedAtTime()
-    expect(time).toBe(
-        "2019-05-15T15:20:21Z"
-    )
+    expect(time).toBe('2019-05-15T15:20:21Z')
 })

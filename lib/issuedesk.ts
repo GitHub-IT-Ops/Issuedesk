@@ -115,7 +115,9 @@ class IssueDesk {
                 )
                 return true
             } else {
-                console.log(`${this.issueMonitor.getIssueTitle()} does not have an Activation Label. Zendesk ticket will not be updated`)
+                console.log(
+                    `${this.issueMonitor.getIssueTitle()} does not have an Activation Label. Zendesk ticket will not be updated`
+                )
                 return false
             }
         }

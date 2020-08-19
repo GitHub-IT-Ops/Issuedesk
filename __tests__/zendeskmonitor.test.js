@@ -70,15 +70,21 @@ test('If ticket does not exist in Zendesk, doesTicketAlreadyExist returns false'
     expect(ticketExists).toBe(false)
 })
 
-test("createTicket() returns true if ticket exists", async () => {
+test('createTicket() returns true if ticket exists', async () => {
     const mockTicketData = require('../__mocks__/ticket.json')
     mockTicketData[0]['external_id'] =
         'https://github.com/Codertocat/Hello-World/issues/1'
-        mockTicketData[0]['status'] = 'open'
+    mockTicketData[0]['status'] = 'open'
     const zendeskMonitor = new ZendeskMonitor(client)
 
-    zendeskMonitor.getAllZendeskTickets = jest.fn().mockResolvedValue(mockTicketData)
-    let ticketWillNotBeCreated = await zendeskMonitor.createTicketIfItDoesNotExist(mockTicketData[0]['status'], mockTicketData[0]['external_id'], mockTicketData[0]['external_id'])
+    zendeskMonitor.getAllZendeskTickets = jest
+        .fn()
+        .mockResolvedValue(mockTicketData)
+    let ticketWillNotBeCreated = await zendeskMonitor.createTicketIfItDoesNotExist(
+        mockTicketData[0]['status'],
+        mockTicketData[0]['external_id'],
+        mockTicketData[0]['external_id']
+    )
 
     expect(ticketWillNotBeCreated).toBe(true)
 })
@@ -112,7 +118,9 @@ test('addIssueCommentToTicket() updates ticket if ticket doesTicketAlreadyExist 
         .fn()
         .mockResolvedValue(mockTicketData)
     zendeskMonitor.doesTicketAlreadyExist = jest.fn().mockReturnValue(true)
-    let outcome = await zendeskMonitor.updateTicketWithIssueComment(mockNewTicket)
+    let outcome = await zendeskMonitor.updateTicketWithIssueComment(
+        mockNewTicket
+    )
     expect(outcome).toBe(true)
 
     zendeskMonitor.doesTicketAlreadyExist = jest.fn().mockReturnValue(false)
