@@ -73,7 +73,7 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
-
+    
         for (let i = 0; i < allZendeskTickets.length; i++) {
 
             const ticketExists = this.doesTicketAlreadyExist(
@@ -83,6 +83,7 @@ class ZendeskMonitor {
             )
 
             if (ticketExists) {
+                
                 const ticket = {
                     "ticket": {
                         "comment": { "body": commentBody },
@@ -94,9 +95,7 @@ class ZendeskMonitor {
                     ticket
                 )
                 return true
-            } else {
-                console.log('Ticket does not exist and will not be updated')
-            }
+            } 
         }
     }
 

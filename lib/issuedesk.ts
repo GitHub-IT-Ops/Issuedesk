@@ -105,7 +105,7 @@ class IssueDesk {
                     comment,
                     createdAt
                 )
-                this.zendeskMonitor.updateTicketWithIssueComment(
+                await this.zendeskMonitor.updateTicketWithIssueComment(
                     this.ticketMaker.getTicketBody(),
                     this.issueMonitor.getIssueUrl()
                 )
