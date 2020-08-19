@@ -71,7 +71,7 @@ class ZendeskMonitor {
 
     public async updateTicketWithIssueComment(
         commentBody: string,
-        external_id: string
+        external_id: string,
     ) {
         const allZendeskTickets: {
             [x: string]: any
@@ -93,8 +93,12 @@ class ZendeskMonitor {
 
                 await this.client.tickets.update(
                     allZendeskTickets[i]['id'],
-                    ticket
+                    ticket, () => {
+                        console.log(`Ticket #${allZendeskTickets[i]['id']} has been updated!`);
+                        
+                    }
                 )
+                
                 return true
             }
         }
