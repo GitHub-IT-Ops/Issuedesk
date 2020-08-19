@@ -74,12 +74,13 @@ test("createTicket() returns true if ticket exists", async () => {
     const mockTicketData = require('../__mocks__/ticket.json')
     mockTicketData[0]['external_id'] =
         'https://github.com/Codertocat/Hello-World/issues/1'
-
+        mockTicketData[0]['status'] = 'open'
     const zendeskMonitor = new ZendeskMonitor(client)
-    zendeskMonitor.doesTicketAlreadyExist = jest.fn().mockReturnValue(false)
-    zendeskMonitor.getAllZendeskTickets = jest.fn().mockReturnValue(mockTicketData)
-    let ticketWillBeCreated = await zendeskMonitor.createTicketIfItDoesNotExist(mockTicketData)
-    expect(ticketWillBeCreated).toBe(true)
+
+    zendeskMonitor.getAllZendeskTickets = jest.fn().mockResolvedValue(mockTicketData)
+    let ticketWillNotBeCreated = await zendeskMonitor.createTicketIfItDoesNotExist(mockTicketData[0]['status'], mockTicketData[0]['external_id'], mockTicketData[0]['external_id'])
+
+    expect(ticketWillNotBeCreated).toBe(true)
 })
 
 test('isTicketOpen() returns true if ticket is open, false if closed', async () => {

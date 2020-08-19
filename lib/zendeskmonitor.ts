@@ -132,7 +132,7 @@ class ZendeskMonitor {
         const allZendeskTickets: {
             [x: string]: any
         } = await this.getAllZendeskTickets()
-
+        
         for (let i = 0; i < allZendeskTickets.length; i++) {
             const ticketExists = this.doesTicketAlreadyExist(
                 allZendeskTickets[i]['status'],
@@ -145,6 +145,7 @@ class ZendeskMonitor {
                 return true
             }
         }
+
         this.createTicket(subject, commentBody, external_id)
         return false
     }
