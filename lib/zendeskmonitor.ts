@@ -100,9 +100,10 @@ class ZendeskMonitor {
                         )
                     }
                 )
-
+                    return true
             } 
         }
+        return false
     }
 
     public async getAllZendeskTickets(): Promise<[ticketType]> {
