@@ -1,7 +1,7 @@
 ### What this does
 
 1. If an issue is labeled on GitHub with a specific "activation label", a ticket will be created on Zendesk, granted it doesn't already exist. 
-2. If an issue has the activation label, all comment updates to the issue will be reflected in Zendesk ticket.
+2. If an issue has the activation label, all comment updates to the issue will be reflected in Zendesk ticket, granted the ticket remains open.
 
 ### How To Install On Repo
 
