@@ -101,7 +101,7 @@ class IssueDesk {
         for (let i = 0; i < labelData.length; i++) {
             const labelName = labelData[i]['name']
             if (activationLabel === labelName) {
-                const commenterGithubHandle = this.issueMonitor.getIssueAuthor()
+                const commenterGithubHandle = this.issueMonitor.getCommentAuthor()
                 const comment = this.issueMonitor.getIssueComment()
                 const createdAt = this.issueMonitor.getCommentCreatedAtTime()
                 this.ticketMaker.generateTicketComment(

@@ -73,3 +73,13 @@ test('ticketHasActivationLabel returns issue label data', () => {
     const time = issueMonitor.getCommentCreatedAtTime()
     expect(time).toBe('2019-05-15T15:20:21Z')
 })
+
+test('getCommentAuthor returns comment author github handle', () => {
+    jest.clearAllMocks()
+    const eventIssueLabel = require('../__mocks__/eventIssueComment.json')
+    const issueMonitor = new IssueMonitor(octokit, eventIssueLabel)
+    const commentAuthor = issueMonitor.getCommentAuthor()
+    expect(commentAuthor).toBe("Codertocat")
+})
+
+

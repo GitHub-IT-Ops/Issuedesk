@@ -12,7 +12,7 @@ test('Ticket body is generated with correct info and in proper format', async ()
     const issueAuthor = 'octocat'
     const timeIssueCreatedAt = '2011-04-14T16:00:49Z'
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/1'
-    let expectedTicketBody = `Issue Created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n\n`
+    let expectedTicketBody = `Issue created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n\n`
     expectedTicketBody += `Original issue can be found at ${issueUrl}\n\n\n`
     ticketMaker.generateTicketBody(
         issueBody,
