@@ -9,28 +9,16 @@ Create `issuedesk.yml` in `.github/workflows` directory (if `.github/workflows` 
 then paste the below workflow config into `issuedesk.yml`
 
 ```
+
 on:
     issues:
         types: [labeled]
     issue_comment:
         types: [created]
 jobs:
-    bot:
-        runs-on: ubuntu-latest
-        name: Run the program
-        steps:
-            - uses: actions/checkout@v2
-            - uses: GitHub-IT-Ops/Issuedesk@master
-              with:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
-                  ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
-                  ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
-                  ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
-jobs:
     issuedesk:
         runs-on: ubuntu-latest
-        name: Create Zendesk ticket if needed or update existing ticket
+        name: Create ticket if needed
         steps:
             - uses: actions/checkout@v2
               env:
@@ -39,7 +27,7 @@ jobs:
                   ZENDESK_TOKEN: ${{ secrets.ZENDESK_TOKEN }}
                   ZENDESK_URI: ${{ secrets.ZENDESK_URI }}
                   ACTIVATION_LABEL: ${{ secrets.ACTIVATION_LABEL }}
-            - uses: GitHub-IT-Ops/Issuedesk@0.0.1
+            - uses: GitHub-IT-Ops/Issuedesk@1.2
               with:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   ZENDESK_USERNAME: ${{ secrets.ZENDESK_USERNAME}}
