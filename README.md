@@ -9,7 +9,6 @@ Create `issuedesk.yml` in `.github/workflows` directory (if `.github/workflows` 
 then paste the below workflow config into `issuedesk.yml`
 
 ```
-
 on:
     issues:
         types: [labeled]
