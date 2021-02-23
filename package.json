@@ -4,8 +4,8 @@
     "description": "Opens tickets and issues. Responds to tickets and issues",
     "main": "index.js",
     "scripts": {
-        "lint": "eslint --ignore-path .gitignore",
-        "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts)\"",
+        "format": "npx prettier --write .",
+        "lint": "npx eslint .",
         "check-format": "prettier --ignore-path .gitignore --list-different \"**/*.+(js|json)\"",
         "check-types": "tsc",
         "test": "jest",
