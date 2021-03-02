@@ -47,11 +47,11 @@ class TicketMaker {
 
         issueUrl: string
     ) {
-        const issueDeskLink = "<a href=\"https://github.com/GitHub-IT-Ops/Issuedesk\">IssueDesk</a>";
-        const issueDeskIssueOpen = "<a href=\"https://github.com/GitHub-IT-Ops/Issuedesk/issues/new/choose\">here</a>";
+        const issueDeskLink = "https://github.com/GitHub-IT-Ops/Issuedesk";
+        const issueDeskIssueOpen = "https://github.com/GitHub-IT-Ops/Issuedesk/issues/new/choose";
         let ticketBody = `Issue created by: ${githubHandle}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n\n`
         ticketBody += `Original issue can be found at ${issueUrl}\n\n\n`
-        ticketBody += `Created by ${issueDeskLink}. Experiencing trouble? Open an issue ${issueDeskIssueOpen}.\n\n\n`
+        ticketBody += `Created by Issuedesk(${issueDeskLink}). Experiencing trouble? Open an issue here(${issueDeskIssueOpen}).\n\n\n`
         this.ticket['ticket']['comment']['body'] = ticketBody
         return ticketBody
     }
