@@ -12,8 +12,8 @@ test('Ticket body is generated with correct info and in proper format', async ()
     const issueAuthor = 'octocat'
     const timeIssueCreatedAt = '2011-04-14T16:00:49Z'
     const issueUrl = 'https://github.com/Codertocat/Hello-World/issues/1'
-    const issueDeskLink = "<a href=https://github.com/GitHub-IT-Ops/Issuedesk>IssueDesk</a>";
-    const issueDeskIssueOpen = "<a href=https://github.com/GitHub-IT-Ops/Issuedesk/issues/new/choose>here</a>";
+    const issueDeskLink = "<a href=\"https://github.com/GitHub-IT-Ops/Issuedesk\">IssueDesk</a>";
+    const issueDeskIssueOpen = "<a href=\"https://github.com/GitHub-IT-Ops/Issuedesk/issues/new/choose\">here</a>";
     let expectedTicketBody = `Issue created by: ${issueAuthor}\nIssue Content: ${issueBody} \n*Created at: ${timeIssueCreatedAt}*\n\n\n`
     expectedTicketBody += `Original issue can be found at ${issueUrl}\n\n\n`
     expectedTicketBody += `Created by ${issueDeskLink}. Experiencing trouble? Open an issue ${issueDeskIssueOpen}.\n\n\n`
